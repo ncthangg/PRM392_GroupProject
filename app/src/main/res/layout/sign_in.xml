@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
     android:background="@drawable/background_gradient">
-    android:padding="20dp">
+    <!--tools:context=".CreateAccountActivity">-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:padding="20dp">
 
         <!-- Back Button -->
-        <ImageButton
+        <ImageView
+            android:id="@+id/btnBack"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/arrow_left"
-            android:scaleType="centerInside"
-            android:contentDescription="Back"
-            android:onClick="onBackPressed" />
+            android:src="@drawable/back_icon"
+            android:contentDescription="Back Button"
+            android:layout_marginBottom="10dp" />
 
         <!-- Title -->
         <TextView
@@ -42,54 +43,40 @@
             android:layout_marginTop="5dp" />
 
         <!-- Email Input -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Email"
-            android:textSize="14sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="20dp" />
-
-        <!-- Password Input -->
         <EditText
-            android:id="@+id/email_input"
+            android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/input_background"
+            android:hint="Email"
             android:padding="10dp"
-            android:textSize="16sp" />
+            android:layout_marginTop="10dp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mật khẩu"
-            android:textSize="14sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="15dp" />
-
-        <LinearLayout
+        <!-- Password Input with Visibility Toggle -->
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:background="@drawable/input_background"
-            android:padding="10dp">
+            android:layout_marginTop="10dp">
 
             <EditText
-                android:id="@+id/password_input"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="16sp"
-                android:inputType="textPassword" />
+                android:background="@drawable/input_background"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="10dp" />
 
-            <ImageButton
-                android:id="@+id/show_password_btn"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
+            <ImageView
+                android:id="@+id/btnTogglePassword"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
                 android:src="@drawable/eye"
-                android:contentDescription="Hiện mật khẩu" />
-        </LinearLayout>
+                android:contentDescription="Toggle Password" />
+        </RelativeLayout>
 
         <!-- Forgot Password -->
         <TextView
@@ -136,12 +123,13 @@
             android:gravity="center"
             android:layout_marginTop="10dp">
 
-            <ImageButton
+            <ImageView
+                android:id="@+id/btnGoogle"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@android:color/transparent"
                 android:src="@drawable/google"
-                android:contentDescription="Google Sign In" />
+                android:contentDescription="Google Login"
+                android:layout_marginEnd="20dp" />
 
         </LinearLayout>
 
