@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="@color/light_blue"
+    android:background="@drawable/background_gradient">
     android:padding="20dp">
 
     <LinearLayout
@@ -50,15 +50,15 @@
             android:textColor="@color/black"
             android:layout_marginTop="20dp" />
 
+        <!-- Password Input -->
         <EditText
             android:id="@+id/email_input"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/input_background"
-            android:textSize="16sp"
-            android:padding="10dp" />
+            android:padding="10dp"
+            android:textSize="16sp" />
 
-        <!-- Password Input -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
