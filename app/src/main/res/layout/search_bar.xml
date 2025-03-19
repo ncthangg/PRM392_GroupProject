@@ -12,10 +12,10 @@
         android:layout_height="40dp"
         android:layout_weight="1"
         android:hint="Search..."
-        android:background="@drawable/Background_Search"
+        android:background="@drawable/background_search"
         android:paddingStart="12dp"
         android:textSize="16sp"
-        android:drawableLeft="@drawable/Search_normal"
+        android:drawableLeft="@drawable/search_normal"
 
         />
 
@@ -25,5 +25,5 @@
         android:layout_height="40dp"
         android:padding="8dp"
         android:scaleType="centerInside"
-        android:src="@drawable/Close_Icon" />
+        android:src="@drawable/close_icon" />
 </LinearLayout>
