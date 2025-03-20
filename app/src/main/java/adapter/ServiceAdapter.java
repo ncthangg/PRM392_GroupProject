@@ -60,7 +60,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
             super(itemView);
             nameTextView = itemView.findViewById(R.id.tvServiceName);
             priceTextView = itemView.findViewById(R.id.tvPrice);
-            serviceImageView = itemView.findViewById(R.id.imageView);
+            serviceImageView = itemView.findViewById(R.id.imageViewMethod);
         }
     }
 }
