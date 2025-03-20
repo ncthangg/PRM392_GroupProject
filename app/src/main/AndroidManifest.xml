@@ -31,14 +31,14 @@
         <activity
             android:name=".SignUpActivity"
             android:exported="false" />
-<!--        <activity-->
-<!--        android:name=".ServiceForManagerActivity"-->
-<!--        android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".ServiceForCusActivity"-->
-<!--            android:exported="false" />-->
         <activity
-            android:name=".ServiceForManagerActivity"
+        android:name=".ServiceForManagerActivity"
+        android:exported="false" />
+        <activity
+            android:name=".ServiceForCusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
