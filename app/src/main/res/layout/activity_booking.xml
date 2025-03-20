@@ -1,299 +1,401 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#E0F2F7">
+    android:background="@color/black"
+    android:orientation="vertical">
 
-    <!-- Top Bar -->
-    <LinearLayout
+    <ImageView
+        android:id="@+id/imgProduct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp">
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/btnBack"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="#FFFFFF"
-            android:text="←"
-            android:textColor="#000000"
-            android:textSize="18sp" />
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="46dp"
+        android:background="@drawable/bg_100dp_no_stroke"
+        android:backgroundTint="#DFF2EB"
+        android:gravity="center"
+        android:padding="9dp"
+        android:src="@drawable/arrow_left"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1" />
+    <ImageView
+        android:id="@+id/btnShare"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/bg_100dp_no_stroke"
+        android:backgroundTint="#DFF2EB"
+        android:padding="7dp"
+        android:src="@drawable/ic_share"
+        app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+        app:layout_constraintEnd_toStartOf="@+id/btnFavorite"
+        app:layout_constraintTop_toTopOf="@+id/btnBack" />
 
-        <Button
-            android:id="@+id/btnShare"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="8dp"
-            android:background="#FFFFFF"
-            android:text="↗"
-            android:textColor="#000000"
-            android:textSize="18sp" />
+    <ImageView
+        android:id="@+id/btnFavorite"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="19dp"
+        android:background="@drawable/bg_100dp_no_stroke"
+        android:backgroundTint="#DFF2EB"
+        android:padding="7dp"
+        android:src="@drawable/ic_heart"
+        app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnBack" />
 
-        <Button
-            android:id="@+id/btnFavorite"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="#FFFFFF"
-            android:text="♡"
-            android:textColor="#000000"
-            android:textSize="18sp" />
-    </LinearLayout>
 
-    <!-- Washing Machine Image Placeholder -->
-    <View
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="#FFFFFF" />
-
-    <!-- Main Content Container -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FFFFFF"
+        android:layout_height="0dp"
+        android:layout_marginTop="126dp"
+        android:background="@drawable/bg_radius_top_46dp"
         android:orientation="vertical"
-        android:padding="16dp">
-
-        <!-- Service Type -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#E0F7FF"
-            android:padding="8dp"
-            android:text="Electric Repair"
-            android:textColor="#007AFF" />
-
-        <!-- Title -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Washing Machine Repair"
-            android:textColor="#000000"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <!-- Location -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="HCM, Viet Nam"
-            android:textColor="#555555" />
-
-        <!-- Book Appointment -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="BOOK APPOINTMENT"
-            android:textColor="#555555"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
-        <!-- Day Selection -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Day"
-            android:textColor="#000000"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-
-        <HorizontalScrollView
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnFavorite">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:scrollbars="none">
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnFavorite">
 
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_radius_9dp"
+                android:backgroundTint="#B9E5E8"
+                android:fontFamily="@font/unbounded_light"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="4dp"
+                android:text="Electric Repair"
+                android:textColor="#000000" />
 
-                <LinearLayout
-                    android:id="@+id/dayToday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:background="#B4E4E4"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="12dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Today"
-                        android:textColor="#000000" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="4 Oct"
-                        android:textColor="#000000"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/dayMon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:background="#B4E4E4"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="12dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Mon"
-                        android:textColor="#000000" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="6 Oct"
-                        android:textColor="#000000"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/dayTues"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:background="#B4E4E4"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="12dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Tues"
-                        android:textColor="#000000" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="7 Oct"
-                        android:textColor="#000000"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/dayWed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#B4E4E4"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="12dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Wed"
-                        android:textColor="#000000" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="8 Oct"
-                        android:textColor="#000000"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </LinearLayout>
-        </HorizontalScrollView>
-
-        <!-- Time Selection -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Time"
-            android:textColor="#000000"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:scrollbars="none">
-
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginTop="17dp"
+                android:fontFamily="@font/unbounded_regular"
+                android:text="Washing Machine Repair"
+                android:textColor="#000000"
+                android:textSize="24sp" />
 
-                <TextView
-                    android:id="@+id/time7am"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:fontFamily="@font/unbounded_light"
+                android:text="HCM, Viet Nam"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <!-- Book Appointment -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/unbounded_regular"
+                android:text="BOOK APPOINTMENT"
+                android:textColor="#000000"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/unbounded_regular"
+                android:text="Day"
+                android:textColor="#000000"
+                android:textSize="40sp" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:scrollbars="none">
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:background="#B4E4E4"
-                    android:padding="12dp"
-                    android:text="7:00  AM"
-                    android:textColor="#000000" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/time730am"
+                    <LinearLayout
+                        android:id="@+id/dayToday"
+                        android:layout_width="102dp"
+                        android:layout_height="64dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_radius_25dp"
+                        android:backgroundTint="#B4E4E4"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/unbounded_light"
+                            android:text="Today"
+                            android:textColor="#000000"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/unbounded_medium"
+                            android:text="4 Oct"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/dayMon"
+                        android:layout_width="102dp"
+                        android:layout_height="64dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_radius_25dp"
+                        android:backgroundTint="#B4E4E4"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/unbounded_light"
+                            android:text="Mon"
+                            android:textColor="#000000"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/unbounded_medium"
+                            android:text="6 Oct"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/dayTues"
+                        android:layout_width="102dp"
+                        android:layout_height="64dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_radius_25dp"
+                        android:backgroundTint="#B4E4E4"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/unbounded_light"
+                            android:text="Tues"
+                            android:textColor="#000000"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/unbounded_medium"
+                            android:text="7 Oct"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/dayWed"
+                        android:layout_width="102dp"
+                        android:layout_height="64dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_radius_25dp"
+                        android:backgroundTint="#B4E4E4"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/unbounded_light"
+                            android:text="Wed"
+                            android:textColor="#000000"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/unbounded_medium"
+                            android:text="8 Oct"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/unbounded_regular"
+                android:text="Time"
+                android:textColor="#000000"
+                android:textSize="40sp" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:scrollbars="none">
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:background="#B4E4E4"
-                    android:padding="12dp"
-                    android:text="7:30  AM"
-                    android:textColor="#000000" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/time8am"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#B4E4E4"
-                    android:padding="12dp"
-                    android:text="8:00  AM"
-                    android:textColor="#000000" />
-            </LinearLayout>
-        </HorizontalScrollView>
+                    <LinearLayout
+                        android:id="@+id/time7am"
+                        android:layout_width="127dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="9dp"
+                        android:background="@drawable/bg_radius_25dp"
+                        android:backgroundTint="#B4E4E4"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingVertical="10dp">
 
-        <!-- Note Section -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Note To Service Provider"
-            android:textColor="#000000" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="12dp"
+                            android:fontFamily="@font/unbounded_light"
+                            android:text="7:00"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
 
-        <EditText
-            android:id="@+id/etNote"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="8dp"
-            android:background="#B4E4E4"
-            android:hint="Enter here"
-            android:padding="12dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/unbounded_medium"
+                            android:text="AM"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
+                    </LinearLayout>
 
-        <!-- Continue Button -->
-        <Button
-            android:id="@+id/btnContinue"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="#2A6597"
-            android:text="Continue"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF" />
-    </LinearLayout>
-</LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/time730am"
+                        android:layout_width="127dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="9dp"
+                        android:background="@drawable/bg_radius_25dp"
+                        android:backgroundTint="#B4E4E4"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingVertical="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="12dp"
+                            android:fontFamily="@font/unbounded_light"
+                            android:text="7:30"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/unbounded_medium"
+                            android:text="AM"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/time8am"
+                        android:layout_width="127dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="9dp"
+                        android:background="@drawable/bg_radius_25dp"
+                        android:backgroundTint="#B4E4E4"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingVertical="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="12dp"
+                            android:fontFamily="@font/unbounded_light"
+                            android:text="8:00"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/unbounded_medium"
+                            android:text="AM"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- Note Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Note To Service Provider"
+                android:textSize="13sp"
+                android:fontFamily="@font/unbounded_regular"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/etNote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minLines="4"
+                android:gravity="start"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_radius_15dp"
+                android:backgroundTint="#B9E5E8"
+                android:hint="Enter here"
+                android:paddingVertical="8dp"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:fontFamily="@font/unbounded_light"
+                android:paddingHorizontal="16dp" />
+
+            <TextView
+                android:id="@+id/btnContinue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="30sp"
+                android:background="@drawable/bg_radius_15dp"
+                android:text="Continue"
+                android:paddingVertical="8dp"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:fontFamily="@font/unbounded_medium"
+                android:textAllCaps="false"
+                android:textColor="#DFF2EB" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
