@@ -1,10 +1,13 @@
 package com.example.main;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,9 +17,11 @@ import androidx.appcompat.app.AppCompatActivity;
 public class BookingActivity extends AppCompatActivity {
 
     private LinearLayout dayToday, dayMon, dayTues, dayWed;
-    private TextView time7am, time730am, time8am;
+    private LinearLayout time7am, time730am, time8am;
     private EditText etNote;
-    private Button btnContinue, btnBack, btnShare, btnFavorite;
+    private ImageView btnBack, btnShare, btnFavorite;
+
+    private TextView btnContinue;
 
     private String selectedDay = "";
     private String selectedTime = "";
@@ -149,19 +154,18 @@ public class BookingActivity extends AppCompatActivity {
     }
 
     private void updateDaySelection(View selectedView) {
-        dayToday.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
-        dayMon.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
-        dayTues.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
-        dayWed.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
+        dayToday.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
+        dayMon.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
+        dayTues.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
+        dayWed.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
 
-        selectedView.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_dark));
+        selectedView.setBackgroundTintList(ColorStateList.valueOf(getColor(android.R.color.holo_blue_dark)));
     }
 
     private void updateTimeSelection(View selectedView) {
-        time7am.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
-        time730am.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
-        time8am.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
-
-        selectedView.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_dark));
+        time7am.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
+        time730am.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
+        time8am.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
+        selectedView.setBackgroundTintList(ColorStateList.valueOf(getColor(android.R.color.holo_blue_dark)));
     }
 }
