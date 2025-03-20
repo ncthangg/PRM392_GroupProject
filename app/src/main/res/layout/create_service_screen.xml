@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@drawable/background_gradient">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <!-- Ảnh dịch vụ -->
+
+        <ImageView
+            android:id="@+id/imgService"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bookmark"
+            android:scaleType="centerCrop"
+            android:src="@drawable/user_icon" />
+
+        <Button
+            android:id="@+id/btnChooseImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chọn ảnh"
+            android:backgroundTint="@color/blue"
+            android:layout_marginBottom="16dp"/>
+
+
+        <!-- Danh mục -->
+        <EditText
+            android:id="@+id/etCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Danh mục"
+            android:layout_marginBottom="10sp"
+            android:background="@drawable/background_search"
+            android:padding="12dp"/>
+
+        <!-- Tên dịch vụ -->
+        <EditText
+            android:id="@+id/etServiceName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tên dịch vụ"
+            android:layout_marginBottom="10sp"
+
+            android:background="@drawable/background_search"
+            android:padding="12dp"/>
+
+        <!-- Tên người thợ -->
+        <EditText
+            android:id="@+id/etWorkerName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tên người thợ"
+            android:background="@drawable/background_search"
+            android:layout_marginBottom="10sp"
+            android:padding="12dp"/>
+
+        <!-- Giá tiền -->
+        <EditText
+            android:id="@+id/etPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Giá tiền"
+            android:background="@drawable/background_search"
+            android:padding="12dp"
+            android:inputType="numberDecimal"/>
+
+        <!-- Nút Lưu -->
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lưu"
+            android:backgroundTint="@color/blue"
+            android:textColor="@color/white"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Nút Xóa (Chỉ hiển thị khi chỉnh sửa) -->
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Xóa"
+            android:backgroundTint="@color/black"
+            android:textColor="@color/white"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"/>
+    </LinearLayout>
+</ScrollView>
