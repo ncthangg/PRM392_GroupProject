@@ -14,13 +14,13 @@
         android:padding="20dp">
 
         <!-- Back Button -->
-        <ImageView
-            android:id="@+id/btnBack"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/back_icon"
-            android:contentDescription="Back Button"
-            android:layout_marginBottom="10dp" />
+<!--        <ImageView-->
+<!--            android:id="@+id/btnBack"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:src="@drawable/back_icon"-->
+<!--            android:contentDescription="Back Button"-->
+<!--            android:layout_marginBottom="10dp" />-->
 
         <!-- Title -->
         <TextView
@@ -44,11 +44,21 @@
 
         <!-- Name Input -->
         <EditText
-            android:id="@+id/etName"
+            android:id="@+id/etFullName"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/input_background"
-            android:hint="Tên"
+            android:hint="Họ và tên"
+            android:padding="10dp"
+            android:layout_marginBottom="12dp"
+            />
+
+        <EditText
+            android:id="@+id/etAddress"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/input_background"
+            android:hint="Địa chỉ"
             android:padding="10dp"/>
 
         <!-- Email Input -->
@@ -59,8 +69,16 @@
             android:background="@drawable/input_background"
             android:hint="Email"
             android:padding="10dp"
-            android:layout_marginTop="10dp" />
-
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="12dp"
+            />
+        <EditText
+            android:id="@+id/etUserName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/input_background"
+            android:hint="Tên đăng nhập"
+            android:padding="10dp"/>
         <!-- Password Input with Visibility Toggle -->
         <RelativeLayout
             android:layout_width="match_parent"
@@ -72,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/input_background"
-                android:hint="Password"
+                android:hint="Mật khẩu"
                 android:inputType="textPassword"
                 android:padding="10dp" />
 
@@ -161,6 +179,7 @@
 
         <!-- Already have an account? -->
         <TextView
+            android:id="@+id/buttonSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Đã có tài khoản? Đăng nhập ngay"
