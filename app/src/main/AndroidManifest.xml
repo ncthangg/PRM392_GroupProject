@@ -19,12 +19,12 @@
         <activity
             android:name=".CheckoutActivity"
             android:exported="false" />
-        <activity
-            android:name=".ChoosePaymentMethodActivity"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".ChoosePaymentMethodActivity"-->
+<!--            android:exported="false" />-->
 
         <activity
-            android:name=".MainActivity"
+            android:name=".ChoosePaymentMethodActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

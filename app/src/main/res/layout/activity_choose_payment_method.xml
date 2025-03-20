@@ -41,18 +41,17 @@
     <RadioGroup
         android:id="@+id/radioGroupPayment"
         android:layout_width="332dp"
-        android:layout_height="326dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingTop="16dp"
         app:layout_constraintBottom_toTopOf="@+id/btnConfirmPayment"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.193">
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
-
+        <!-- Phương thức thanh toán tiền mặt -->
         <LinearLayout
+            android:id="@+id/cashLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/payment_option_bg"
@@ -76,36 +75,12 @@
             <RadioButton
                 android:id="@+id/rbCash"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/payment_option_bg"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="15dp">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_wallet" />
-
-            <TextView
-                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingStart="12dp"
-                android:text="Wallet"
-                android:textSize="16sp" />
-
-            <RadioButton
-                android:id="@+id/rbWallet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:clickable="false"
+                android:focusable="false"/>
         </LinearLayout>
 
+        <!-- More Payment Options -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -115,7 +90,9 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
+        <!-- Phương thức thanh toán VnPay -->
         <LinearLayout
+            android:id="@+id/vnpayLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/payment_option_bg"
@@ -139,10 +116,12 @@
             <RadioButton
                 android:id="@+id/rbVnPay"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"/>
         </LinearLayout>
-
     </RadioGroup>
+
 
     <Button
         android:id="@+id/btnConfirmPayment"
