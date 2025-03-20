@@ -8,9 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.main.interfaces.ApiService;
+import com.example.main.retrofits.RetrofitClient;
+
 import adapter.ServiceAdapter;
-import api.ServiceApis;
-import api.ApiService;
 import model.GetServiceRes;
 import model.ServiceItem;
 
@@ -41,7 +42,7 @@ public class ServiceForCusActivity extends AppCompatActivity {
     }
 
     private void loadServices() {
-        ServiceApis apiService = ApiService.getClient().create(ServiceApis.class);
+        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
         Call<GetServiceRes> call = apiService.getServices();
 
         call.enqueue(new Callback<GetServiceRes>() {

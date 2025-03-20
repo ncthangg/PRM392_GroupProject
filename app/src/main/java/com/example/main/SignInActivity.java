@@ -12,10 +12,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.main.interfaces.AuthApiService;
+import com.example.main.interfaces.ApiService;
 import com.example.main.models.AuthResponse;
 import com.example.main.models.SignInRequest;
-import com.example.main.models.SignUpRequest;
 import com.example.main.retrofits.RetrofitClient;
 
 import retrofit2.Call;
@@ -35,7 +34,7 @@ public class SignInActivity extends AppCompatActivity {
         EditText userName = findViewById(R.id.etUserName);
         EditText password = findViewById(R.id.etPassword);
 
-        AuthApiService apiService = RetrofitClient.getClient().create(AuthApiService.class);
+        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
 
         // 🛑 Remove this: API call should be inside btnSignIn click listener
         // Call<AuthResponse> call = apiService.signIn(new SignInRequest(userName.getText().toString(), password.getText().toString()));
@@ -64,7 +63,7 @@ public class SignInActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Sign In Successful!", Toast.LENGTH_SHORT).show();
 
                             // Redirect to Main Activity after successful login
-                            Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                            Intent intent = new Intent(SignInActivity.this, ServiceForCusActivity.class);
                             startActivity(intent);
                             finish(); // Close current activity
                         } else {

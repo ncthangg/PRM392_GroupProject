@@ -11,7 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.main.interfaces.AuthApiService;
+import com.example.main.interfaces.ApiService;
 import com.example.main.models.AuthResponse;
 import com.example.main.models.SignUpRequest;
 import com.example.main.retrofits.RetrofitClient;
@@ -32,7 +32,7 @@ public class SignUpActivity extends AppCompatActivity {
         EditText userName = findViewById(R.id.etUserName);
         EditText address = findViewById(R.id.etAddress);
         EditText password = findViewById(R.id.etPassword);
-        AuthApiService apiService = RetrofitClient.getClient().create(AuthApiService.class);
+        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
 
         SignUpRequest signUpRequest = new SignUpRequest(fullName.getText().toString(), address.getText().toString(), userName.getText().toString(), password.getText().toString(), email.getText().toString());
 
