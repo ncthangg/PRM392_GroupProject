@@ -67,7 +67,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
         imageViewMethod = findViewById(R.id.imageViewMethod);
         txtMethodName = findViewById(R.id.txtMethodName);
-        txtTotalPrice = txtPrice;
+        txtTotalPrice = findViewById(R.id.txtTotalPrice);
 
         btnCheckout = findViewById(R.id.btnContinue);
         btnChange = findViewById(R.id.btnChange);
