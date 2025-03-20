@@ -23,12 +23,6 @@ public interface ApiService {
     @POST("repair-services/get-services")
     Call<GetServiceRes> getServices();
 
-    class ApiResponse {
-        public Data data;
 
-        public static class Data {
-            public List<ServiceItem> Data;
-        }
-    }
 }
 
