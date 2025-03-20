@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background_gradient">
+
+    <!-- Nút Back -->
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_back"
+        android:background="?attr/selectableItemBackground"
+        android:layout_margin="16dp"/>
+
+    <!-- Tiêu đề -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Wallet"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Thông tin số dư ví -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_gradient"
+        android:padding="16dp"
+        android:layout_margin="16dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/txtWalletBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wallet Balance"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/txtBalanceAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="200.000VND"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"/>
+    </LinearLayout>
+
+    <!-- Nút Add Money -->
+    <Button
+        android:id="@+id/btnAddMoney"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Money"
+        android:background="@drawable/button_background"
+        android:textSize="16sp"
+        android:layout_marginHorizontal="16dp"/>
+
+    <!-- RecyclerView hiển thị danh sách giao dịch -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewTransactions"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp"/>
+</LinearLayout>

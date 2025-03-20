@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <!-- Ngày (Group Header) -->
+    <TextView
+        android:id="@+id/txtTransactionDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="22 September 2023"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"/>
+
+    <!-- Tên giao dịch + số tiền -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="8dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtTransactionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Booking #23453"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/txtTransactionTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="22 September 9:30"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtTransactionAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-250.000VND"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+</LinearLayout>
