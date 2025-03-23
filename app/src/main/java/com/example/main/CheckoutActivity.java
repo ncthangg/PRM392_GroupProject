@@ -53,8 +53,6 @@ public class CheckoutActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_checkout);
 
-        Log.d("CheckoutActivity", "Received Payment Method: " + selectedPaymentMethod);
-
         txtServiceType = findViewById(R.id.txtServiceType);
         txtServiceName = findViewById(R.id.txtServiceName);
         txtPrice = findViewById(R.id.txtPrice);
@@ -67,14 +65,14 @@ public class CheckoutActivity extends AppCompatActivity {
 
         imageViewMethod = findViewById(R.id.imageViewMethod);
         txtMethodName = findViewById(R.id.txtMethodName);
-        txtTotalPrice = findViewById(R.id.txtTotalPrice);
+        txtTotalPrice = txtPrice;
 
         btnCheckout = findViewById(R.id.btnContinue);
         btnChange = findViewById(R.id.btnChange);
 
         String totalPriceStr = txtTotalPrice.getText().toString().trim();
         totalPriceStr = totalPriceStr.replace(".", "").replace(",", ".");
-        int totalCost = Integer.parseInt(totalPriceStr);
+        totalCost = Integer.parseInt(totalPriceStr);
 
         // Lấy dữ liệu từ Intent
         Intent intent = getIntent();
@@ -95,7 +93,7 @@ public class CheckoutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(totalCost<=0){
-                    Toast.makeText(CheckoutActivity.this, "Please choose food and drink", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CheckoutActivity.this, "Invalid Payment", Toast.LENGTH_SHORT).show();
                 }else
                     CheckOut(totalCost);
             }
