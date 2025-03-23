@@ -98,18 +98,34 @@
 
         <TextView
             android:id="@+id/txtPrice"
-            android:layout_width="133dp"
-            android:layout_height="37dp"
-            android:text="200.000 VND"
+            android:layout_width="125dp"
+            android:layout_height="51dp"
+            android:text="200.000"
+            android:textAlignment="textEnd"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintHorizontal_bias="0.23"
             app:layout_constraintStart_toEndOf="@+id/imgService"
             app:layout_constraintTop_toBottomOf="@+id/txtServiceName"
-            app:layout_constraintVertical_bias="0.012" />
+            app:layout_constraintVertical_bias="0.015" />
+
+        <TextView
+            android:id="@+id/txtPrice2"
+            android:layout_width="63dp"
+            android:layout_height="51dp"
+            android:text="VND"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.933"
+            app:layout_constraintStart_toEndOf="@+id/imgService"
+            app:layout_constraintTop_toBottomOf="@+id/txtServiceName"
+            app:layout_constraintVertical_bias="0.015" />
 
         <View
             android:id="@+id/view"
