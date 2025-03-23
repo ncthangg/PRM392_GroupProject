@@ -18,16 +18,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".PaymentMethodActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CustomerInfoActivity"
-            android:exported="false" />
-        <activity
             android:name=".BookingActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LastCheckoutActivity"
             android:exported="false" />
         <activity
             android:name=".CheckoutActivity"
@@ -36,16 +27,31 @@
             android:name=".ChoosePaymentMethodActivity"
             android:exported="false" />
         <activity
+            android:name=".CustomerInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LastCheckoutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PaymentMethodActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ServiceForCusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ServiceForManagerActivity"
+            android:exported="false" />
+        <activity
             android:name=".SignInActivity"
             android:exported="false" />
         <activity
             android:name=".SignUpActivity"
             android:exported="false" />
         <activity
-        android:name=".ServiceForManagerActivity"
-        android:exported="false" />
-        <activity
-            android:name=".ServiceForCusActivity"
+            android:name=".WalletActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
