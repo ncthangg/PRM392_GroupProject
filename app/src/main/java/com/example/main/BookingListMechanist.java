@@ -28,6 +28,8 @@ public class BookingListMechanist extends AppCompatActivity {
     private RecyclerView recyclerView;
     private BookingAdapter bookingAdapter;
     private List<BookingItem> bookingList = new ArrayList<>();
+    private static final int REQUEST_UPDATE_BOOKING = 1; // Define a request code
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class BookingListMechanist extends AppCompatActivity {
             String statusString = String.valueOf(bookingItem.getStatus());
 
             // Pass booking details through Intent
+            intent.putExtra("bookingId", bookingItem.getId());
             intent.putExtra("serviceName", bookingItem.getService().getName());
             intent.putExtra("bookingDate", bookingItem.getBookingDate() != null ? bookingItem.getBookingDate().toString() : "N/A");
             intent.putExtra("workingDate", bookingItem.getWorkingDate() != null ? bookingItem.getWorkingDate().toString() : "N/A");
@@ -52,16 +55,20 @@ public class BookingListMechanist extends AppCompatActivity {
             intent.putExtra("address", bookingItem.getAddress() != null ? bookingItem.getAddress() : "N/A");
             intent.putExtra("note", bookingItem.getNote() != null ? bookingItem.getNote() : "N/A");
             intent.putExtra("status", statusString);
+            startActivityForResult(intent, REQUEST_UPDATE_BOOKING);
 
-            startActivity(intent);
         });
-
-
-
         recyclerView.setAdapter(bookingAdapter);
         loadBookingAdmin();
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == REQUEST_UPDATE_BOOKING && resultCode == RESULT_OK) {
+            loadBookingAdmin(); // Call API again to refresh the list
+        }
+    }
     private void loadBookingAdmin() {
         ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
         Call<GetBookingsRes> call = apiService.getBookings("18493305-2010-4196-83ab-d8e28d73899e", "Pending",1, 10);

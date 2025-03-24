@@ -49,6 +49,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
     implementation(libs.okhttp.logging)
+    implementation(libs.cronet.embedded)
     testImplementation(libs.junit)
     implementation(libs.glide)
     annotationProcessor(libs.glideCompiler)

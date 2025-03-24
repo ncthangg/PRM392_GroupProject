@@ -5,17 +5,15 @@ import com.example.main.models.SignInRequest;
 import com.example.main.models.SignUpRequest;
 import com.example.main.models.UserInfoResponse;
 
-import java.util.List;
-
+import model.BookingUpdateRequest;
 import model.GetBookingsRes;
 import model.GetServiceRes;
-import model.ServiceItem;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -39,5 +37,10 @@ public interface ApiService {
                 @Query("PageNumber") int pageNumber,
                 @Query("PageSize") int pageSize
         );
+    @PUT("bookings/{id}")
+    Call<Void> updateBookingStatus(
+            @Path("id") String id,
+            @Body BookingUpdateRequest request
+    );
 }
 
