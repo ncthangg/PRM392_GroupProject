@@ -32,7 +32,7 @@ public class SignUpActivity extends AppCompatActivity {
         EditText userName = findViewById(R.id.etUserName);
         EditText address = findViewById(R.id.etAddress);
         EditText password = findViewById(R.id.etPassword);
-        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+        ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
 
         SignUpRequest signUpRequest = new SignUpRequest(fullName.getText().toString(), address.getText().toString(), userName.getText().toString(), password.getText().toString(), email.getText().toString());
 

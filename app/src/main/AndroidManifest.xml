@@ -58,6 +58,12 @@
             android:name=".WalletActivity"
             android:exported="false" />
         <activity
+            android:name=".BookingListAdmin"
+            android:exported="false" />
+        <activity
+        android:name=".BookingDetailAdmin"
+        android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

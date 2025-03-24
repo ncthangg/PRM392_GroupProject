@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:background="@drawable/categoryback"
+    android:layout_margin="8dp">
+
+    <!-- Service Image -->
+    <ImageView
+        android:id="@+id/tvServiceImageView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/user_icon"
+        android:background="@drawable/rounded_corner"
+        android:padding="4dp"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingStart="12dp">
+
+        <!-- Service Category -->
+        <TextView
+            android:id="@+id/tvCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Electric Repair"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:background="@drawable/text_background"
+            android:padding="4dp"/>
+
+        <!-- Service Name -->
+        <TextView
+            android:id="@+id/tvServiceName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fridge Repair"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+        <!-- Worker Name -->
+        <TextView
+            android:id="@+id/tvWorkerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Worker Name"
+            android:textSize="14sp"
+            android:textColor="@color/black"/>
+
+        <!-- Booking Date -->
+        <TextView
+            android:id="@+id/tvBookingDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Booking Date: 2025-03-25"
+            android:textSize="12sp"
+            android:textColor="@color/black"/>
+
+        <!-- Working Date & Time -->
+        <TextView
+            android:id="@+id/tvWorkingDateTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Working Date: 2025-03-27 - 10:00 AM"
+            android:textSize="12sp"
+            android:textColor="@color/black"/>
+
+        <!-- Address -->
+        <TextView
+            android:id="@+id/tvAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="123 Street, Hanoi, Vietnam"
+            android:textSize="12sp"
+            android:textColor="@color/black"/>
+
+        <!-- Price -->
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="200.000 VND"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+    <!-- Bookmark Button -->
+    <ImageView
+        android:id="@+id/btnBookmark"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/archive_tick"/>
+</LinearLayout>

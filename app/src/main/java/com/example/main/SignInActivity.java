@@ -35,7 +35,7 @@ public class SignInActivity extends AppCompatActivity {
         EditText userName = findViewById(R.id.etUserName);
         EditText password = findViewById(R.id.etPassword);
 
-        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+        ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
 
         // 🛑 Remove this: API call should be inside btnSignIn click listener
         // Call<AuthResponse> call = apiService.signIn(new SignInRequest(userName.getText().toString(), password.getText().toString()));
@@ -71,9 +71,16 @@ public class SignInActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Sign In Successful!", Toast.LENGTH_SHORT).show();
 
                             // Redirect to Main Activity after successful login
-                            Intent intent = new Intent(SignInActivity.this, ServiceForCusActivity.class);
-                            startActivity(intent);
-                            finish(); // Close current activity
+                            if(usernameInput.equals("admin")){
+                                Intent intent = new Intent(SignInActivity.this, BookingListAdmin.class);
+                                startActivity(intent);
+                                finish(); // Close current activity
+                            }else{
+                                Intent intent = new Intent(SignInActivity.this, ServiceForCusActivity.class);
+                                startActivity(intent);
+                                finish(); // Close current activity
+                            }
+
                         } else {
                             Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
                         }

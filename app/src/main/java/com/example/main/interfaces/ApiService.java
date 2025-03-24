@@ -7,13 +7,16 @@ import com.example.main.models.UserInfoResponse;
 
 import java.util.List;
 
+import model.GetBookingsRes;
 import model.GetServiceRes;
 import model.ServiceItem;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface ApiService {
 
@@ -28,6 +31,12 @@ public interface ApiService {
 
     @GET("authentications/current-user")
     Call<UserInfoResponse> getUserInfo(@Header("Authorization") String token);
+    @POST("bookings/get-bookings")
+    Call<GetBookingsRes> getBookings(
+            @Query("Status") String status,
+            @Query("PageNumber") int pageNumber,
+            @Query("PageSize") int pageSize
+    );
 
 }
 

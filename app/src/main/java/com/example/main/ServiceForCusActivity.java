@@ -53,7 +53,7 @@ public class ServiceForCusActivity extends AppCompatActivity {
     }
 
     private void loadServices() {
-        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+        ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
         Call<GetServiceRes> call = apiService.getServices();
 
         call.enqueue(new Callback<GetServiceRes>() {
