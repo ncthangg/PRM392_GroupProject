@@ -3,6 +3,7 @@ package com.example.main;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,10 +19,21 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.main.interfaces.ApiService;
+import com.example.main.models.BookingReq;
+import com.example.main.models.UserInfoResponse;
+import com.example.main.retrofits.RetrofitClient;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.UnsupportedEncodingException;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import vnpayConfig.VNPay;
 
 public class CheckoutActivity extends AppCompatActivity {
@@ -47,7 +59,6 @@ public class CheckoutActivity extends AppCompatActivity {
     private ConstraintLayout btnChange;
 
     private int totalCost = 0;
-
     private String selectedPaymentMethod = "";
     private ActivityResultLauncher<Intent> choosePaymentMethodLauncher;
 
@@ -75,6 +86,8 @@ public class CheckoutActivity extends AppCompatActivity {
         btnChange = findViewById(R.id.btnChange);
 
         // Nhận dữ liệu từ ChoosePaymentMethodActivity
+        String serviceId = getIntent().getStringExtra("serviceId");
+
         String categoryName = getIntent().getStringExtra("categoryName");
         String serviceName = getIntent().getStringExtra("serviceName");
         String servicePrice = getIntent().getStringExtra("servicePrice");
@@ -127,10 +140,34 @@ public class CheckoutActivity extends AppCompatActivity {
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(totalCost<=0){
+                if(totalCost<=0)
+                {
                     Toast.makeText(CheckoutActivity.this, "Invalid Payment", Toast.LENGTH_SHORT).show();
-                }else
-                    CheckOut(totalCost);
+                }
+                else
+                {
+                    selectedPaymentMethod = intent.getStringExtra("selectedPaymentMethod");
+                    txtMethodName.setText(selectedPaymentMethod);
+
+                    if ("VnPay".equals(selectedPaymentMethod)) {
+                        CheckOut(totalCost);
+                    } else {
+                        LoadUserInfo(new UserInfoCallback() {
+                            @Override
+                            public void onSuccess(UserInfoResponse userInfo) {
+                                UserInfoResponse.UserData user = userInfo.getData();
+                                Toast.makeText(CheckoutActivity.this, "Lấy User Thành công", Toast.LENGTH_SHORT).show();
+                                SaveBooking(user);
+                            }
+
+                            @Override
+                            public void onFailure(String errorMessage) {
+                                Toast.makeText(CheckoutActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }
+
             }
         });
 
@@ -138,6 +175,8 @@ public class CheckoutActivity extends AppCompatActivity {
             Intent intentChange = new Intent(CheckoutActivity.this, ChoosePaymentMethodActivity.class);
             selectedPaymentMethod = txtMethodName.getText().toString();
             intentChange.putExtra("selectedPaymentMethod", selectedPaymentMethod);
+            intentChange.putExtra("serviceId", serviceId);
+
             intentChange.putExtra("categoryName", categoryName);
             intentChange.putExtra("serviceName", serviceName);
             intentChange.putExtra("servicePrice", servicePrice);
@@ -172,10 +211,46 @@ public class CheckoutActivity extends AppCompatActivity {
                 }
         );
 
+
+
     }
 
+    private void SaveBooking(UserInfoResponse.UserData user) {
+        String customerId = user.getId(); // ID khách hàng (có thể lấy từ API current-user)
+        String serviceId = getIntent().getStringExtra("serviceId");
+        String workingDate = getIntent().getStringExtra("selected_day");
+        String workingTime = getIntent().getStringExtra("selected_time");
+        String address = getIntent().getStringExtra("location");
+        String note = getIntent().getStringExtra("note");
 
-    protected void CheckOut(int totalCost){
+        BookingReq request = new BookingReq(customerId, serviceId, workingDate, workingTime, address, note);
+
+        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("MY_APP", MODE_PRIVATE);
+        String token = sharedPreferences.getString("ACCESS_TOKEN", "");
+
+        Call<Void> call = apiService.saveBooking("Bearer " + token, request);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(CheckoutActivity.this, "Đặt lịch thành công!", Toast.LENGTH_SHORT).show();
+                    finish(); // Đóng activity
+                } else {
+                    Toast.makeText(CheckoutActivity.this, "Lỗi khi đặt lịch!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(CheckoutActivity.this, "Kết nối thất bại!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void CheckOut(int totalCost){
         new AlertDialog.Builder(this)
                 .setTitle("Confirm Checkout?")
                 .setMessage("Payment for Service: " + totalCost)
@@ -201,4 +276,34 @@ public class CheckoutActivity extends AppCompatActivity {
                 .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss()) // Đóng dialog nếu hủy
                 .show();
     }
+
+    private void LoadUserInfo(UserInfoCallback callback) {
+        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("MY_APP", MODE_PRIVATE);
+        String token = sharedPreferences.getString("ACCESS_TOKEN", "");
+
+        Call<UserInfoResponse> call = apiService.getUserInfo("Bearer " + token);
+        call.enqueue(new Callback<UserInfoResponse>() {
+            @Override
+            public void onResponse(Call<UserInfoResponse> call, Response<UserInfoResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    callback.onSuccess(response.body());
+                } else {
+                    callback.onFailure("Không thể lấy thông tin người dùng!");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserInfoResponse> call, Throwable t) {
+                callback.onFailure("Lỗi: " + t.getMessage());
+            }
+        });
+    }
+
+    private interface UserInfoCallback {
+        void onSuccess(UserInfoResponse userInfo);
+        void onFailure(String errorMessage);
+    }
+
 }

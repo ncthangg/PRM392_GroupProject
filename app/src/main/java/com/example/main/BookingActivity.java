@@ -27,6 +27,9 @@ public class BookingActivity extends AppCompatActivity {
     private String selectedDay = "";
     private String selectedTime = "";
     private String servicePrice = "";
+
+    private String serviceId = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,7 @@ public class BookingActivity extends AppCompatActivity {
         initViews();
 
         // Nhận dữ liệu từ Intent
+        serviceId = getIntent().getStringExtra("serviceId");
         String categoryName = getIntent().getStringExtra("categoryName");
         String serviceName = getIntent().getStringExtra("serviceName");
         servicePrice = getIntent().getStringExtra("servicePrice");
@@ -111,7 +115,7 @@ public class BookingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateTimeSelection(time7am);
-                selectedTime = "7:00 AM";
+                selectedTime = "07:00:00";
             }
         });
 
@@ -119,7 +123,7 @@ public class BookingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateTimeSelection(time730am);
-                selectedTime = "7:30 AM";
+                selectedTime = "07:30:00";
             }
         });
 
@@ -127,7 +131,7 @@ public class BookingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateTimeSelection(time8am);
-                selectedTime = "8:00 AM";
+                selectedTime = "08:00:00";
             }
         });
 
@@ -143,13 +147,15 @@ public class BookingActivity extends AppCompatActivity {
 
                 // Chuyển sang màn hình Customer Info
                 Intent intent = new Intent(BookingActivity.this, CustomerInfoActivity.class);
+                intent.putExtra("serviceId", serviceId);
+
                 intent.putExtra("categoryName", tvCategoryName.getText());
                 intent.putExtra("serviceName", tvServiceName.getText());
                 intent.putExtra("servicePrice", servicePrice);
 
                 intent.putExtra("selected_day", selectedDay);
                 intent.putExtra("selected_time", selectedTime);
-                intent.putExtra("note", etNote.getText().toString().trim());
+                intent.putExtra("note", etNote.getText().toString());
                 startActivity(intent);
             }
         });

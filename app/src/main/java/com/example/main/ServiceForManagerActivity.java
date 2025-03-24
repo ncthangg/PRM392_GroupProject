@@ -15,10 +15,9 @@ import com.example.main.retrofits.RetrofitClient;
 import java.util.ArrayList;
 import java.util.List;
 
-import adapter.ServiceAdapter;
 import adapter.ServiceManagerAdapter;
-import model.GetServiceRes;
-import model.ServiceItem;
+import com.example.main.models.GetServiceRes;
+import com.example.main.models.ServiceItem;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

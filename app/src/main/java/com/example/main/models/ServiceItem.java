@@ -1,4 +1,4 @@
-package model;
+package com.example.main.models;
 
 public class ServiceItem {
     private String Id;

@@ -15,7 +15,7 @@ import com.example.main.R;
 
 import java.util.List;
 
-import model.ServiceItem;
+import com.example.main.models.ServiceItem;
 
 public class ServiceManagerAdapter extends RecyclerView.Adapter<ServiceManagerAdapter.ServiceViewHolder> {
     private Context context;

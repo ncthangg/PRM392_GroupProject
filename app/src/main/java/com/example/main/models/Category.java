@@ -1,4 +1,4 @@
-package model;
+package com.example.main.models;
 
 public class Category {
     private String Id;

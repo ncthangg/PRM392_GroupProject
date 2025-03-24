@@ -1,14 +1,13 @@
 package com.example.main.interfaces;
 
 import com.example.main.models.AuthResponse;
+import com.example.main.models.BookingReq;
 import com.example.main.models.SignInRequest;
 import com.example.main.models.SignUpRequest;
 import com.example.main.models.UserInfoResponse;
 
-import java.util.List;
+import com.example.main.models.GetServiceRes;
 
-import model.GetServiceRes;
-import model.ServiceItem;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -28,6 +27,9 @@ public interface ApiService {
 
     @GET("authentications/current-user")
     Call<UserInfoResponse> getUserInfo(@Header("Authorization") String token);
+
+    @POST("bookings")
+    Call<Void> saveBooking(@Header("Authorization") String token, @Body BookingReq request);
 
 }
 

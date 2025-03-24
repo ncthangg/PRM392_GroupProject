@@ -13,8 +13,8 @@ import com.example.main.interfaces.ApiService;
 import com.example.main.retrofits.RetrofitClient;
 
 import adapter.ServiceAdapter;
-import model.GetServiceRes;
-import model.ServiceItem;
+import com.example.main.models.GetServiceRes;
+import com.example.main.models.ServiceItem;
 
 import java.util.ArrayList;
 import java.util.List;
