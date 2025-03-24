@@ -41,9 +41,9 @@
         <activity
             android:name=".ServiceForCusActivity"
             android:exported="false" />
-        <activity
-            android:name=".ServiceForManagerActivity"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".ServiceManagerActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".SignInActivity"
             android:exported="false" />
@@ -54,7 +54,7 @@
             android:name=".WalletActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ServiceManagerActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
