@@ -1,15 +1,29 @@
 package com.example.main.models;
 
-public class AuthResponse {
-    private String token;
-    private String message;
+import com.google.gson.annotations.SerializedName;
 
-    public String getToken() {
-        return token;
+public class AuthResponse {
+    @SerializedName("data") // Ánh xạ với key "data"
+    private TokenData data;
+
+    public TokenData getData() {
+        return data;
     }
 
-    public String getMessage() {
-        return message;
+    public class TokenData {
+        @SerializedName("AccessToken")
+        private String accessToken;
+
+        @SerializedName("RefreshToken")
+        private String refreshToken;
+
+        public String getAccessToken() {
+            return accessToken;
+        }
+
+        public String getRefreshToken() {
+            return refreshToken;
+        }
     }
 }
 

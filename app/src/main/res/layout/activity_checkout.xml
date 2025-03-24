@@ -20,7 +20,7 @@
         app:layout_constraintHorizontal_bias="0.045"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
@@ -47,10 +47,10 @@
         android:padding="16dp"
         app:layout_constraintBottom_toTopOf="@+id/btnContinue"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.884">
+        app:layout_constraintVertical_bias="0.759">
 
         <TextView
             android:id="@+id/txtServiceType"
@@ -97,13 +97,13 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/txtPrice"
+            android:id="@+id/txtServicePrice"
             android:layout_width="125dp"
             android:layout_height="51dp"
-            android:text="200.000"
+            android:text=""
             android:textAlignment="textEnd"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -182,14 +182,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.04"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtCustomer"
+            app:layout_constraintTop_toBottomOf="@+id/lblCustomer"
             app:layout_constraintVertical_bias="1.0" />
 
 
         <TextView
             android:id="@+id/txtEmail"
-            android:layout_width="200dp"
-            android:layout_height="25dp"
+            android:layout_width="284dp"
+            android:layout_height="20dp"
             android:layout_marginStart="87dp"
             android:text="le@gmail.com"
             android:textAlignment="textEnd"
@@ -198,10 +198,10 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/lblEmail"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.681"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/lblEmail"
             app:layout_constraintTop_toTopOf="@+id/lblEmail"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/lblLocation"
@@ -373,7 +373,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:layout_constraintStart_toEndOf="@+id/txtMethodName"
                 app:layout_constraintTop_toTopOf="@id/imageViewMethod"
                 app:layout_constraintVertical_bias="0.166" />
 
@@ -398,7 +398,7 @@
             android:layout_height="44dp"
             android:text="Total"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="26sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -412,10 +412,10 @@
             android:layout_width="144dp"
             android:layout_height="43dp"
             android:layout_marginEnd="60dp"
-            android:text="200.000"
+            android:text=""
             android:textAlignment="textEnd"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="26sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/lblTotal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -426,12 +426,12 @@
 
         <TextView
             android:id="@+id/txtVNĐ"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
+            android:layout_width="54dp"
+            android:layout_height="39dp"
             android:text="VNĐ"
             android:textAlignment="textEnd"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="26sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/txtTotalPrice"
             app:layout_constraintEnd_toEndOf="parent"
@@ -444,12 +444,13 @@
         android:id="@+id/btnContinue"
         android:layout_width="411dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="76dp"
+        android:layout_marginBottom="44dp"
         android:backgroundTint="@color/dark_blue"
         android:text="Continue"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

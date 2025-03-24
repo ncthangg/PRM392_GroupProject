@@ -18,6 +18,7 @@ public class BookingActivity extends AppCompatActivity {
 
     private LinearLayout dayToday, dayMon, dayTues, dayWed;
     private LinearLayout time7am, time730am, time8am;
+    private TextView tvServiceName, tvCategoryName;
     private EditText etNote;
     private ImageView btnBack, btnShare, btnFavorite;
 
@@ -25,13 +26,27 @@ public class BookingActivity extends AppCompatActivity {
 
     private String selectedDay = "";
     private String selectedTime = "";
-
+    private String servicePrice = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
 
         initViews();
+
+        // Nhận dữ liệu từ Intent
+        String categoryName = getIntent().getStringExtra("categoryName");
+        String serviceName = getIntent().getStringExtra("serviceName");
+        servicePrice = getIntent().getStringExtra("servicePrice");
+
+        // Kiểm tra xem dữ liệu có null không trước khi setText
+        if (categoryName != null) {
+            tvCategoryName.setText(categoryName);
+        }
+
+        if (serviceName != null) {
+            tvServiceName.setText(serviceName);
+        }
 
         setupListeners();
     }
@@ -48,7 +63,11 @@ public class BookingActivity extends AppCompatActivity {
         time730am = findViewById(R.id.time730am);
         time8am = findViewById(R.id.time8am);
 
+        tvCategoryName = findViewById(R.id.tvCategoryName);
+        tvServiceName = findViewById(R.id.tvServiceName);
+
         etNote = findViewById(R.id.etNote);
+
         btnContinue = findViewById(R.id.btnContinue);
         btnBack = findViewById(R.id.btnBack);
         btnShare = findViewById(R.id.btnShare);
@@ -124,6 +143,10 @@ public class BookingActivity extends AppCompatActivity {
 
                 // Chuyển sang màn hình Customer Info
                 Intent intent = new Intent(BookingActivity.this, CustomerInfoActivity.class);
+                intent.putExtra("categoryName", tvCategoryName.getText());
+                intent.putExtra("serviceName", tvServiceName.getText());
+                intent.putExtra("servicePrice", servicePrice);
+
                 intent.putExtra("selected_day", selectedDay);
                 intent.putExtra("selected_time", selectedTime);
                 intent.putExtra("note", etNote.getText().toString().trim());
