@@ -8,6 +8,7 @@ public class BookingItem {
     public String MechanistId;
     public String ServiceId;
     public Service Service;
+    public Rating Rating;
     public String WorkingDate;
     public String Address;
     public String WorkingTime;

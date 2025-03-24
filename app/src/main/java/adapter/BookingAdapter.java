@@ -43,9 +43,18 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
     @Override
     public void onBindViewHolder(@NonNull BookingAdapter.BookingViewHolder holder, int position) {
         BookingItem booking = bookingList.get(position);
-        holder.nameTextView.setText(booking.getNote());
-        holder.priceTextView.setText(booking.getAddress());
-
+        holder.nameTextView.setText(booking.getService().getName());
+        holder.categoryTextView.setText(booking.getService().getCategory().getName());
+        holder.workerNameTextView.setText(booking.getService().getCategory().getName());
+        if (booking.getService().getImage() != null && !booking.getService().getImage().isEmpty()) {
+            Glide.with(holder.serviceImageView.getContext())
+                    .load(booking.getService().getImage())
+                    .placeholder(R.drawable.bg_label) // Ảnh mặc định
+                    .error(R.drawable.close_icon) // Ảnh khi lỗi
+                    .into(holder.serviceImageView);
+        } else {
+            holder.serviceImageView.setImageResource(R.drawable.bg_label);
+        }
         holder.itemView.setOnClickListener(v -> onItemClickListener.onItemClick(booking));
     }
 
@@ -55,17 +64,15 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
     }
 
     public static class BookingViewHolder extends RecyclerView.ViewHolder {
-        TextView categoryTextView, nameTextView, workerNameTextView, priceTextView;
-        ImageView serviceImageView, bookmarkImageView;
+        TextView categoryTextView, nameTextView, workerNameTextView;
+        ImageView serviceImageView;
 
         public BookingViewHolder(@NonNull View itemView) {
             super(itemView);
             categoryTextView = itemView.findViewById(R.id.tvCategory);
             nameTextView = itemView.findViewById(R.id.tvServiceName);
             workerNameTextView = itemView.findViewById(R.id.tvWorkerName);
-            priceTextView = itemView.findViewById(R.id.tvPrice);
             serviceImageView = itemView.findViewById(R.id.tvServiceImageView);
-            bookmarkImageView = itemView.findViewById(R.id.btnBookmark);
         }
     }
 

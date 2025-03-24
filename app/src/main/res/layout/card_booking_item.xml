@@ -63,33 +63,7 @@
             android:textSize="12sp"
             android:textColor="@color/black"/>
 
-        <!-- Working Date & Time -->
-        <TextView
-            android:id="@+id/tvWorkingDateTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Working Date: 2025-03-27 - 10:00 AM"
-            android:textSize="12sp"
-            android:textColor="@color/black"/>
 
-        <!-- Address -->
-        <TextView
-            android:id="@+id/tvAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="123 Street, Hanoi, Vietnam"
-            android:textSize="12sp"
-            android:textColor="@color/black"/>
-
-        <!-- Price -->
-        <TextView
-            android:id="@+id/tvPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="200.000 VND"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"/>
     </LinearLayout>
 
     <!-- Bookmark Button -->

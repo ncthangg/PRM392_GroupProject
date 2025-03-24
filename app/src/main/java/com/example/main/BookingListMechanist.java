@@ -24,7 +24,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BookingListAdmin extends AppCompatActivity {
+public class BookingListMechanist extends AppCompatActivity {
     private RecyclerView recyclerView;
     private BookingAdapter bookingAdapter;
     private List<BookingItem> bookingList = new ArrayList<>();
@@ -32,24 +32,20 @@ public class BookingListAdmin extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.booking_list_admin);
+        setContentView(R.layout.booking_list_mechanist);
 
         recyclerView = findViewById(R.id.rvBookingList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
         bookingAdapter = new BookingAdapter(this, bookingList, bookingItem -> {
-            Intent intent = new Intent(BookingListAdmin.this, BookingDetailAdmin.class);
+            Intent intent = new Intent(BookingListMechanist.this, BookingDetailMechanist.class);
 
             // Convert numerical values to string
             String statusString = String.valueOf(bookingItem.getStatus());
 
             // Pass booking details through Intent
-            intent.putExtra("bookingId", bookingItem.getId());
-            intent.putExtra("customerId", bookingItem.getCustomerId());
-            intent.putExtra("mechanistId", bookingItem.getMechanistId());
-            intent.putExtra("serviceId", bookingItem.getServiceId());
-            intent.putExtra("serviceName", bookingItem.getAddress());
+            intent.putExtra("serviceName", bookingItem.getService().getName());
             intent.putExtra("bookingDate", bookingItem.getBookingDate() != null ? bookingItem.getBookingDate().toString() : "N/A");
             intent.putExtra("workingDate", bookingItem.getWorkingDate() != null ? bookingItem.getWorkingDate().toString() : "N/A");
             intent.putExtra("workingTime", bookingItem.getWorkingTime() != null ? bookingItem.getWorkingTime().toString() : "N/A");
@@ -68,7 +64,7 @@ public class BookingListAdmin extends AppCompatActivity {
 
     private void loadBookingAdmin() {
         ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
-        Call<GetBookingsRes> call = apiService.getBookings("Pending", 1, 10);
+        Call<GetBookingsRes> call = apiService.getBookings("18493305-2010-4196-83ab-d8e28d73899e", "Pending",1, 10);
 
         call.enqueue(new Callback<GetBookingsRes>() {
             @Override
@@ -85,14 +81,14 @@ public class BookingListAdmin extends AppCompatActivity {
                     }
                 } else {
                     Log.e("API_RESPONSE", "Failed with response: " + response.errorBody());
-                    Toast.makeText(BookingListAdmin.this, "Failed to get data!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BookingListMechanist.this, "Failed to get data!", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<GetBookingsRes> call, Throwable t) {
                 Log.e("API_ERROR", "Request failed", t);
-                Toast.makeText(BookingListAdmin.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(BookingListMechanist.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

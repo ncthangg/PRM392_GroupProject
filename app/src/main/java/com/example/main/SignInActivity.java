@@ -72,10 +72,15 @@ public class SignInActivity extends AppCompatActivity {
 
                             // Redirect to Main Activity after successful login
                             if(usernameInput.equals("admin")){
-                                Intent intent = new Intent(SignInActivity.this, BookingListAdmin.class);
+                                Intent intent = new Intent(SignInActivity.this, BookingListMechanist.class);
                                 startActivity(intent);
                                 finish(); // Close current activity
-                            }else{
+                            }
+                            else if(usernameInput.equals("mechanist")){
+                                Intent intent = new Intent(SignInActivity.this, BookingListMechanist.class);
+                                startActivity(intent);
+                                finish(); // Close current activity
+                            } else{
                                 Intent intent = new Intent(SignInActivity.this, ServiceForCusActivity.class);
                                 startActivity(intent);
                                 finish(); // Close current activity

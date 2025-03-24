@@ -58,10 +58,10 @@
             android:name=".WalletActivity"
             android:exported="false" />
         <activity
-            android:name=".BookingListAdmin"
+            android:name=".BookingListMechanist"
             android:exported="false" />
         <activity
-        android:name=".BookingDetailAdmin"
+        android:name=".BookingDetailMechanist"
         android:exported="false" />
         <activity
             android:name=".MainActivity"
