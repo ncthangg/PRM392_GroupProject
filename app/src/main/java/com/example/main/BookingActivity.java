@@ -1,5 +1,7 @@
 package com.example.main;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -14,10 +16,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class BookingActivity extends AppCompatActivity {
 
-    private LinearLayout dayToday, dayMon, dayTues, dayWed;
-    private LinearLayout time7am, time730am, time8am;
+    private Button btnSelectDate, btnSelectTime;
     private TextView tvServiceName, tvCategoryName;
     private EditText etNote;
     private ImageView btnBack, btnShare, btnFavorite;
@@ -26,9 +31,12 @@ public class BookingActivity extends AppCompatActivity {
 
     private String selectedDay = "";
     private String selectedTime = "";
-    private String servicePrice = "";
+    private String formattedDate = ""; // yyyy-MM-dd
+    private String formattedTime = ""; // HH:mm:ss
 
+    private String servicePrice = "";
     private String serviceId = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,19 +61,13 @@ public class BookingActivity extends AppCompatActivity {
         }
 
         setupListeners();
+
     }
 
     private void initViews() {
-        // Ngày
-        dayToday = findViewById(R.id.dayToday);
-        dayMon = findViewById(R.id.dayMon);
-        dayTues = findViewById(R.id.dayTues);
-        dayWed = findViewById(R.id.dayWed);
 
-
-        time7am = findViewById(R.id.time7am);
-        time730am = findViewById(R.id.time730am);
-        time8am = findViewById(R.id.time8am);
+        btnSelectDate = findViewById(R.id.btnSelectDate);
+        btnSelectTime = findViewById(R.id.btnSelectTime);
 
         tvCategoryName = findViewById(R.id.tvCategoryName);
         tvServiceName = findViewById(R.id.tvServiceName);
@@ -79,86 +81,6 @@ public class BookingActivity extends AppCompatActivity {
     }
 
     private void setupListeners() {
-        dayToday.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateDaySelection(dayToday);
-                selectedDay = "Today (4 Oct)";
-            }
-        });
-
-        dayMon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateDaySelection(dayMon);
-                selectedDay = "Monday (6 Oct)";
-            }
-        });
-
-        dayTues.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateDaySelection(dayTues);
-                selectedDay = "Tuesday (7 Oct)";
-            }
-        });
-
-        dayWed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateDaySelection(dayWed);
-                selectedDay = "Wednesday (8 Oct)";
-            }
-        });
-
-        time7am.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateTimeSelection(time7am);
-                selectedTime = "07:00:00";
-            }
-        });
-
-        time730am.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateTimeSelection(time730am);
-                selectedTime = "07:30:00";
-            }
-        });
-
-        time8am.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateTimeSelection(time8am);
-                selectedTime = "08:00:00";
-            }
-        });
-
-        // Sự kiện cho nút Continue
-        btnContinue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (selectedDay.isEmpty() || selectedTime.isEmpty()) {
-                    Toast.makeText(BookingActivity.this,
-                            "Vui lòng chọn ngày và giờ", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                // Chuyển sang màn hình Customer Info
-                Intent intent = new Intent(BookingActivity.this, CustomerInfoActivity.class);
-                intent.putExtra("serviceId", serviceId);
-
-                intent.putExtra("categoryName", tvCategoryName.getText());
-                intent.putExtra("serviceName", tvServiceName.getText());
-                intent.putExtra("servicePrice", servicePrice);
-
-                intent.putExtra("selected_day", selectedDay);
-                intent.putExtra("selected_time", selectedTime);
-                intent.putExtra("note", etNote.getText().toString());
-                startActivity(intent);
-            }
-        });
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,21 +102,86 @@ public class BookingActivity extends AppCompatActivity {
                 Toast.makeText(BookingActivity.this, "Đã thêm vào yêu thích", Toast.LENGTH_SHORT).show();
             }
         });
+
+        // Sự kiện cho nút Continue
+        btnContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (selectedDay.isEmpty() || selectedTime.isEmpty()) {
+                    Toast.makeText(BookingActivity.this,
+                            "Vui lòng chọn ngày và giờ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Chuyển sang màn hình Customer Info
+                Intent intent = new Intent(BookingActivity.this, CustomerInfoActivity.class);
+                intent.putExtra("serviceId", serviceId);
+
+                intent.putExtra("categoryName", tvCategoryName.getText());
+                intent.putExtra("serviceName", tvServiceName.getText());
+                intent.putExtra("servicePrice", servicePrice);
+
+                intent.putExtra("selected_day", formattedDate);
+                intent.putExtra("selected_time", formattedTime);
+                intent.putExtra("note", etNote.getText().toString());
+                startActivity(intent);
+            }
+        });
+
+        btnSelectDate.setOnClickListener(v -> {
+            Calendar calendar = Calendar.getInstance();
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                    (view, year1, month1, dayOfMonth) -> {
+                        // Lưu ngày hiển thị trên nút
+                        selectedDay = dayOfMonth + " / " + (month1 + 1) + " / " + year1;
+                        btnSelectDate.setText(selectedDay);
+
+                        // Chuyển đổi sang định dạng yyyy-MM-dd
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                        Calendar selectedDate = Calendar.getInstance();
+                        selectedDate.set(year1, month1, dayOfMonth);
+                        formattedDate = sdf.format(selectedDate.getTime()); // Lưu đúng format
+                    }, year, month, day);
+            datePickerDialog.show();
+        });
+
+
+        btnSelectTime.setOnClickListener(v -> {
+            Calendar calendar = Calendar.getInstance();
+            int hour = calendar.get(Calendar.HOUR_OF_DAY);
+            int minute = calendar.get(Calendar.MINUTE);
+
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                    (view, selectedHour, selectedMinute) -> {
+                        // Hiển thị trên button
+                        selectedTime = String.format(Locale.getDefault(), "%02d:%02d", selectedHour, selectedMinute);
+                        btnSelectTime.setText(selectedTime);
+
+                        // Chuyển đổi sang định dạng HH:mm:ss
+                        formattedTime = String.format(Locale.getDefault(), "%02d:%02d:%02d", selectedHour, selectedMinute, 0);
+                    }, hour, minute, true);
+            timePickerDialog.show();
+        });
     }
 
-    private void updateDaySelection(View selectedView) {
-        dayToday.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
-        dayMon.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
-        dayTues.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
-        dayWed.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
 
-        selectedView.setBackgroundTintList(ColorStateList.valueOf(getColor(android.R.color.holo_blue_dark)));
-    }
-
-    private void updateTimeSelection(View selectedView) {
-        time7am.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
-        time730am.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
-        time8am.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
-        selectedView.setBackgroundTintList(ColorStateList.valueOf(getColor(android.R.color.holo_blue_dark)));
-    }
+//    private void updateDaySelection(View selectedView) {
+//        dayToday.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
+//        dayMon.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
+//        dayTues.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
+//        dayWed.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
+//
+//        selectedView.setBackgroundTintList(ColorStateList.valueOf(getColor(android.R.color.holo_blue_dark)));
+//    }
+//
+//    private void updateTimeSelection(View selectedView) {
+//        time7am.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
+//        time730am.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
+//        time8am.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
+//        selectedView.setBackgroundTintList(ColorStateList.valueOf(getColor(android.R.color.holo_blue_dark)));
+//    }
 }

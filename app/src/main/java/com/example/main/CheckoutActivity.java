@@ -156,7 +156,6 @@ public class CheckoutActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(UserInfoResponse userInfo) {
                                 UserInfoResponse.UserData user = userInfo.getData();
-                                Toast.makeText(CheckoutActivity.this, "Lấy User Thành công", Toast.LENGTH_SHORT).show();
                                 SaveBooking(user);
                             }
 
@@ -236,7 +235,8 @@ public class CheckoutActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(CheckoutActivity.this, "Đặt lịch thành công!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(CheckoutActivity.this, LastCheckoutActivity.class);
+                    startActivity(intent);
                     finish(); // Đóng activity
                 } else {
                     Toast.makeText(CheckoutActivity.this, "Lỗi khi đặt lịch!", Toast.LENGTH_SHORT).show();
