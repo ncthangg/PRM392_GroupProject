@@ -34,14 +34,29 @@ public class ChoosePaymentMethodActivity extends AppCompatActivity {
 
         btnConfirmPayment = findViewById(R.id.btnConfirmPayment);
 
-        // Nhận dữ liệu từ CheckoutActivity
-        String selectedPayment = getIntent().getStringExtra("selectedPayment");
+        // Nhận dữ liệu từ CusomterInfoActivity
+        String categoryName = getIntent().getStringExtra("categoryName");
+        String serviceName = getIntent().getStringExtra("serviceName");
+        String servicePrice = getIntent().getStringExtra("servicePrice");
 
-        // Chọn lại radio button
-        if ("Cash".equals(selectedPayment)) {
-            rbCash.setChecked(true);
-        } else if ("VnPay".equals(selectedPayment)) {
-            rbVnPay.setChecked(true);
+        String name = getIntent().getStringExtra("name");
+        String email = getIntent().getStringExtra("email");
+        String phone = getIntent().getStringExtra("phone");
+        String location = getIntent().getStringExtra("location");
+
+        String selectedDay = getIntent().getStringExtra("selected_day");
+        String selectedTime = getIntent().getStringExtra("selected_time");
+        String note = getIntent().getStringExtra("note");
+
+        // Nhận dữ liệu từ CheckoutActivity
+        String selectedPayment = getIntent().getStringExtra("selectedPaymentMethod");
+        if(selectedPayment != null){
+            // Chọn lại radio button
+            if ("Cash".equals(selectedPayment)) {
+                cashLayout.setOnClickListener(v -> radioGroup.check(R.id.rbCash));
+            } else if ("VnPay".equals(selectedPayment)) {
+                vnPayLayout.setOnClickListener(v -> radioGroup.check(R.id.rbVnPay));
+            }
         }
 
         cashLayout.setOnClickListener(v -> radioGroup.check(R.id.rbCash));
@@ -58,7 +73,22 @@ public class ChoosePaymentMethodActivity extends AppCompatActivity {
             }
 
             Intent intent  = new Intent(ChoosePaymentMethodActivity.this, CheckoutActivity.class);
-            intent.putExtra("selectedPayment", paymentMethod);
+            intent.putExtra("selectedPaymentMethod", paymentMethod);
+
+            intent.putExtra("categoryName", categoryName);
+            intent.putExtra("serviceName", serviceName);
+            intent.putExtra("servicePrice", servicePrice);
+
+            intent.putExtra("name", name);
+            intent.putExtra("email", email);
+
+            intent.putExtra("phone", phone);
+            intent.putExtra("location", location);
+
+            intent.putExtra("selected_day", selectedDay);
+            intent.putExtra("selected_time", selectedTime);
+            intent.putExtra("note", note);
+
             startActivity(intent);
             finish();
         });

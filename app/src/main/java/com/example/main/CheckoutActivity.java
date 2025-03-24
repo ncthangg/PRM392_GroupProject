@@ -19,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.io.UnsupportedEncodingException;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import vnpayConfig.VNPay;
 
@@ -26,14 +28,16 @@ public class CheckoutActivity extends AppCompatActivity {
 
     private TextView txtServiceType;
     private TextView txtServiceName;
-    private TextView txtPrice;
+    private TextView txtServicePrice;
 
-    private TextView txtCustomer;
     private TextView txtCustomerName;
     private TextView txtEmail;
-    private TextView txtLocation;
     private TextView txtPhoneNumber;
+    private TextView txtLocation;
+
     private TextView txtBookingDate;
+    private TextView txtNote;
+
     private TextView txtTotalPrice;
 
     private ImageView imageViewMethod;
@@ -55,29 +59,60 @@ public class CheckoutActivity extends AppCompatActivity {
 
         txtServiceType = findViewById(R.id.txtServiceType);
         txtServiceName = findViewById(R.id.txtServiceName);
-        txtPrice = findViewById(R.id.txtPrice);
+        txtServicePrice = findViewById(R.id.txtServicePrice);
 
         txtCustomerName = findViewById(R.id.txtCustomerName);
         txtEmail = findViewById(R.id.txtEmail);
         txtPhoneNumber = findViewById(R.id.txtPhoneNumber);
         txtLocation = findViewById(R.id.txtLocation);
         txtBookingDate = findViewById(R.id.txtBookingDate);
+        txtTotalPrice =  findViewById(R.id.txtTotalPrice);
 
         imageViewMethod = findViewById(R.id.imageViewMethod);
         txtMethodName = findViewById(R.id.txtMethodName);
-        txtTotalPrice = txtPrice;
 
         btnCheckout = findViewById(R.id.btnContinue);
         btnChange = findViewById(R.id.btnChange);
 
-        String totalPriceStr = txtTotalPrice.getText().toString().trim();
-        totalPriceStr = totalPriceStr.replace(".", "").replace(",", ".");
-        totalCost = Integer.parseInt(totalPriceStr);
+        // Nhận dữ liệu từ ChoosePaymentMethodActivity
+        String categoryName = getIntent().getStringExtra("categoryName");
+        String serviceName = getIntent().getStringExtra("serviceName");
+        String servicePrice = getIntent().getStringExtra("servicePrice");
+
+        String name = getIntent().getStringExtra("name");
+        String email = getIntent().getStringExtra("email");
+        String phone = getIntent().getStringExtra("phone");
+        String location = getIntent().getStringExtra("location");
+
+        String selectedDay = getIntent().getStringExtra("selected_day");
+        String selectedTime = getIntent().getStringExtra("selected_time");
+        String note = getIntent().getStringExtra("note");
+
+        //Show dữ liệu ra
+        txtServiceType.setText(categoryName);
+        txtServiceName.setText(serviceName);
+
+        txtCustomerName.setText(name);
+        txtEmail.setText(email);
+        txtPhoneNumber.setText(phone);
+        txtLocation.setText(location);
+
+        txtBookingDate.setText(selectedDay + " - " + selectedTime);
+
+        //Show TotalPrice
+        NumberFormat numberFormat = NumberFormat.getInstance(new Locale("vi", "VN"));
+        String formattedPrice = numberFormat.format(Integer.parseInt(servicePrice));
+        txtServicePrice.setText(formattedPrice);
+        txtTotalPrice.setText(formattedPrice);
+
+        String totalCostStr = txtTotalPrice.getText().toString().trim();
+        totalCostStr = totalCostStr.replace(".", "").replace(",", ".");
+        totalCost = Integer.parseInt(totalCostStr);
 
         // Lấy dữ liệu từ Intent
         Intent intent = getIntent();
-        if (intent != null && intent.hasExtra("selectedPayment")) {
-            String selectedPaymentMethod = intent.getStringExtra("selectedPayment");
+        if (intent != null && intent.hasExtra("selectedPaymentMethod")) {
+            selectedPaymentMethod = intent.getStringExtra("selectedPaymentMethod");
             txtMethodName.setText(selectedPaymentMethod);
 
             // Đổi icon theo phương thức thanh toán
@@ -101,7 +136,22 @@ public class CheckoutActivity extends AppCompatActivity {
 
         btnChange.setOnClickListener(v -> {
             Intent intentChange = new Intent(CheckoutActivity.this, ChoosePaymentMethodActivity.class);
-            intentChange.putExtra("selectedPayment", selectedPaymentMethod);
+            selectedPaymentMethod = txtMethodName.getText().toString();
+            intentChange.putExtra("selectedPaymentMethod", selectedPaymentMethod);
+            intentChange.putExtra("categoryName", categoryName);
+            intentChange.putExtra("serviceName", serviceName);
+            intentChange.putExtra("servicePrice", servicePrice);
+
+            intentChange.putExtra("name", name);
+            intentChange.putExtra("email", email);
+
+            intentChange.putExtra("phone", phone);
+            intentChange.putExtra("location", location);
+
+            intentChange.putExtra("selected_day", selectedDay);
+            intentChange.putExtra("selected_time", selectedTime);
+            intentChange.putExtra("note", note);
+
             choosePaymentMethodLauncher.launch(intentChange);
         });
 
@@ -121,6 +171,7 @@ public class CheckoutActivity extends AppCompatActivity {
                     }
                 }
         );
+
     }
 
 
