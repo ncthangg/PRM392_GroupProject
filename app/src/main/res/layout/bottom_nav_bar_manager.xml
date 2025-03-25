@@ -45,7 +45,7 @@
             android:clickable="true"
             android:focusable="true">
             <ImageView
-                android:src="@drawable/bookMark"
+                android:src="@drawable/bookmark"
                 android:layout_width="24dp"
                 android:layout_height="24dp"/>
             <TextView
@@ -67,7 +67,7 @@
             android:clickable="true"
             android:focusable="true">
             <ImageView
-                android:src="@drawable/list_icon"
+                android:src="@drawable/chat_icon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"/>
             <TextView
@@ -89,7 +89,7 @@
             android:clickable="true"
             android:focusable="true">
             <ImageView
-                android:src="@drawable/user_Icon"
+                android:src="@drawable/user_icon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"/>
             <TextView

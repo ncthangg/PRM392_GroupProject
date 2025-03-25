@@ -6,53 +6,44 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.example.main.R;
-
+import model.ServiceItem;
 import java.util.List;
 
-import model.ServiceItem;
-
-public class ServiceManagerAdapter extends RecyclerView.Adapter<ServiceManagerAdapter.ServiceViewHolder> {
+public class ServiceManagerAdapter extends RecyclerView.Adapter<ServiceManagerAdapter.ViewHolder> {
     private Context context;
     private List<ServiceItem> serviceList;
-    private OnServiceClickListener listener;
+    private OnItemClickListener onItemClickListener;
 
-    public interface OnServiceClickListener {
-        void onServiceClick(ServiceItem service);
+    public interface OnItemClickListener {
+        void onItemClick(ServiceItem service);
     }
 
-    public ServiceManagerAdapter(Context context, List<ServiceItem> serviceList, OnServiceClickListener listener) {
+    public ServiceManagerAdapter(Context context, List<ServiceItem> serviceList, OnItemClickListener listener) {
         this.context = context;
         this.serviceList = serviceList;
-        this.listener = listener;
+        this.onItemClickListener = listener;
     }
 
     @NonNull
     @Override
-    public ServiceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.card_item_in_list_manage_service, parent, false);
-        return new ServiceViewHolder(view);
+        return new ViewHolder(view);
     }
+
     @Override
-    public void onBindViewHolder(@NonNull ServiceViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ServiceItem service = serviceList.get(position);
-
-        // Load ảnh từ URL bằng Glide
-        Glide.with(context).load(service.getImage()).into(holder.tvServiceImageView);
-
-        // Gán dữ liệu vào các TextView
-        holder.tvCategory.setText(service.getCategory().getName());
         holder.tvServiceName.setText(service.getName());
-        holder.tvWorkerName.setText(service.getDescription());
-        holder.tvPrice.setText(service.getPrice() + " VND");
+        holder.tvServicePrice.setText(String.format("$%s", service.getPrice()));
 
-        // Xử lý sự kiện click item
-        holder.itemView.setOnClickListener(v -> listener.onServiceClick(service));
+        Glide.with(context).load(service.getImage()).into(holder.ivServiceImage);
+
+        holder.itemView.setOnClickListener(v -> onItemClickListener.onItemClick(service));
     }
 
     @Override
@@ -60,18 +51,15 @@ public class ServiceManagerAdapter extends RecyclerView.Adapter<ServiceManagerAd
         return serviceList.size();
     }
 
-    public static class ServiceViewHolder extends RecyclerView.ViewHolder {
-        ImageView tvServiceImageView, btnBookmark;
-        TextView tvCategory, tvServiceName, tvWorkerName, tvPrice;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView tvServiceName, tvServicePrice;
+        ImageView ivServiceImage;
 
-        public ServiceViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvServiceImageView = itemView.findViewById(R.id.tvServiceImageView);
-            btnBookmark = itemView.findViewById(R.id.btnBookmark);
-            tvCategory = itemView.findViewById(R.id.tvCategory);
             tvServiceName = itemView.findViewById(R.id.tvServiceName);
-            tvWorkerName = itemView.findViewById(R.id.tvWorkerName);
-            tvPrice = itemView.findViewById(R.id.tvPrice);
+            tvServicePrice = itemView.findViewById(R.id.tvPrice);
+            ivServiceImage = itemView.findViewById(R.id.tvServiceImageView);
         }
     }
 }

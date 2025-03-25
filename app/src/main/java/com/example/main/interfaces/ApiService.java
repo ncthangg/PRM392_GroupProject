@@ -6,11 +6,13 @@ import com.example.main.models.SignUpRequest;
 
 import java.util.List;
 
+import model.Category;
 import model.GetServiceRes;
 import model.ServiceItem;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -22,6 +24,8 @@ public interface ApiService {
 
     @POST("authentications/login")
     Call<AuthResponse> signIn(@Body SignInRequest request);
+    @GET("api/categories")
+    Call<List<Category>> getCategories();
 
     @POST("repair-services/get-services")
     Call<GetServiceRes> getServices();

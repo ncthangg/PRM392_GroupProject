@@ -42,28 +42,28 @@ public class ServiceForCusActivity extends AppCompatActivity {
     }
 
     private void loadServices() {
-        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
-        Call<GetServiceRes> call = apiService.getServices();
-
-        call.enqueue(new Callback<GetServiceRes>() {
+        ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
+        apiService.getServices().enqueue(new Callback<GetServiceRes>() {
             @Override
             public void onResponse(Call<GetServiceRes> call, Response<GetServiceRes> response) {
-                if (response.isSuccessful() && response.body() != null) {
+                if (response.isSuccessful() && response.body() != null && response.body().data != null) {
                     serviceList.clear();
-                    if (response.body().data != null && response.body().data.Data != null) {
+                    if (response.body().data.Data != null && !response.body().data.Data.isEmpty()) {
                         serviceList.addAll(response.body().data.Data);
-                        serviceAdapter.notifyDataSetChanged();
+                    } else {
+                        Toast.makeText(ServiceForCusActivity.this, "No services available!", Toast.LENGTH_SHORT).show();
                     }
+                    serviceAdapter.notifyDataSetChanged();
                 } else {
-                    Toast.makeText(ServiceForCusActivity.this, "Failed to get data!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ServiceForCusActivity.this, "Failed to load services!", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<GetServiceRes> call, Throwable t) {
-                Log.e("API_ERROR", "Failed to load services", t);
                 Toast.makeText(ServiceForCusActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 }

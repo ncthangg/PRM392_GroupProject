@@ -9,6 +9,15 @@ public class ServiceItem {
     private boolean Active;
     private Category Category;
 
+    public ServiceItem(String image, String name, String description, int price, Category category) {
+        this.Image = image;
+        this.Name = name;
+        this.Description = description;
+        this.Price = price;
+        this.Category = category;
+        this.Active = true; // Mặc định là active khi tạo mới
+    }
+
     public String getId() { return Id; }
     public String getImage() { return Image; }
     public String getName() { return Name; }
