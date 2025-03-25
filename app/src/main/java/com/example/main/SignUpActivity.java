@@ -25,6 +25,7 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up); // Use your correct layout
+
         TextView signInTextView = findViewById(R.id.buttonSignIn);
         Button btnSignUp = findViewById(R.id.btnSignUp);
         EditText fullName = findViewById(R.id.etFullName);
@@ -34,23 +35,48 @@ public class SignUpActivity extends AppCompatActivity {
         EditText password = findViewById(R.id.etPassword);
         ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
 
-        SignUpRequest signUpRequest = new SignUpRequest(fullName.getText().toString(), address.getText().toString(), userName.getText().toString(), password.getText().toString(), email.getText().toString());
-
-        Call<AuthResponse> call = apiService.signUp(signUpRequest);
-        call.enqueue(new Callback<AuthResponse>() {
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(@NonNull Call<AuthResponse> call, @NonNull Response<AuthResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    String accessToken = response.body().getData().getAccessToken();
-                    Toast.makeText(getApplicationContext(), "Sign Up Successful!", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Sign Up Failed", Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                // Get user inputs
+                String fullNameText = fullName.getText().toString().trim();
+                String emailText = email.getText().toString().trim();
+                String userNameText = userName.getText().toString().trim();
+                String addressText = address.getText().toString().trim();
+                String passwordText = password.getText().toString().trim();
+
+                // Validate fields
+                if (fullNameText.isEmpty() || emailText.isEmpty() || userNameText.isEmpty() || addressText.isEmpty() || passwordText.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                    return;
                 }
-            }
 
-            @Override
-            public void onFailure(@NonNull Call<AuthResponse> call, @NonNull Throwable t) {
-                Toast.makeText(getApplicationContext(), "Network Error", Toast.LENGTH_SHORT).show();
+                // Create sign-up request
+                SignUpRequest signUpRequest = new SignUpRequest(fullNameText, addressText, userNameText, passwordText, emailText);
+
+                // Call API
+                Call<AuthResponse> call = apiService.signUp(signUpRequest);
+                call.enqueue(new Callback<AuthResponse>() {
+                    @Override
+                    public void onResponse(@NonNull Call<AuthResponse> call, @NonNull Response<AuthResponse> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            String accessToken = response.body().getData().getAccessToken();
+                            Toast.makeText(getApplicationContext(), "Sign Up Successful!", Toast.LENGTH_SHORT).show();
+
+                            // Navigate to SignInActivity after successful sign-up
+                            Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Sign Up Failed", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<AuthResponse> call, @NonNull Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Network Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
@@ -63,4 +89,5 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
+
 }

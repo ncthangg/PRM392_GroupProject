@@ -44,8 +44,8 @@ public class BookingDetailMechanist extends AppCompatActivity {
         tvWorkingTime = findViewById(R.id.tvWorkingTime);
         tvAddress = findViewById(R.id.tvAddress);
         tvNote = findViewById(R.id.tvNote);
-        spinnerStatus = findViewById(R.id.spinnerStatus);
         btnUpdate = findViewById(R.id.btnUpdate);
+        spinnerStatus = findViewById(R.id.spinnerStatus);
 
         // Populate spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, statusOptions);
