@@ -64,17 +64,16 @@ public class SignInActivity extends AppCompatActivity {
 
         // Initialize UI elements
         btnGoogleSignIn = findViewById(R.id.btnGoogle);
-//        btnGoogleSignOut = findViewById(R.id.btnGoogleSignOut);
 
         // Check if the user is already signed in
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if (account != null) {
-            Toast.makeText(getApplicationContext(), "Đăng nhập bằng GG thành công", Toast.LENGTH_SHORT).show();
-
-        } else {
-            Toast.makeText(getApplicationContext(), "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
-
-        }
+//        if (account != null) {
+//            Toast.makeText(getApplicationContext(), "Đăng nhập bằng GG thành công", Toast.LENGTH_SHORT).show();
+//
+//        } else {
+//            Toast.makeText(getApplicationContext(), "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+//
+//        }
 
         btnGoogleSignIn.setOnClickListener(v -> signInWithGoogle());
 //        btnGoogleSignOut.setOnClickListener(v -> signOut());

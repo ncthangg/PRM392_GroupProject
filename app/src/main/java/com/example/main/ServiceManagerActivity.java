@@ -93,7 +93,8 @@ public class ServiceManagerActivity extends AppCompatActivity {
         Intent intent = new Intent(ServiceManagerActivity.this, EditServiceActivity.class);
         intent.putExtra("service_id", service.getId());
         intent.putExtra("service_name", service.getName());
-        intent.putExtra("service_price", service.getPrice());
+        intent.putExtra("service_price", String.valueOf(service.getPrice()));
+        intent.putExtra("service_description", service.getDescription());
         intent.putExtra("service_image", service.getImage());
         startActivity(intent);
     }

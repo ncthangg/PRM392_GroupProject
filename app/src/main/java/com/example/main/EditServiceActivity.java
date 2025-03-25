@@ -29,13 +29,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class EditServiceActivity extends AppCompatActivity {
-    private EditText etName, etPrice;
+    private EditText etName, etPrice , etServiceDes;
     private ImageView ivServiceImage;
     private Button btnUpdate, btnDelete;
-    private Spinner spCategory;
     private String serviceId;
     private String encodedImage = "";
-    private List<Category> categoryList = new ArrayList<>();
 //    private ArrayAdapter<String> categoryAdapter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,29 +41,26 @@ public class EditServiceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_service);
 
         etName = findViewById(R.id.etServiceName);
+        etServiceDes = findViewById(R.id.etServiceDes);
         etPrice = findViewById(R.id.etServicePrice);
         ivServiceImage = findViewById(R.id.ivServiceImage);
         btnUpdate = findViewById(R.id.btnUpdate);
         btnDelete = findViewById(R.id.btnDelete);
-//        spCategory = findViewById(R.id.spServiceCategory);
+
 
         serviceId = getIntent().getStringExtra("service_id");
         etName.setText(getIntent().getStringExtra("service_name"));
+        etServiceDes.setText(getIntent().getStringExtra("service_description"));
         etPrice.setText(getIntent().getStringExtra("service_price"));
 
         String imageUrl = getIntent().getStringExtra("service_image");
         Glide.with(this).load(imageUrl).into(ivServiceImage);
 
-        // Khởi tạo adapter trước khi loadCategories()
-//        categoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new ArrayList<>());
-//        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spCategory.setAdapter(categoryAdapter);
 
         btnUpdate.setOnClickListener(view -> updateService());
         btnDelete.setOnClickListener(view -> deleteService());
 
-        // Gọi API lấy danh mục sau khi Adapter đã khởi tạo
-//        loadCategories();
+
     }
 
     private void encodeImage(Bitmap bitmap) {
@@ -76,15 +71,11 @@ public class EditServiceActivity extends AppCompatActivity {
     }
     private void updateService() {
         String name = etName.getText().toString();
+        String des = etServiceDes.getText().toString();
         int price = Integer.parseInt(etPrice.getText().toString());
 
-        int selectedPosition = spCategory.getSelectedItemPosition();
-        if (selectedPosition == -1) {
-            Toast.makeText(this, "Please select a category", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        ServiceReq service = new ServiceReq(encodedImage, name, "", price, "9CA4AE5B-C18D-4115-821F-3A28ED7A416F");
+        Toast.makeText(EditServiceActivity.this, "data to update service" + name + des + price , Toast.LENGTH_SHORT).show();
+        ServiceReq service = new ServiceReq("https://fixitright.blob.core.windows.net/fixitright/aircondition.jpg", name, des, price, "9CA4AE5B-C18D-4115-821F-3A28ED7A416F");
 
         ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
         apiService.updateService(serviceId, service).enqueue(new Callback<Void>() {
