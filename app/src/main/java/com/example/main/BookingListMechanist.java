@@ -75,7 +75,7 @@ public class BookingListMechanist extends AppCompatActivity {
 //            startActivity(intent);
 //        });
 
-        findViewById(R.id.nav_profile).setOnClickListener(v -> logoutUser());
+        findViewById(R.id.nav_logout).setOnClickListener(v -> logoutUser());
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

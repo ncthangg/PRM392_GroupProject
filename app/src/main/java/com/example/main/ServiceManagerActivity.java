@@ -60,7 +60,8 @@ public class ServiceManagerActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
 
-        findViewById(R.id.nav_profile).setOnClickListener(v -> logoutUser());
+        findViewById(R.id.nav_logout).setOnClickListener(v -> logoutUser());
+        findViewById(R.id.nav_profile).setOnClickListener(v -> viewProfile());
     }
 
     private void loadServices() {
@@ -117,4 +118,9 @@ public class ServiceManagerActivity extends AppCompatActivity {
             finish();
         });
     }
+    private void viewProfile() {
+        Intent intent = new Intent(ServiceManagerActivity.this, ProfileActivity.class);
+        startActivity(intent);
+    }
+
 }

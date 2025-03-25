@@ -63,7 +63,8 @@ public class ServiceForCusActivity extends AppCompatActivity {
 //            startActivity(intent);
 //        });
 
-        findViewById(R.id.nav_profile).setOnClickListener(v -> logoutUser());
+        findViewById(R.id.nav_logout).setOnClickListener(v -> logoutUser());
+        findViewById(R.id.nav_profile).setOnClickListener(v -> viewProfile());
 
     }
 
@@ -106,6 +107,8 @@ public class ServiceForCusActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+    }    private void viewProfile() {
+        Intent intent = new Intent(ServiceForCusActivity.this, ProfileActivity.class);
+        startActivity(intent);
     }
-
 }
