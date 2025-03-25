@@ -50,10 +50,13 @@
             android:name=".ServiceForCusActivity"
             android:exported="false" />
         <activity
-            android:name=".MapActivity"
+            android:name=".ServiceManagerActivity"
             android:exported="false" />
+                <activity
+                    android:name=".AddServiceActivity"
+                    android:exported="false" />
         <activity
-            android:name=".ServiceForManagerActivity"
+            android:name=".EditServiceActivity"
             android:exported="false" />
         <activity
             android:name=".SignInActivity"
@@ -64,6 +67,12 @@
         <activity
             android:name=".WalletActivity"
             android:exported="false" />
+        <activity
+            android:name=".BookingListMechanist"
+            android:exported="false" />
+        <activity
+        android:name=".BookingDetailMechanist"
+        android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

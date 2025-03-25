@@ -6,13 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.example.main.R;
-
+import model.ServiceItem;
 import java.util.List;
 
 import com.example.main.models.ServiceItem;
@@ -20,34 +18,34 @@ import com.example.main.models.ServiceItem;
 public class ServiceManagerAdapter extends RecyclerView.Adapter<ServiceManagerAdapter.ServiceViewHolder> {
     private Context context;
     private List<ServiceItem> serviceList;
+    private OnItemClickListener onItemClickListener;
 
-    public ServiceManagerAdapter(Context context, List<ServiceItem> serviceList) {
+    public interface OnItemClickListener {
+        void onItemClick(ServiceItem service);
+    }
+
+    public ServiceManagerAdapter(Context context, List<ServiceItem> serviceList, OnItemClickListener listener) {
         this.context = context;
         this.serviceList = serviceList;
+        this.onItemClickListener = listener;
     }
 
     @NonNull
     @Override
-    public ServiceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.card_item_in_list_manage_service, parent, false);
-        return new ServiceViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ServiceViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ServiceItem service = serviceList.get(position);
-        holder.nameTextView.setText(service.getName());
-        holder.priceTextView.setText(service.getPrice() + " VND");
+        holder.tvServiceName.setText(service.getName());
+        holder.tvServicePrice.setText(String.format("$%s", service.getPrice()));
 
-        if (service.getImage() != null && !service.getImage().isEmpty()) {
-            Glide.with(holder.serviceImageView.getContext())
-                    .load(service.getImage())
-                    .placeholder(R.drawable.bg_label) // Ảnh mặc định
-                    .error(R.drawable.close_icon) // Ảnh khi lỗi
-                    .into(holder.serviceImageView);
-        } else {
-            holder.serviceImageView.setImageResource(R.drawable.bg_label);
-        }
+        Glide.with(context).load(service.getImage()).into(holder.ivServiceImage);
+
+        holder.itemView.setOnClickListener(v -> onItemClickListener.onItemClick(service));
     }
 
     @Override
@@ -55,15 +53,15 @@ public class ServiceManagerAdapter extends RecyclerView.Adapter<ServiceManagerAd
         return serviceList.size();
     }
 
-    public static class ServiceViewHolder extends RecyclerView.ViewHolder {
-        TextView nameTextView, priceTextView;
-        ImageView serviceImageView;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView tvServiceName, tvServicePrice;
+        ImageView ivServiceImage;
 
-        public ServiceViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            nameTextView = itemView.findViewById(R.id.tvServiceName);
-            priceTextView = itemView.findViewById(R.id.tvPrice);
-            serviceImageView = itemView.findViewById(R.id.tvServiceImageView);
+            tvServiceName = itemView.findViewById(R.id.tvServiceName);
+            tvServicePrice = itemView.findViewById(R.id.tvPrice);
+            ivServiceImage = itemView.findViewById(R.id.tvServiceImageView);
         }
     }
 }

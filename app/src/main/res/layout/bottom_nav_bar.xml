@@ -4,9 +4,11 @@
     android:orientation="horizontal"
     android:background="@drawable/rounded_bottom_bar"
     android:padding="8dp"
-    android:gravity="bottom">
+    android:gravity="bottom"
+    >
 
     <LinearLayout
+        android:id="@+id/nav_home"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -24,65 +26,8 @@
             android:textColor="@color/white"
             android:textSize="10sp"/>
     </LinearLayout>
-
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingBottom="12dp">
-        <ImageView
-            android:src="@drawable/bookmark"
-            android:layout_width="24dp"
-            android:layout_height="24dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bookmark"
-            android:textColor="@color/white"
-            android:textSize="10sp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingBottom="12dp">
-        <ImageView
-            android:src="@drawable/search"
-            android:layout_width="24dp"
-            android:layout_height="24dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Search"
-            android:textColor="@color/white"
-            android:textSize="10sp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingBottom="12dp">
-        <ImageView
-            android:src="@drawable/chat_icon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Chat"
-            android:textColor="@color/white"
-            android:textSize="10sp"/>
-    </LinearLayout>
-
-    <LinearLayout
+        android:id="@+id/nav_profile"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -99,6 +44,64 @@
             android:text="Profile"
             android:textColor="@color/white"
             android:textSize="10sp"/>
+
     </LinearLayout>
 
 </LinearLayout>
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layout_weight="1"-->
+    <!--        android:gravity="center"-->
+    <!--        android:orientation="vertical"-->
+    <!--        android:paddingBottom="12dp">-->
+    <!--        <ImageView-->
+    <!--            android:src="@drawable/bookmark"-->
+    <!--            android:layout_width="24dp"-->
+    <!--            android:layout_height="24dp"/>-->
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="Bookmark"-->
+    <!--            android:textColor="@color/white"-->
+    <!--            android:textSize="10sp"/>-->
+    <!--    </LinearLayout>-->
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layout_weight="1"-->
+    <!--        android:gravity="center"-->
+    <!--        android:orientation="vertical"-->
+    <!--        android:paddingBottom="12dp">-->
+    <!--        <ImageView-->
+    <!--            android:src="@drawable/search"-->
+    <!--            android:layout_width="24dp"-->
+    <!--            android:layout_height="24dp"/>-->
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="Search"-->
+    <!--            android:textColor="@color/white"-->
+    <!--            android:textSize="10sp"/>-->
+    <!--    </LinearLayout>-->
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layout_weight="1"-->
+    <!--        android:gravity="center"-->
+    <!--        android:orientation="vertical"-->
+    <!--        android:paddingBottom="12dp">-->
+    <!--        <ImageView-->
+    <!--            android:src="@drawable/chat_icon"-->
+    <!--            android:layout_width="24dp"-->
+    <!--            android:layout_height="24dp"/>-->
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="Chat"-->
+    <!--            android:textColor="@color/white"-->
+    <!--            android:textSize="10sp"/>-->
+    <!--    </LinearLayout>-->
