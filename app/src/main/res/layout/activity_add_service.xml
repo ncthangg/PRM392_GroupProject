@@ -29,16 +29,6 @@
             android:backgroundTint="@color/blue"
             android:layout_marginBottom="16dp"/>
 
-        <!-- Danh mục -->
-        <EditText
-            android:id="@+id/etCategory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Danh mục"
-            android:layout_marginBottom="10sp"
-            android:background="@drawable/background_search"
-            android:padding="12dp"/>
-
         <!-- Tên dịch vụ -->
         <EditText
             android:id="@+id/etServiceName"
@@ -47,16 +37,6 @@
             android:hint="Tên dịch vụ"
             android:layout_marginBottom="10sp"
             android:background="@drawable/background_search"
-            android:padding="12dp"/>
-
-        <!-- Tên người thợ -->
-        <EditText
-            android:id="@+id/etWorkerName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Tên người thợ"
-            android:background="@drawable/background_search"
-            android:layout_marginBottom="10sp"
             android:padding="12dp"/>
 
         <!-- Giá tiền -->
@@ -68,6 +48,14 @@
             android:background="@drawable/background_search"
             android:padding="12dp"
             android:inputType="numberDecimal"/>
+        <EditText
+        android:id="@+id/etServiceDes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mô tả"
+        android:background="@drawable/background_search"
+        android:padding="12dp"
+        android:inputType="text"/>
 
         <!-- Nút Lưu -->
         <Button

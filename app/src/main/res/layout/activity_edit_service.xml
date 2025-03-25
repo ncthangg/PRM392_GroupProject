@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@drawable/background_gradient">
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -21,6 +26,13 @@
         android:layout_height="wrap_content"
         android:hint="Price"
         android:inputType="number"/>
+    <!-- Giá dịch vụ -->
+    <EditText
+        android:id="@+id/etServiceDes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Description"
+        android:inputType="number"/>
 
     <!-- Ảnh dịch vụ -->
     <ImageView
@@ -33,7 +45,7 @@
 
 <!--    &lt;!&ndash; Danh mục dịch vụ &ndash;&gt;-->
 <!--    <Spinner-->
-<!--        android:id="@+id/spServiceCategory"-->
+<!--        android:id="@+id/spServiceDes"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content"/>-->
 
@@ -58,3 +70,4 @@
         android:layout_marginTop="8dp"/>
 
 </LinearLayout>
+</ScrollView>

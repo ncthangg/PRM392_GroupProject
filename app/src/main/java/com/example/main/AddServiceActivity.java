@@ -27,7 +27,7 @@ import retrofit2.Response;
 
 public class AddServiceActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
-    private EditText etServiceName, etCategory, etWorkerName, etPrice;
+    private EditText etServiceName, etServiceDes, etPrice;
     private ImageView imgService;
     private Button btnChooseImage, btnSave;
     private String encodedImage = "";
@@ -42,8 +42,7 @@ public class AddServiceActivity extends AppCompatActivity {
         btnChooseImage = findViewById(R.id.btnChooseImage);
         btnSave = findViewById(R.id.btnSave);
         etServiceName = findViewById(R.id.etServiceName);
-        etCategory = findViewById(R.id.etCategory);
-        etWorkerName = findViewById(R.id.etWorkerName);
+        etServiceDes = findViewById(R.id.etServiceDes);
         etPrice = findViewById(R.id.etPrice);
 
         // Xử lý chọn ảnh
@@ -82,18 +81,17 @@ public class AddServiceActivity extends AppCompatActivity {
 
     private void addService() {
         String name = etServiceName.getText().toString().trim();
-        String category = etCategory.getText().toString().trim();
-        String workerName = etWorkerName.getText().toString().trim();
+        String description = etServiceDes.getText().toString();
         String priceStr = etPrice.getText().toString().trim();
 
-        if (name.isEmpty() || category.isEmpty() || workerName.isEmpty() || priceStr.isEmpty()) {
+        if (name.isEmpty() ||priceStr.isEmpty()) {
             Toast.makeText(this, "Vui lòng điền đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
             return;
         }
 
         int price = Integer.parseInt(priceStr);
 
-        ServiceReq service = new ServiceReq(encodedImage, name, category, price, workerName);
+        ServiceReq service = new ServiceReq("https://fixitright.blob.core.windows.net/fixitright/aircondition.jpg", name, description, price, "9ca4ae5b-c18d-4115-821f-3a28ed7a416f");
 
         ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
         apiService.createService(service).enqueue(new Callback<Void>() {
