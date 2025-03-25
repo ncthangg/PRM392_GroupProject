@@ -2,6 +2,7 @@ package com.example.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,13 @@ import com.example.main.interfaces.ApiService;
 import com.example.main.models.AuthResponse;
 import com.example.main.models.SignUpRequest;
 import com.example.main.retrofits.RetrofitClient;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,18 +60,18 @@ public class SignUpActivity extends AppCompatActivity {
                 }
 
                 // Create sign-up request
-                SignUpRequest signUpRequest = new SignUpRequest(fullNameText, addressText, userNameText, passwordText, emailText);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                String formattedDate = sdf.format(new Date()); // Convert to "yyyy-MM-dd"
+
+                SignUpRequest signUpRequest = new SignUpRequest(fullNameText, "Male", formattedDate, addressText, userNameText, passwordText, emailText);
 
                 // Call API
-                Call<AuthResponse> call = apiService.signUp(signUpRequest);
-                call.enqueue(new Callback<AuthResponse>() {
+                Call<Void> call = apiService.signUp(signUpRequest);
+                call.enqueue(new Callback<Void>() {
                     @Override
-                    public void onResponse(@NonNull Call<AuthResponse> call, @NonNull Response<AuthResponse> response) {
-                        if (response.isSuccessful() && response.body() != null) {
-                            String accessToken = response.body().getData().getAccessToken();
-                            Toast.makeText(getApplicationContext(), "Sign Up Successful!", Toast.LENGTH_SHORT).show();
-
-                            // Navigate to SignInActivity after successful sign-up
+                    public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                        if (response.code() == 201) {  // HTTP 201 Created
+                            Toast.makeText(SignUpActivity.this, "Sign Up Successfully", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
                             startActivity(intent);
                             finish();
@@ -73,10 +81,12 @@ public class SignUpActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(@NonNull Call<AuthResponse> call, @NonNull Throwable t) {
+                    public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
                         Toast.makeText(getApplicationContext(), "Network Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+
+
             }
         });
 

@@ -20,7 +20,7 @@ import retrofit2.http.Query;
 public interface ApiService {
 
     @POST("authentications/customers")
-    Call<AuthResponse> signUp(@Body SignUpRequest request);
+    Call<Void> signUp(@Body SignUpRequest request);
 
     @POST("authentications/login")
     Call<AuthResponse> signIn(@Body SignInRequest request);
