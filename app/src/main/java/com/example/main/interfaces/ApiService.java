@@ -2,17 +2,18 @@ package com.example.main.interfaces;
 
 import com.example.main.models.AuthResponse;
 import com.example.main.models.BookingReq;
+import com.example.main.models.BookingUpdateRequest;
+import com.example.main.models.Category;
+import com.example.main.models.GetBookingsRes;
+import com.example.main.models.ServiceItem;
 import com.example.main.models.SignInRequest;
 import com.example.main.models.SignUpRequest;
 import com.example.main.models.UserInfoResponse;
 
 import com.example.main.models.GetServiceRes;
 
-import model.Category;
-import model.BookingUpdateRequest;
-import model.GetBookingsRes;
-import model.GetServiceRes;
-import model.ServiceItem;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;

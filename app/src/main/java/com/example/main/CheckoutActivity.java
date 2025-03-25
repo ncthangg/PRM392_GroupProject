@@ -264,7 +264,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
         BookingReq request = new BookingReq(customerId, serviceId, workingDate, workingTime, address, note);
 
-        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+        ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
 
         SharedPreferences sharedPreferences = getSharedPreferences("MY_APP", MODE_PRIVATE);
         String token = sharedPreferences.getString("ACCESS_TOKEN", "");
@@ -289,7 +289,7 @@ public class CheckoutActivity extends AppCompatActivity {
     }
 
     private void LoadUserInfo(UserInfoCallback callback) {
-        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+        ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
 
         SharedPreferences sharedPreferences = getSharedPreferences("MY_APP", MODE_PRIVATE);
         String token = sharedPreferences.getString("ACCESS_TOKEN", "");

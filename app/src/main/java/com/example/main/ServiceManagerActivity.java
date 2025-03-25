@@ -10,12 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.main.interfaces.ApiService;
+import com.example.main.models.GetServiceRes;
+import com.example.main.models.ServiceItem;
 import com.example.main.retrofits.RetrofitClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import adapter.ServiceManagerAdapter;
-import model.GetServiceRes;
-import model.ServiceItem;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -10,12 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.main.interfaces.ApiService;
+import com.example.main.models.BookingItem;
+import com.example.main.models.GetBookingsRes;
 import com.example.main.retrofits.RetrofitClient;
 import com.google.gson.Gson;
 
 import adapter.BookingAdapter;
-import model.BookingItem;
-import model.GetBookingsRes;
 
 import java.util.ArrayList;
 import java.util.List;

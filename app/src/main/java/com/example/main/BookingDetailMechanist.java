@@ -14,13 +14,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.main.interfaces.ApiService;
+import com.example.main.models.BookingUpdateRequest;
 import com.example.main.retrofits.RetrofitClient;
 import com.google.gson.Gson;
 
 import java.util.Arrays;
 
-import model.BookingUpdateRequest;
-import model.GetBookingsRes;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

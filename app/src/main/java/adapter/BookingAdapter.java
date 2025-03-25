@@ -12,11 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.main.R;
+import com.example.main.models.BookingItem;
 
 import java.util.List;
 
-import model.BookingItem;
-import model.ServiceItem;
 
 public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingViewHolder> {
     private Context context;
