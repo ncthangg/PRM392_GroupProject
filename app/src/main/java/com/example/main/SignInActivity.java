@@ -83,10 +83,6 @@ public class SignInActivity extends AppCompatActivity {
 
         ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
 
-        // 🛑 Remove this: API call should be inside btnSignIn click listener
-        // Call<AuthResponse> call = apiService.signIn(new SignInRequest(userName.getText().toString(), password.getText().toString()));
-
-        // ✅ Attach click listener to btnSignIn
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
