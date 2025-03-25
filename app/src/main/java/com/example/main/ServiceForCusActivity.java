@@ -1,6 +1,7 @@
 package com.example.main;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -44,25 +45,26 @@ public class ServiceForCusActivity extends AppCompatActivity {
             Intent intent = new Intent(ServiceForCusActivity.this, BookingActivity.class);
             int servicePriceInt = serviceItem.getPrice();
             String servicePriceString = Integer.toString(servicePriceInt);
-            intent.putExtra("categoryName", serviceItem.getCategory());
+            intent.putExtra("categoryName", serviceItem.getCategory().getName());
             intent.putExtra("serviceId", serviceItem.getId());
             intent.putExtra("serviceName", serviceItem.getName());
             intent.putExtra("servicePrice", servicePriceString);
             startActivity(intent);
         });
+        recyclerView.setAdapter(serviceAdapter);
+        loadServices();
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        recyclerView.setAdapter(serviceAdapter);
-        loadServices();
         // Bắt sự kiện click
 //        findViewById(R.id.nav_home).setOnClickListener(v -> {
 //            Intent intent = new Intent(ServiceForCusActivity.this, ServiceForCusActivity.class);
 //            startActivity(intent);
 //        });
 
-        findViewById(R.id.nav_profile).setOnClickListener(v -> logoutUser());
+        findViewById(R.id.nav_logout).setOnClickListener(v -> logoutUser());
+        findViewById(R.id.nav_profile).setOnClickListener(v -> viewProfile());
 
     }
 
@@ -94,12 +96,19 @@ public class ServiceForCusActivity extends AppCompatActivity {
         });
     }
     private void logoutUser() {
+        // Xóa token trong SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("MY_APP", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("ACCESS_TOKEN"); // Xóa token
+        editor.apply(); // Lưu lại thay đổi
         mGoogleSignInClient.signOut().addOnCompleteListener(this, task -> {
             Toast.makeText(ServiceForCusActivity.this, "Logged out!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(ServiceForCusActivity.this, SignInActivity.class);
             startActivity(intent);
             finish();
         });
+    }    private void viewProfile() {
+        Intent intent = new Intent(ServiceForCusActivity.this, ProfileActivity.class);
+        startActivity(intent);
     }
-
 }

@@ -1,6 +1,7 @@
 package com.example.main;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -13,6 +14,9 @@ import com.example.main.interfaces.ApiService;
 import com.example.main.models.BookingItem;
 import com.example.main.models.GetBookingsRes;
 import com.example.main.retrofits.RetrofitClient;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.gson.Gson;
 
 import adapter.BookingAdapter;
@@ -27,6 +31,7 @@ import retrofit2.Response;
 public class BookingListMechanist extends AppCompatActivity {
     private RecyclerView recyclerView;
     private BookingAdapter bookingAdapter;
+    private GoogleSignInClient mGoogleSignInClient;
     private List<BookingItem> bookingList = new ArrayList<>();
     private static final int REQUEST_UPDATE_BOOKING = 1; // Define a request code
 
@@ -60,6 +65,17 @@ public class BookingListMechanist extends AppCompatActivity {
         });
         recyclerView.setAdapter(bookingAdapter);
         loadBookingAdmin();
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        // Bắt sự kiện click
+//        findViewById(R.id.nav_home).setOnClickListener(v -> {
+//            Intent intent = new Intent(ServiceForCusActivity.this, ServiceForCusActivity.class);
+//            startActivity(intent);
+//        });
+
+        findViewById(R.id.nav_logout).setOnClickListener(v -> logoutUser());
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -97,6 +113,19 @@ public class BookingListMechanist extends AppCompatActivity {
                 Log.e("API_ERROR", "Request failed", t);
                 Toast.makeText(BookingListMechanist.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
+        });
+    }
+    private void logoutUser() {
+        // Xóa token trong SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("MY_APP", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("ACCESS_TOKEN"); // Xóa token
+        editor.apply(); // Lưu lại thay đổi
+        mGoogleSignInClient.signOut().addOnCompleteListener(this, task -> {
+            Toast.makeText(BookingListMechanist.this, "Logged out!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(BookingListMechanist.this, SignInActivity.class);
+            startActivity(intent);
+            finish();
         });
     }
 

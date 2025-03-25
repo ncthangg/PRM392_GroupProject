@@ -11,14 +11,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.main.interfaces.ApiService;
 import com.example.main.models.BookingUpdateRequest;
 import com.example.main.retrofits.RetrofitClient;
-import com.google.gson.Gson;
 
 import java.util.Arrays;
+
+import com.example.main.models.BookingUpdateRequest;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,11 +54,11 @@ public class BookingDetailMechanist extends AppCompatActivity {
         if (intent != null) {
             bookingId = intent.getStringExtra("bookingId");
             tvServiceName.setText(intent.getStringExtra("serviceName"));
-            tvBookingDate.setText("Booking Date: " + intent.getStringExtra("bookingDate"));
-            tvWorkingDate.setText("Working Date: " + intent.getStringExtra("workingDate"));
-            tvWorkingTime.setText("Working Time: " + intent.getStringExtra("workingTime"));
-            tvAddress.setText("Address: " + intent.getStringExtra("address"));
-            tvNote.setText("Note: " + intent.getStringExtra("note"));
+            tvBookingDate.setText(intent.getStringExtra("bookingDate"));
+            tvWorkingDate.setText(intent.getStringExtra("workingDate"));
+            tvWorkingTime.setText(intent.getStringExtra("workingTime"));
+            tvAddress.setText(intent.getStringExtra("address"));
+            tvNote.setText(intent.getStringExtra("note"));
 
             // Set spinner selection based on status
             String status = intent.getStringExtra("status");

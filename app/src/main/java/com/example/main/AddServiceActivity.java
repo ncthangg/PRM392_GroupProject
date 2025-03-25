@@ -5,23 +5,21 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.main.interfaces.ApiService;
+import com.example.main.models.ServiceReq;
 import com.example.main.models.Category;
 import com.example.main.models.ServiceItem;
 import com.example.main.retrofits.RetrofitClient;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Base64;
+import com.example.main.models.ServiceItem;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,64 +27,31 @@ import retrofit2.Response;
 
 public class AddServiceActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
-    private EditText etName, etDescription, etPrice;
-    private Spinner spCategory;
-    private ImageView ivServiceImage;
-    private Button btnAdd, btnPickImage;
+    private EditText etServiceName, etCategory, etWorkerName, etPrice;
+    private ImageView imgService;
+    private Button btnChooseImage, btnSave;
     private String encodedImage = "";
-    private List<Category> categoryList = new ArrayList<>();
-//    private ArrayAdapter<String> categoryAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_service);
 
-        etName = findViewById(R.id.etServiceName);
-        etDescription = findViewById(R.id.etServiceDescription);
-        etPrice = findViewById(R.id.etServicePrice);
-//        spCategory = findViewById(R.id.spServiceCategory);
-        ivServiceImage = findViewById(R.id.ivServiceImage);
-        btnAdd = findViewById(R.id.btnAdd);
-        btnPickImage = findViewById(R.id.btnPickImage);
+        // Ánh xạ view từ XML
+        imgService = findViewById(R.id.imgService);
+        btnChooseImage = findViewById(R.id.btnChooseImage);
+        btnSave = findViewById(R.id.btnSave);
+        etServiceName = findViewById(R.id.etServiceName);
+        etCategory = findViewById(R.id.etCategory);
+        etWorkerName = findViewById(R.id.etWorkerName);
+        etPrice = findViewById(R.id.etPrice);
 
-//        categoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new ArrayList<>());
-//        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spCategory.setAdapter(categoryAdapter);
+        // Xử lý chọn ảnh
+        btnChooseImage.setOnClickListener(v -> openImagePicker());
 
-//        fetchCategories();
-
-        btnPickImage.setOnClickListener(v -> openImagePicker());
-        btnAdd.setOnClickListener(v -> addService());
+        // Xử lý lưu dịch vụ
+        btnSave.setOnClickListener(v -> addService());
     }
-
-//    private void fetchCategories() {
-//        ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
-//        apiService.getCategories().enqueue(new Callback<List<Category>>() {
-//            @Override
-//            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
-//                if (response.isSuccessful() && response.body() != null) {
-//                    categoryList = response.body();
-//                    List<String> categoryNames = new ArrayList<>();
-//                    for (Category category : categoryList) {
-//                        categoryNames.add(category.getName());
-//                    }
-//                    categoryAdapter.clear();
-//                    categoryAdapter.addAll(categoryNames);
-//                    categoryAdapter.notifyDataSetChanged();
-//                } else {
-//                    Toast.makeText(AddServiceActivity.this, "Failed to load categories", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Category>> call, Throwable t) {
-//                Toast.makeText(AddServiceActivity.this, "Failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-
-
 
     private void openImagePicker() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -100,7 +65,7 @@ public class AddServiceActivity extends AppCompatActivity {
             Uri imageUri = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-                ivServiceImage.setImageBitmap(bitmap);
+                imgService.setImageBitmap(bitmap);
                 encodeImage(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -116,34 +81,35 @@ public class AddServiceActivity extends AppCompatActivity {
     }
 
     private void addService() {
-        String name = etName.getText().toString();
-        String description = etDescription.getText().toString();
-        int price = Integer.parseInt(etPrice.getText().toString());
-        int selectedPosition = spCategory.getSelectedItemPosition();
+        String name = etServiceName.getText().toString().trim();
+        String category = etCategory.getText().toString().trim();
+        String workerName = etWorkerName.getText().toString().trim();
+        String priceStr = etPrice.getText().toString().trim();
 
-        if (selectedPosition == -1) {
-            Toast.makeText(this, "Please select a category", Toast.LENGTH_SHORT).show();
+        if (name.isEmpty() || category.isEmpty() || workerName.isEmpty() || priceStr.isEmpty()) {
+            Toast.makeText(this, "Vui lòng điền đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
             return;
         }
 
-//        Category selectedCategory = categoryList.get(selectedPosition);
-        ServiceItem service = new ServiceItem(encodedImage, name, description, price, "9CA4AE5B-C18D-4115-821F-3A28ED7A416F");
+        int price = Integer.parseInt(priceStr);
+
+        ServiceReq service = new ServiceReq(encodedImage, name, category, price, workerName);
 
         ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
         apiService.createService(service).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(AddServiceActivity.this, "Service Added!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddServiceActivity.this, "Dịch vụ đã được thêm!", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
-                    Toast.makeText(AddServiceActivity.this, "Failed to add service", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddServiceActivity.this, "Lỗi khi thêm dịch vụ!", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(AddServiceActivity.this, "Failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddServiceActivity.this, "Lỗi: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -21,6 +21,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.main.interfaces.ApiService;
 import com.example.main.models.AuthResponse;
 import com.example.main.models.SignInRequest;
+import com.example.main.models.SignUpRequest;
 import com.example.main.retrofits.RetrofitClient;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -28,6 +29,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -71,7 +76,7 @@ public class SignInActivity extends AppCompatActivity {
 
         }
 
-        btnGoogleSignIn.setOnClickListener(v -> signIn());
+        btnGoogleSignIn.setOnClickListener(v -> signInWithGoogle());
 //        btnGoogleSignOut.setOnClickListener(v -> signOut());
         //End loginGG
         // UI Elements
@@ -164,12 +169,10 @@ public class SignInActivity extends AppCompatActivity {
     }
     //login
     // Method to sign in
-    private void signIn() {
+    private void signInWithGoogle() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
-        Intent intent = new Intent(SignInActivity.this, ServiceForCusActivity.class);
-        startActivity(intent);
-        finish();
+
     }
     // Method to sign out
     private void signOut() {
@@ -201,21 +204,81 @@ public class SignInActivity extends AppCompatActivity {
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 if (account != null) {
-                    Log.d(TAG, "------------------ Google Sign-In Data ------------------");
-                    Log.d(TAG, "ID: " + account.getId());
-                    Log.d(TAG, "Display Name: " + account.getDisplayName());
-                    Log.d(TAG, "Email: " + account.getEmail());
-                    Log.d(TAG, "Profile Picture: " + (account.getPhotoUrl() != null ? account.getPhotoUrl().toString() : "No Profile Picture"));
-                    Log.d(TAG, "-------------------------------------------------------");
-                    String email = account.getEmail();
-//                    tvUserEmail.setText("Email: " + email);
-//                    tvUserEmail.setVisibility(View.VISIBLE);
+                    Log.d(TAG, "Google Sign-In thành công: " + account.getEmail());
+                    handleGoogleSignIn(account.getEmail(), account.getDisplayName());
                 }
             } catch (ApiException e) {
                 Log.e(TAG, "Đăng nhập thất bại! Mã lỗi: " + e.getStatusCode());
-                Toast.makeText(this, "Đăng nhập thất bại! Lỗi: " + e.getStatusCode(), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Đăng nhập thất bại!", Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    // Xử lý logic đăng ký & đăng nhập khi dùng Google
+    private void handleGoogleSignIn(String email, String fullName) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        String formattedDate = sdf.format(new Date());
+        ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
+        SignUpRequest signUpRequest = new SignUpRequest(
+                fullName, "Male", formattedDate, "No Address", email, "string", email
+        );
+
+        Call<Void> signUpCall = apiService.signUp(signUpRequest);
+        signUpCall.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d(TAG, "Tài khoản mới được tạo, đăng nhập ngay...");
+                    signInWithEmail(email, "string");
+                } else if (response.code() == 400) {
+                    Log.d(TAG, "Tài khoản đã tồn tại, chuyển sang đăng nhập...");
+                    signInWithEmail(email, "string");
+                } else {
+                    Toast.makeText(getApplicationContext(), "Không thể tạo tài khoản!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                Toast.makeText(getApplicationContext(), "Lỗi mạng khi tạo tài khoản!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    // Đăng nhập với email và password
+    private void signInWithEmail(String email, String password) {
+        ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
+        SignInRequest signInRequest = new SignInRequest(email, password);
+        Call<AuthResponse> call = apiService.signIn(signInRequest);
+
+        call.enqueue(new Callback<AuthResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<AuthResponse> call, @NonNull Response<AuthResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    String accessToken = response.body().getData().getAccessToken();
+
+                    // Lưu token vào SharedPreferences
+                    SharedPreferences sharedPreferences = getSharedPreferences("MY_APP", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("ACCESS_TOKEN", accessToken);
+                    editor.apply();
+
+                    Toast.makeText(getApplicationContext(), "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+
+                    // Chuyển hướng sau khi đăng nhập
+                    Intent intent = new Intent(SignInActivity.this, ServiceForCusActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Sai tài khoản hoặc mật khẩu!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<AuthResponse> call, @NonNull Throwable t) {
+                Toast.makeText(getApplicationContext(), "Lỗi mạng khi đăng nhập!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     //end login
 }

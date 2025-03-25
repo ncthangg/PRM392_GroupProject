@@ -1,52 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@drawable/background_gradient">
 
-    <EditText
-        android:id="@+id/etServiceName"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Service Name" />
+        android:orientation="vertical"
+        android:gravity="center">
 
-    <EditText
-        android:id="@+id/etServiceDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Description"
-        android:inputType="textMultiLine" />
+        <!-- Ảnh dịch vụ -->
+        <ImageView
+            android:id="@+id/imgService"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bookmark"
+            android:scaleType="centerCrop"
+            android:src="@drawable/user_icon" />
 
-    <EditText
-        android:id="@+id/etServicePrice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Price"
-        android:inputType="numberDecimal" />
+        <Button
+            android:id="@+id/btnChooseImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chọn ảnh"
+            android:backgroundTint="@color/blue"
+            android:layout_marginBottom="16dp"/>
 
-<!--    <Spinner-->
-<!--        android:id="@+id/spServiceCategory"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content" />-->
+        <!-- Danh mục -->
+        <EditText
+            android:id="@+id/etCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Danh mục"
+            android:layout_marginBottom="10sp"
+            android:background="@drawable/background_search"
+            android:padding="12dp"/>
 
-    <ImageView
-        android:id="@+id/ivServiceImage"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:scaleType="centerCrop"
-        android:src="@drawable/user_icon" />
+        <!-- Tên dịch vụ -->
+        <EditText
+            android:id="@+id/etServiceName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tên dịch vụ"
+            android:layout_marginBottom="10sp"
+            android:background="@drawable/background_search"
+            android:padding="12dp"/>
 
-    <Button
-        android:id="@+id/btnPickImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Pick Image" />
+        <!-- Tên người thợ -->
+        <EditText
+            android:id="@+id/etWorkerName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tên người thợ"
+            android:background="@drawable/background_search"
+            android:layout_marginBottom="10sp"
+            android:padding="12dp"/>
 
-    <Button
-        android:id="@+id/btnAdd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Service" />
-</LinearLayout>
+        <!-- Giá tiền -->
+        <EditText
+            android:id="@+id/etPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Giá tiền"
+            android:background="@drawable/background_search"
+            android:padding="12dp"
+            android:inputType="numberDecimal"/>
+
+        <!-- Nút Lưu -->
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lưu"
+            android:backgroundTint="@color/blue"
+            android:textColor="@color/white"
+            android:layout_marginTop="16dp"/>
+    </LinearLayout>
+</ScrollView>
