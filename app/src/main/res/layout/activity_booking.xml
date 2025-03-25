@@ -114,128 +114,17 @@
                 android:textColor="#000000"
                 android:textSize="40sp" />
 
-            <HorizontalScrollView
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/btnSelectDate"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:scrollbars="none">
+                android:background="@drawable/bg_radius_25dp"
+                android:backgroundTint="#B4E4E4"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp"
+                android:text="Chọn ngày" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:id="@+id/dayToday"
-                        android:layout_width="102dp"
-                        android:layout_height="64dp"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/bg_radius_25dp"
-                        android:backgroundTint="#B4E4E4"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/unbounded_light"
-                            android:text="Today"
-                            android:textColor="#000000"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/unbounded_medium"
-                            android:text="4 Oct"
-                            android:textColor="#000000"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:id="@+id/dayMon"
-                        android:layout_width="102dp"
-                        android:layout_height="64dp"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/bg_radius_25dp"
-                        android:backgroundTint="#B4E4E4"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/unbounded_light"
-                            android:text="Mon"
-                            android:textColor="#000000"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/unbounded_medium"
-                            android:text="6 Oct"
-                            android:textColor="#000000"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/dayTues"
-                        android:layout_width="102dp"
-                        android:layout_height="64dp"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/bg_radius_25dp"
-                        android:backgroundTint="#B4E4E4"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/unbounded_light"
-                            android:text="Tues"
-                            android:textColor="#000000"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/unbounded_medium"
-                            android:text="7 Oct"
-                            android:textColor="#000000"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/dayWed"
-                        android:layout_width="102dp"
-                        android:layout_height="64dp"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/bg_radius_25dp"
-                        android:backgroundTint="#B4E4E4"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/unbounded_light"
-                            android:text="Wed"
-                            android:textColor="#000000"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/unbounded_medium"
-                            android:text="8 Oct"
-                            android:textColor="#000000"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                </LinearLayout>
-            </HorizontalScrollView>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -246,106 +135,16 @@
                 android:textColor="#000000"
                 android:textSize="40sp" />
 
-            <HorizontalScrollView
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/btnSelectTime"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:scrollbars="none">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:id="@+id/time7am"
-                        android:layout_width="127dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="9dp"
-                        android:background="@drawable/bg_radius_25dp"
-                        android:backgroundTint="#B4E4E4"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:paddingVertical="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="12dp"
-                            android:fontFamily="@font/unbounded_light"
-                            android:text="7:00"
-                            android:textColor="#000000"
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/unbounded_medium"
-                            android:text="AM"
-                            android:textColor="#000000"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/time730am"
-                        android:layout_width="127dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="9dp"
-                        android:background="@drawable/bg_radius_25dp"
-                        android:backgroundTint="#B4E4E4"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:paddingVertical="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="12dp"
-                            android:fontFamily="@font/unbounded_light"
-                            android:text="7:30"
-                            android:textColor="#000000"
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/unbounded_medium"
-                            android:text="AM"
-                            android:textColor="#000000"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/time8am"
-                        android:layout_width="127dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="9dp"
-                        android:background="@drawable/bg_radius_25dp"
-                        android:backgroundTint="#B4E4E4"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:paddingVertical="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="12dp"
-                            android:fontFamily="@font/unbounded_light"
-                            android:text="8:00"
-                            android:textColor="#000000"
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/unbounded_medium"
-                            android:text="AM"
-                            android:textColor="#000000"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                </LinearLayout>
-            </HorizontalScrollView>
+                android:background="@drawable/bg_radius_25dp"
+                android:backgroundTint="#B4E4E4"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp"
+                android:text="Chọn giờ" />
 
             <!-- Note Section -->
             <TextView

@@ -8,49 +8,46 @@
     tools:context=".CheckoutActivity"
     tools:ignore="MissingConstraints">
 
-
-    <ImageButton
+    <ImageView
         android:id="@+id/btnBack"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="@drawable/ic_back"
-        android:contentDescription="Back"
-        app:layout_constraintBottom_toTopOf="@+id/txtTitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/bg_100dp_no_stroke"
+        android:backgroundTint="#4A628A"
+        android:gravity="center"
+        android:padding="9dp"
+        android:src="@drawable/arrow_left"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="TouchTargetSizeCheck" />
+        app:tint="#DFF2EB" />
 
     <TextView
         android:id="@+id/txtTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
-        android:layout_marginBottom="18dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="112dp"
         android:text="Review Summary"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.879"
+        app:layout_constraintStart_toEndOf="@+id/btnBack"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="394dp"
-        android:layout_height="554dp"
-        android:layout_marginBottom="4dp"
+        android:layout_width="389dp"
+        android:layout_height="587dp"
         android:padding="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnContinue"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.759">
+        app:layout_constraintTop_toBottomOf="@+id/btnBack">
 
         <TextView
             android:id="@+id/txtServiceType"
@@ -58,12 +55,12 @@
             android:layout_height="29dp"
             android:background="@drawable/bg_label"
             android:padding="6dp"
-            android:text="Electric Repair"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.184"
+            app:layout_constraintHorizontal_bias="0.172"
             app:layout_constraintStart_toEndOf="@+id/imgService"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
@@ -72,23 +69,23 @@
             android:id="@+id/txtServiceName"
             android:layout_width="194dp"
             android:layout_height="44dp"
-            android:text="Air Condition Repair"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.676"
+            app:layout_constraintHorizontal_bias="0.7"
             app:layout_constraintStart_toEndOf="@+id/imgService"
             app:layout_constraintTop_toBottomOf="@+id/txtServiceType"
-            app:layout_constraintVertical_bias="0.017" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/imgService"
             android:layout_width="128dp"
             android:layout_height="123dp"
             android:contentDescription="Service Image"
-            android:src="@drawable/ic_wallet"
+            android:src="@drawable/ic_cash"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.021"
@@ -107,10 +104,10 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.23"
+            app:layout_constraintHorizontal_bias="0.222"
             app:layout_constraintStart_toEndOf="@+id/imgService"
             app:layout_constraintTop_toBottomOf="@+id/txtServiceName"
-            app:layout_constraintVertical_bias="0.015" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/txtPrice2"
@@ -122,22 +119,22 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.933"
+            app:layout_constraintHorizontal_bias="0.913"
             app:layout_constraintStart_toEndOf="@+id/imgService"
             app:layout_constraintTop_toBottomOf="@+id/txtServiceName"
-            app:layout_constraintVertical_bias="0.015" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <View
             android:id="@+id/view"
             android:layout_width="350dp"
             android:layout_height="1dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginBottom="412dp"
             android:background="@color/dark_blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgService"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/imgService" />
 
         <TextView
             android:id="@+id/lblCustomer"
@@ -154,21 +151,22 @@
             app:layout_constraintTop_toBottomOf="@+id/view"
             app:layout_constraintVertical_bias="0.0" />
 
+
         <TextView
             android:id="@+id/txtCustomerName"
-            android:layout_width="200dp"
-            android:layout_height="25dp"
-            android:text="Lê Ngã Lễ"
+            android:layout_width="240dp"
+            android:layout_height="37dp"
+            android:text=""
             android:textAlignment="textEnd"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/lblCustomer"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.922"
+            app:layout_constraintHorizontal_bias="0.857"
             app:layout_constraintStart_toEndOf="@+id/lblCustomer"
             app:layout_constraintTop_toTopOf="@+id/lblCustomer"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.466" />
 
         <TextView
             android:id="@+id/lblEmail"
@@ -180,18 +178,17 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.04"
+            app:layout_constraintHorizontal_bias="0.037"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lblCustomer"
-            app:layout_constraintVertical_bias="1.0" />
-
+            app:layout_constraintVertical_bias="0.323" />
 
         <TextView
             android:id="@+id/txtEmail"
-            android:layout_width="284dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="87dp"
-            android:text="le@gmail.com"
+            android:layout_width="267dp"
+            android:layout_height="37dp"
+            android:layout_marginEnd="4dp"
+            android:text=""
             android:textAlignment="textEnd"
             android:textColor="@color/black"
             android:textSize="16sp"
@@ -201,7 +198,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/lblEmail"
             app:layout_constraintTop_toTopOf="@+id/lblEmail"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/lblLocation"
@@ -214,27 +211,27 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.04"
+            app:layout_constraintHorizontal_bias="0.037"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lblPhoneNumber"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.6" />
 
         <TextView
             android:id="@+id/txtLocation"
-            android:layout_width="200dp"
-            android:layout_height="25dp"
+            android:layout_width="225dp"
+            android:layout_height="37dp"
             android:layout_marginEnd="4dp"
-            android:text="90/52 ABC"
+            android:text=""
             android:textAlignment="textEnd"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/lblLocation"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.976"
+            app:layout_constraintHorizontal_bias="0.963"
             app:layout_constraintStart_toEndOf="@+id/lblLocation"
             app:layout_constraintTop_toTopOf="@+id/lblLocation"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/lblPhoneNumber"
@@ -246,25 +243,24 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.046"
+            app:layout_constraintHorizontal_bias="0.039"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lblEmail"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.351" />
 
         <TextView
             android:id="@+id/txtPhoneNumber"
-            android:layout_width="200dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="42dp"
-            android:layout_marginEnd="4dp"
-            android:text="0912321421"
+            android:layout_width="199dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="8dp"
+            android:text=""
             android:textAlignment="textEnd"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/lblPhoneNumber"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/lblPhoneNumber"
             app:layout_constraintTop_toTopOf="@+id/lblPhoneNumber"
             app:layout_constraintVertical_bias="0.0" />
@@ -279,28 +275,60 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.043"
+            app:layout_constraintHorizontal_bias="0.041"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lblLocation"
-            app:layout_constraintVertical_bias="0.541" />
+            app:layout_constraintVertical_bias="0.568" />
 
         <TextView
             android:id="@+id/txtBookingDate"
-            android:layout_width="226dp"
-            android:layout_height="25dp"
+            android:layout_width="225dp"
+            android:layout_height="35dp"
             android:layout_marginStart="29dp"
             android:layout_marginEnd="4dp"
-            android:text="October 04, 2024 | 10:00 AM"
+            android:text=""
             android:textAlignment="textEnd"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/lblBookingDate"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/lblBookingDate"
             app:layout_constraintTop_toTopOf="@+id/lblBookingDate"
             app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/lblNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Note"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/view2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.037"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lblBookingDate"
+            app:layout_constraintVertical_bias="0.586" />
+
+        <TextView
+            android:id="@+id/txtNote"
+            android:layout_width="287dp"
+            android:layout_height="42dp"
+            android:layout_marginEnd="4dp"
+            android:text=""
+            android:textAlignment="textEnd"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/lblNote"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.904"
+            app:layout_constraintStart_toEndOf="@+id/lblNote"
+            app:layout_constraintTop_toTopOf="@+id/lblNote"
+            app:layout_constraintVertical_bias="0.65" />
 
         <View
             android:id="@+id/view2"
@@ -310,26 +338,26 @@
             android:background="@color/dark_blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintHorizontal_bias="0.714"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtBookingDate"
-            app:layout_constraintVertical_bias="0.044" />
+            app:layout_constraintVertical_bias="0.234" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btnChange"
             android:layout_width="343dp"
             android:layout_height="65dp"
-            android:layout_marginBottom="108dp"
+            android:layout_marginTop="4dp"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
             android:padding="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/view3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.352"
+            app:layout_constraintHorizontal_bias="0.357"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view2"
-            app:layout_constraintVertical_bias="0.526">
+            app:layout_constraintVertical_bias="0.3">
 
             <ImageView
                 android:id="@+id/imageViewMethod"
@@ -351,7 +379,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="12dp"
                 android:paddingStart="12dp"
-                android:text="Cash"
+                android:text=""
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -383,14 +411,12 @@
             android:id="@+id/view3"
             android:layout_width="350dp"
             android:layout_height="1dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginBottom="56dp"
             android:background="@color/dark_blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnChange"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintHorizontal_bias="0.142"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/lblTotal"
@@ -402,10 +428,10 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.026"
+            app:layout_constraintHorizontal_bias="0.019"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view3"
-            app:layout_constraintVertical_bias="0.355" />
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/txtTotalPrice"
@@ -444,13 +470,14 @@
         android:id="@+id/btnContinue"
         android:layout_width="411dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="76dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="44dp"
         android:backgroundTint="@color/dark_blue"
         android:text="Continue"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

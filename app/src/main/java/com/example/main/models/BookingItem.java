@@ -16,7 +16,7 @@ public class BookingItem {
     public Date BookingDate;
     public String Note;
 
-    public BookingItem(String id, String customerId, String mechanistId, String serviceId, com.example.main.models.Service service, String workingDate, String address, String workingTime, String status, Date bookingDate, String note) {
+    public BookingItem(String id, String customerId, String mechanistId, String serviceId, Service service, String workingDate, String address, String workingTime, String status, Date bookingDate, String note) {
         Id = id;
         CustomerId = customerId;
         MechanistId = mechanistId;
@@ -62,11 +62,11 @@ public class BookingItem {
         ServiceId = serviceId;
     }
 
-    public com.example.main.models.Service getService() {
+    public Service getService() {
         return Service;
     }
 
-    public void setService(com.example.main.models.Service service) {
+    public void setService(Service service) {
         Service = service;
     }
 

@@ -13,6 +13,8 @@ import com.example.main.R;
 import com.example.main.models.ServiceItem;
 import java.util.List;
 
+import com.example.main.models.ServiceItem;
+
 public class ServiceManagerAdapter extends RecyclerView.Adapter<ServiceManagerAdapter.ViewHolder> {
     private Context context;
     private List<ServiceItem> serviceList;

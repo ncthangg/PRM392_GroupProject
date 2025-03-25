@@ -32,7 +32,14 @@
             android:exported="false" />
         <activity
             android:name=".LastCheckoutActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <data android:scheme="myapp" android:host="vnpay_return"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".PaymentMethodActivity"
             android:exported="false" />
@@ -75,6 +82,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyB8QVHGzdoXcuXVqNS1oqU-E10HQ0OJWA8"/>

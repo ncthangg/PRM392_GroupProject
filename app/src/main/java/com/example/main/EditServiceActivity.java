@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.main.interfaces.ApiService;
 import com.example.main.models.ServiceReq;
+import com.example.main.models.Category;
+import com.example.main.models.ServiceItem;
 import com.example.main.retrofits.RetrofitClient;
 
 import java.io.ByteArrayOutputStream;

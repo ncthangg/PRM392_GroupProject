@@ -1,5 +1,7 @@
 package com.example.main.models;
 
+import com.example.main.models.Category;
+
 public class Service {
     public String Id;
     public String Image;
@@ -9,7 +11,7 @@ public class Service {
     public boolean Active;
     public Category Category;
 
-    public Service(String id, String image, String name, String description, int price, boolean active, com.example.main.models.Category category) {
+    public Service(String id, String image, String name, String description, int price, boolean active, Category category) {
         Id = id;
         Image = image;
         Name = name;
@@ -67,11 +69,11 @@ public class Service {
         Active = active;
     }
 
-    public com.example.main.models.Category getCategory() {
+    public Category getCategory() {
         return Category;
     }
 
-    public void setCategory(com.example.main.models.Category category) {
+    public void setCategory(Category category) {
         Category = category;
     }
 }

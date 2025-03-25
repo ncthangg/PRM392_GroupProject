@@ -1,6 +1,11 @@
 package com.example.main.interfaces;
 
 import com.example.main.models.AuthResponse;
+import com.example.main.models.BookingReq;
+import com.example.main.models.BookingUpdateRequest;
+import com.example.main.models.Category;
+import com.example.main.models.GetBookingsRes;
+import com.example.main.models.ServiceItem;
 import com.example.main.models.SignInRequest;
 import com.example.main.models.SignUpRequest;
 import com.example.main.models.UserInfoResponse;
@@ -10,6 +15,10 @@ import com.example.main.models.GetBookingsRes;
 import com.example.main.models.GetServiceRes;
 import com.example.main.models.ServiceItem;
 import com.example.main.models.ServiceReq;
+import com.example.main.models.GetServiceRes;
+
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -43,6 +52,10 @@ public interface ApiService {
 
     @GET("authentications/current-user")
     Call<UserInfoResponse> getUserInfo(@Header("Authorization") String token);
+
+    @POST("bookings")
+    Call<Void> saveBooking(@Header("Authorization") String token, @Body BookingReq request);
+
         @POST("bookings/get-bookings-by-mechanist/{mechanistId}")
         Call<GetBookingsRes> getBookings(
                 @Path("mechanistId") String mechanistId,
