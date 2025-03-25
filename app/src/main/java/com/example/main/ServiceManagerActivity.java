@@ -61,7 +61,6 @@ public class ServiceManagerActivity extends AppCompatActivity {
 
 
         findViewById(R.id.nav_logout).setOnClickListener(v -> logoutUser());
-        findViewById(R.id.nav_profile).setOnClickListener(v -> viewProfile());
     }
 
     private void loadServices() {
