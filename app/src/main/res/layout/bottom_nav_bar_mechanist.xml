@@ -50,7 +50,7 @@
 
     <!-- Logout Button -->
     <LinearLayout
-        android:id="@+id/nav_logout"
+        android:id="@+id/nav_booking"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -58,13 +58,13 @@
         android:orientation="vertical"
         android:paddingBottom="12dp">
         <ImageView
-            android:src="@drawable/home_icon"
+            android:src="@drawable/nav_booking"
             android:layout_width="24dp"
             android:layout_height="24dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Logout"
+            android:text="Booking"
             android:textColor="@color/white"
             android:textSize="10sp"/>
     </LinearLayout>
