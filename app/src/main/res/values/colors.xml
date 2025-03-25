@@ -8,5 +8,6 @@
     <color name="light_gray">#F5F5F5</color>
     <color name="dark_blue">#003366</color>
     <color name="dark_gray">#A9A9A9</color>
+    <color name="purple_500">#8FA5EB</color>
 
 </resources>

@@ -1,22 +1,29 @@
 package com.example.main;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.main.interfaces.ApiService;
+import com.example.main.models.UserInfoResponse;
+import com.example.main.retrofits.RetrofitClient;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class CustomerInfoActivity extends AppCompatActivity {
 
-    private EditText etName, etEmail, etGender, etPhoneNumber;
-    private Spinner spinnerCountry;
+    private EditText etName, etEmail, etLocation, etPhoneNumber;
     private TextView btnContinue;
     private ImageView btnBack;
 
@@ -28,12 +35,16 @@ public class CustomerInfoActivity extends AppCompatActivity {
         // Initialize views
         etName = findViewById(R.id.etName);
         etEmail = findViewById(R.id.etEmail);
-        etGender = findViewById(R.id.etGender);
+
         etPhoneNumber = findViewById(R.id.etPhoneNumber);
-        spinnerCountry = findViewById(R.id.spinnerCountry);
+        etLocation = findViewById(R.id.etLocation);
+
         btnContinue = findViewById(R.id.btnContinue);
         btnBack = findViewById(R.id.btnBack);
-        setupCountrySpinner();
+
+        String categoryName = getIntent().getStringExtra("categoryName");
+        String serviceName = getIntent().getStringExtra("serviceName");
+        String servicePrice = getIntent().getStringExtra("servicePrice");
 
         String selectedDay = getIntent().getStringExtra("selected_day");
         String selectedTime = getIntent().getStringExtra("selected_time");
@@ -46,25 +57,31 @@ public class CustomerInfoActivity extends AppCompatActivity {
             }
         });
 
+        loadUserInfo();
 
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String name = etName.getText().toString().trim();
                 String email = etEmail.getText().toString().trim();
-                String gender = etGender.getText().toString().trim();
                 String phoneNumber = etPhoneNumber.getText().toString().trim();
-                String country = spinnerCountry.getSelectedItem().toString();
+                String location = etLocation.getText().toString();
 
-                if (name.isEmpty() || email.isEmpty() || gender.isEmpty() || phoneNumber.isEmpty() || country.isEmpty()) {
+                if (name.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || location.isEmpty()) {
                     Toast.makeText(CustomerInfoActivity.this, "Input invalidate", Toast.LENGTH_SHORT).show();
                 }else {
-                    Intent intent = new Intent(CustomerInfoActivity.this, PaymentMethodActivity.class);
+                    Intent intent = new Intent(CustomerInfoActivity.this, ChoosePaymentMethodActivity.class);
+                    intent.putExtra("categoryName", categoryName);
+                    intent.putExtra("serviceName", serviceName);
+                    intent.putExtra("servicePrice", servicePrice);
+
                     intent.putExtra("name", name);
                     intent.putExtra("email", email);
-                    intent.putExtra("gender", gender);
-                    intent.putExtra("phoneNumber", phoneNumber);
-                    intent.putExtra("country", country);
+
+                    intent.putExtra("phone", phoneNumber);
+                    intent.putExtra("location", location);
+
                     intent.putExtra("selected_day", selectedDay);
                     intent.putExtra("selected_time", selectedTime);
                     intent.putExtra("note", note);
@@ -75,18 +92,33 @@ public class CustomerInfoActivity extends AppCompatActivity {
         });
     }
 
-    private void setupCountrySpinner() {
-        String[] countries = new String[]{
-                "Viet Nam", "United States", "United Kingdom", "Australia",
-                "Canada", "China", "Japan", "South Korea"
-        };
+    private void loadUserInfo() {
+        ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                this, android.R.layout.simple_spinner_item, countries);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCountry.setAdapter(adapter);
+        SharedPreferences sharedPreferences = getSharedPreferences("MY_APP", MODE_PRIVATE);
+        String token = sharedPreferences.getString("ACCESS_TOKEN", "");
 
-        // Set default to Viet Nam (first in list)
-        spinnerCountry.setSelection(0);
+        Call<UserInfoResponse> call = apiService.getUserInfo("Bearer " + token); // Gọi API lấy thông tin người dùng
+
+        call.enqueue(new Callback<UserInfoResponse>() {
+            @Override
+            public void onResponse(Call<UserInfoResponse> call, Response<UserInfoResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    UserInfoResponse.UserData user = response.body().getData();
+
+                    // Cập nhật dữ liệu vào các EditText
+                    etName.setText(user.getFullname());
+                    etEmail.setText(user.getEmail());
+                } else {
+                    Toast.makeText(CustomerInfoActivity.this, "Không thể lấy thông tin người dùng!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserInfoResponse> call, Throwable t) {
+                Toast.makeText(CustomerInfoActivity.this, "Lỗi: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
 }

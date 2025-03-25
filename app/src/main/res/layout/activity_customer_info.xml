@@ -13,8 +13,8 @@
         android:id="@+id/btnBack"
         android:layout_width="42dp"
         android:layout_height="42dp"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="46dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
         android:background="@drawable/bg_100dp_no_stroke"
         android:backgroundTint="#4A628A"
         android:gravity="center"
@@ -35,6 +35,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <!-- Title texts -->
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -65,9 +66,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/unbounded_regular"
                     android:text="Name"
                     android:textColor="#000000"
-                    android:fontFamily="@font/unbounded_regular"
                     android:textSize="15sp" />
 
                 <EditText
@@ -75,83 +76,56 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="32dp"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="12dp"
-                    android:layout_marginHorizontal="8dp"
                     android:background="@drawable/bg_radius_15dp"
                     android:backgroundTint="#DFF2EB"
                     android:fontFamily="@font/unbounded_light"
-                    android:textSize="14sp"
-                    android:textColor="#000000"
-
                     android:inputType="textPersonName"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp"
                     android:text="Lê Ngà Lê"
-                     />
+
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
 
                 <!-- Email field -->
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/unbounded_regular"
                     android:text="Email"
                     android:textColor="#000000"
-                    android:fontFamily="@font/unbounded_regular"
                     android:textSize="15sp" />
 
                 <EditText
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="32dp"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="12dp"
-                    android:layout_marginHorizontal="8dp"
                     android:background="@drawable/bg_radius_15dp"
                     android:backgroundTint="#DFF2EB"
                     android:fontFamily="@font/unbounded_light"
-                    android:textSize="14sp"
                     android:inputType="textEmailAddress"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp"
                     android:text="Example@gmail.com"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
 
                 <!-- Gender field -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Gender"
-                    android:textColor="#000000"
-                    android:fontFamily="@font/unbounded_regular"
-                    android:textSize="15sp" />
-
-                <EditText
-                    android:id="@+id/etGender"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="32dp"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="12dp"
-                    android:layout_marginHorizontal="8dp"
-                    android:background="@drawable/bg_radius_15dp"
-                    android:backgroundTint="#DFF2EB"
-                    android:fontFamily="@font/unbounded_light"
-                    android:textSize="14sp"
-                    android:textColor="#000000"
-
-                    android:inputType="text"
-                    android:text="Male"
-                    />
 
                 <!-- Phone Number field -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/unbounded_regular"
                     android:text="Phone Number"
                     android:textColor="#000000"
-                    android:fontFamily="@font/unbounded_regular"
                     android:textSize="15sp" />
 
                 <EditText
@@ -159,58 +133,64 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="32dp"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="12dp"
-                    android:layout_marginHorizontal="8dp"
                     android:background="@drawable/bg_radius_15dp"
                     android:backgroundTint="#DFF2EB"
                     android:fontFamily="@font/unbounded_light"
-                    android:textSize="14sp"
-                    android:textColor="#000000"
-                    android:text="+84    |     (208) 555 699"
                     android:inputType="phone"
-                    />
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp"
+                    android:text=""
+                    android:hint="Số điện thoại liên lạc"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Country"
-                    android:textColor="#000000"
                     android:fontFamily="@font/unbounded_regular"
-                    android:textSize="15sp"/>
+                    android:text="Location"
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
 
-                <Spinner
-                    android:id="@+id/spinnerCountry"
+                <EditText
+                    android:id="@+id/etLocation"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="32dp"
+                    android:background="@drawable/bg_radius_15dp"
+                    android:backgroundTint="#DFF2EB"
+                    android:fontFamily="@font/unbounded_light"
+                    android:inputType="text"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="12dp"
-                    android:layout_marginHorizontal="8dp"
-                    android:background="@drawable/bg_radius_15dp"
-                    android:backgroundTint="#DFF2EB"/>
-
+                    android:hint="Địa chỉ chi tiết"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
                 <!-- Continue button -->
 
                 <TextView
                     android:id="@+id/btnContinue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:layout_marginHorizontal="30sp"
-                    android:background="@drawable/bg_radius_15dp"
-                    android:text="Continue"
-                    android:paddingVertical="8dp"
-                    android:textSize="13sp"
-                    android:gravity="center"
+                    android:layout_marginTop="16dp"
                     android:layout_marginBottom="40dp"
+                    android:background="@drawable/bg_radius_15dp"
                     android:fontFamily="@font/unbounded_medium"
+                    android:gravity="center"
+                    android:paddingVertical="8dp"
+                    android:text="Continue"
                     android:textAllCaps="false"
-                    android:textColor="#DFF2EB" />
+                    android:textColor="#DFF2EB"
+                    android:textSize="13sp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -1,6 +1,7 @@
 package com.example.main;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -104,13 +105,32 @@ public class SignInActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(@NonNull Call<AuthResponse> call, @NonNull Response<AuthResponse> response) {
                         if (response.isSuccessful() && response.body() != null) {
-                            String token = response.body().getToken();
+                            String accessToken = response.body().getData().getAccessToken();
+
+                            // Lưu token vào SharedPreferences
+                            SharedPreferences sharedPreferences = getSharedPreferences("MY_APP", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("ACCESS_TOKEN", accessToken);
+                            editor.apply(); // Lưu lại
+
                             Toast.makeText(getApplicationContext(), "Sign In Successful!", Toast.LENGTH_SHORT).show();
 
                             // Redirect to Main Activity after successful login
-                            Intent intent = new Intent(SignInActivity.this, ServiceForCusActivity.class);
-                            startActivity(intent);
-                            finish(); // Close current activity
+                            if(usernameInput.equals("admin")){
+                                Intent intent = new Intent(SignInActivity.this, BookingListMechanist.class);
+                                startActivity(intent);
+                                finish(); // Close current activity
+                            }
+                            else if(usernameInput.equals("mechanist")){
+                                Intent intent = new Intent(SignInActivity.this, BookingListMechanist.class);
+                                startActivity(intent);
+                                finish(); // Close current activity
+                            } else{
+                                Intent intent = new Intent(SignInActivity.this, ServiceForCusActivity.class);
+                                startActivity(intent);
+                                finish(); // Close current activity
+                            }
+
                         } else {
                             Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
                         }

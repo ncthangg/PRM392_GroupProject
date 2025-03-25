@@ -1,5 +1,6 @@
 package com.example.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -35,15 +36,27 @@ public class ServiceForCusActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.rvServiceList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        serviceAdapter = new ServiceAdapter(this, serviceList);
-        recyclerView.setAdapter(serviceAdapter);
 
+        serviceAdapter = new ServiceAdapter(this, serviceList, serviceItem -> {
+            Intent intent = new Intent(ServiceForCusActivity.this, BookingActivity.class);
+            int servicePriceInt = serviceItem.getPrice();
+            String servicePriceString = Integer.toString(servicePriceInt);
+            intent.putExtra("categoryName", serviceItem.getCategory().getName());
+            intent.putExtra("serviceId", serviceItem.getId());
+            intent.putExtra("serviceName", serviceItem.getName());
+            intent.putExtra("servicePrice", servicePriceString);
+            startActivity(intent);
+        });
+
+        recyclerView.setAdapter(serviceAdapter);
         loadServices();
     }
 
     private void loadServices() {
         ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
-        apiService.getServices().enqueue(new Callback<GetServiceRes>() {
+        Call<GetServiceRes> call = apiService.getServices();
+
+        call.enqueue(new Callback<GetServiceRes>() {
             @Override
             public void onResponse(Call<GetServiceRes> call, Response<GetServiceRes> response) {
                 if (response.isSuccessful() && response.body() != null && response.body().data != null) {

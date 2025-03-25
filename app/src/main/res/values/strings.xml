@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">main</string>
+    <string name="label_service_name">Service Name</string>
+    <string name="label_booking_date">Booking Date:</string>
+    <string name="label_working_date">Working Date:</string>
+    <string name="label_working_time">Working Time:</string>
+    <string name="label_address">Address:</string>
+    <string name="label_note">Note:</string>
+    <string name="label_status">Status:</string>
+    <string name="btn_update_booking">Update Booking</string>
+
 </resources>

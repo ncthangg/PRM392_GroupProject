@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -49,6 +50,10 @@
                     android:exported="false" />
         <activity
             android:name=".EditServiceActivity"
+            android:name=".MapActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ServiceForManagerActivity"
             android:exported="false" />
         <activity
             android:name=".SignInActivity"
@@ -60,6 +65,12 @@
             android:name=".WalletActivity"
             android:exported="false" />
         <activity
+            android:name=".BookingListMechanist"
+            android:exported="false" />
+        <activity
+        android:name=".BookingDetailMechanist"
+        android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -68,6 +79,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyB8QVHGzdoXcuXVqNS1oqU-E10HQ0OJWA8"/>
     </application>
 
 </manifest>

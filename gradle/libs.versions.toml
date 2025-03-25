@@ -11,6 +11,7 @@ constraintlayout = "2.2.1"
 retrofit = "2.9.0"
 okhttp = "4.9.3"
 glide = "4.15.1"
+cronetEmbedded = "119.6045.31"
 
 [libraries]
 jtds = { module = "net.sourceforge.jtds:jtds", version.ref = "jtds"}
@@ -26,6 +27,7 @@ retrofit-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref 
 okhttp-logging = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 glideCompiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
+cronet-embedded = { group = "org.chromium.net", name = "cronet-embedded", version.ref = "cronetEmbedded" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 

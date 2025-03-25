@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -17,10 +18,16 @@ import java.util.List;
 public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceViewHolder> {
     private Context context;
     private List<ServiceItem> serviceList;
+    private OnItemClickListener onItemClickListener;
 
-    public ServiceAdapter(Context context, List<ServiceItem> serviceList) {
+    public interface OnItemClickListener {
+        void onItemClick(ServiceItem serviceItem);
+    }
+
+    public ServiceAdapter(Context context, List<ServiceItem> serviceList, OnItemClickListener onItemClickListener) {
         this.context = context;
         this.serviceList = serviceList;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
@@ -45,6 +52,8 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
         } else {
             holder.serviceImageView.setImageResource(R.drawable.bg_label);
         }
+
+        holder.itemView.setOnClickListener(v -> onItemClickListener.onItemClick(service));
     }
 
     @Override

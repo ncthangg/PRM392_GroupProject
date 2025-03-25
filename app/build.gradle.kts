@@ -38,6 +38,11 @@ android {
 }
 
 dependencies {
+    implementation(fileTree(mapOf(
+        "dir" to "libs",
+        "include" to listOf("*.aar", "*.jar"),
+        "exclude" to listOf("*mock*.jar")
+    )))
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -45,6 +50,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
     implementation(libs.okhttp.logging)
+    implementation(libs.cronet.embedded)
     testImplementation(libs.junit)
     implementation(libs.glide)
     annotationProcessor(libs.glideCompiler)
@@ -61,4 +67,5 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    implementation("com.google.android.gms:play-services-maps:19.1.0")
 }
