@@ -2,8 +2,11 @@ package com.example.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -24,6 +27,14 @@ public class MainActivity extends AppCompatActivity {
 //            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
 //            return insets;
 //        });
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if (account != null) {
+            Log.d("LOGIN", "Google Account found, navigating to ServiceForCusActivity");
+            Intent intent = new Intent(MainActivity.this, ServiceForCusActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
         TextView signInTextView = findViewById(R.id.buttonText);
 
         // Set Click Listener

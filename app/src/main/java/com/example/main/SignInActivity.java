@@ -51,6 +51,7 @@ public class SignInActivity extends AppCompatActivity {
 
         // Configure Google Sign-In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
@@ -117,7 +118,7 @@ public class SignInActivity extends AppCompatActivity {
 
                             // Redirect to Main Activity after successful login
                             if(usernameInput.equals("admin")){
-                                Intent intent = new Intent(SignInActivity.this, BookingListMechanist.class);
+                                Intent intent = new Intent(SignInActivity.this, ServiceManagerActivity.class);
                                 startActivity(intent);
                                 finish(); // Close current activity
                             }
@@ -170,6 +171,9 @@ public class SignInActivity extends AppCompatActivity {
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
+        Intent intent = new Intent(SignInActivity.this, ServiceForCusActivity.class);
+        startActivity(intent);
+        finish();
     }
     // Method to sign out
     private void signOut() {

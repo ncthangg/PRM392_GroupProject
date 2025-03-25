@@ -35,7 +35,7 @@ public class AddServiceActivity extends AppCompatActivity {
     private Button btnAdd, btnPickImage;
     private String encodedImage = "";
     private List<Category> categoryList = new ArrayList<>();
-    private ArrayAdapter<String> categoryAdapter;
+//    private ArrayAdapter<String> categoryAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,48 +45,48 @@ public class AddServiceActivity extends AppCompatActivity {
         etName = findViewById(R.id.etServiceName);
         etDescription = findViewById(R.id.etServiceDescription);
         etPrice = findViewById(R.id.etServicePrice);
-        spCategory = findViewById(R.id.spServiceCategory);
+//        spCategory = findViewById(R.id.spServiceCategory);
         ivServiceImage = findViewById(R.id.ivServiceImage);
         btnAdd = findViewById(R.id.btnAdd);
         btnPickImage = findViewById(R.id.btnPickImage);
 
-        categoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new ArrayList<>());
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spCategory.setAdapter(categoryAdapter);
+//        categoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new ArrayList<>());
+//        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spCategory.setAdapter(categoryAdapter);
 
-        fetchCategories();
+//        fetchCategories();
 
         btnPickImage.setOnClickListener(v -> openImagePicker());
         btnAdd.setOnClickListener(v -> addService());
     }
 
-    private void fetchCategories() {
-        ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
-        apiService.getCategories().enqueue(new Callback<List<Category>>() {
-            @Override
-            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    categoryList = response.body();
-                    List<String> categoryNames = new ArrayList<>();
-                    for (Category category : categoryList) {
-                        categoryNames.add(category.getName());
-                    }
-                    categoryAdapter.clear();
-                    categoryAdapter.addAll(categoryNames);
-                    categoryAdapter.notifyDataSetChanged();
-                } else {
-                    Toast.makeText(AddServiceActivity.this, "Failed to load categories", Toast.LENGTH_SHORT).show();
-                }
-            }
+//    private void fetchCategories() {
+//        ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
+//        apiService.getCategories().enqueue(new Callback<List<Category>>() {
+//            @Override
+//            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+//                if (response.isSuccessful() && response.body() != null) {
+//                    categoryList = response.body();
+//                    List<String> categoryNames = new ArrayList<>();
+//                    for (Category category : categoryList) {
+//                        categoryNames.add(category.getName());
+//                    }
+//                    categoryAdapter.clear();
+//                    categoryAdapter.addAll(categoryNames);
+//                    categoryAdapter.notifyDataSetChanged();
+//                } else {
+//                    Toast.makeText(AddServiceActivity.this, "Failed to load categories", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Category>> call, Throwable t) {
+//                Toast.makeText(AddServiceActivity.this, "Failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
-            @Override
-            public void onFailure(Call<List<Category>> call, Throwable t) {
-                Toast.makeText(AddServiceActivity.this, "Failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
 
 
-}
 
     private void openImagePicker() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -126,8 +126,8 @@ public class AddServiceActivity extends AppCompatActivity {
             return;
         }
 
-        Category selectedCategory = categoryList.get(selectedPosition);
-        ServiceItem service = new ServiceItem(encodedImage, name, description, price, selectedCategory);
+//        Category selectedCategory = categoryList.get(selectedPosition);
+        ServiceItem service = new ServiceItem(encodedImage, name, description, price, "9CA4AE5B-C18D-4115-821F-3A28ED7A416F");
 
         ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
         apiService.createService(service).enqueue(new Callback<Void>() {

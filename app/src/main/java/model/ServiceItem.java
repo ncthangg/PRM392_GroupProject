@@ -7,9 +7,9 @@ public class ServiceItem {
     private String Description;
     private int Price;
     private boolean Active;
-    private Category Category;
+    private String  Category;
 
-    public ServiceItem(String image, String name, String description, int price, Category category) {
+    public ServiceItem(String image, String name, String description, int price, String category) {
         this.Image = image;
         this.Name = name;
         this.Description = description;
@@ -24,5 +24,5 @@ public class ServiceItem {
     public String getDescription() { return Description; }
     public int getPrice() { return Price; }
     public boolean isActive() { return Active; }
-    public Category getCategory() { return Category; }
+    public String getCategory() { return Category; }
 }

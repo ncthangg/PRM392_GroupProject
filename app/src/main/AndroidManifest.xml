@@ -50,10 +50,6 @@
                     android:exported="false" />
         <activity
             android:name=".EditServiceActivity"
-            android:name=".MapActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ServiceForManagerActivity"
             android:exported="false" />
         <activity
             android:name=".SignInActivity"

@@ -34,50 +34,6 @@
                 android:textSize="10sp"/>
         </LinearLayout>
 
-        <!-- List Service -->
-        <LinearLayout
-            android:id="@+id/nav_list_service"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:clickable="true"
-            android:focusable="true">
-            <ImageView
-                android:src="@drawable/bookmark"
-                android:layout_width="24dp"
-                android:layout_height="24dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Services"
-                android:textColor="@color/white"
-                android:textSize="10sp"/>
-        </LinearLayout>
-
-        <!-- List Booking -->
-        <LinearLayout
-            android:id="@+id/nav_list_booking"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:clickable="true"
-            android:focusable="true">
-            <ImageView
-                android:src="@drawable/chat_icon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Bookings"
-                android:textColor="@color/white"
-                android:textSize="10sp"/>
-        </LinearLayout>
-
         <!-- Profile -->
         <LinearLayout
             android:id="@+id/nav_profile"
@@ -105,3 +61,47 @@
 
 
 </RelativeLayout>
+
+    <!-- List Service -->
+    <!--        <LinearLayout-->
+    <!--            android:id="@+id/nav_list_service"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:gravity="center"-->
+    <!--            android:orientation="vertical"-->
+    <!--            android:clickable="true"-->
+    <!--            android:focusable="true">-->
+    <!--            <ImageView-->
+    <!--                android:src="@drawable/bookmark"-->
+    <!--                android:layout_width="24dp"-->
+    <!--                android:layout_height="24dp"/>-->
+    <!--            <TextView-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:text="Services"-->
+    <!--                android:textColor="@color/white"-->
+    <!--                android:textSize="10sp"/>-->
+    <!--        </LinearLayout>-->
+
+    <!--        &lt;!&ndash; List Booking &ndash;&gt;-->
+    <!--        <LinearLayout-->
+    <!--            android:id="@+id/nav_list_booking"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:gravity="center"-->
+    <!--            android:orientation="vertical"-->
+    <!--            android:clickable="true"-->
+    <!--            android:focusable="true">-->
+    <!--            <ImageView-->
+    <!--                android:src="@drawable/chat_icon"-->
+    <!--                android:layout_width="24dp"-->
+    <!--                android:layout_height="24dp"/>-->
+    <!--            <TextView-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:text="Bookings"-->
+    <!--                android:textColor="@color/white"-->
+    <!--                android:textSize="10sp"/>-->
+    <!--        </LinearLayout>-->

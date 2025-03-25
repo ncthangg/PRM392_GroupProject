@@ -11,6 +11,7 @@ import model.Category;
 import model.BookingUpdateRequest;
 import model.GetBookingsRes;
 import model.GetServiceRes;
+import model.ServiceItem;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;

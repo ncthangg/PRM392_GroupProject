@@ -9,4 +9,7 @@
     <string name="label_status">Status:</string>
     <string name="btn_update_booking">Update Booking</string>
 
+    <string name="default_web_client_id">908653249112-4oobmgjq7cm8hjmhi62jbdb01328ttnc.apps.googleusercontent.com</string>
+
+
 </resources>

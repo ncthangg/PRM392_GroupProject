@@ -1,6 +1,7 @@
 
 package com.example.main;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -35,7 +36,7 @@ public class EditServiceActivity extends AppCompatActivity {
     private String serviceId;
     private String encodedImage = "";
     private List<Category> categoryList = new ArrayList<>();
-    private ArrayAdapter<String> categoryAdapter;
+//    private ArrayAdapter<String> categoryAdapter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +47,7 @@ public class EditServiceActivity extends AppCompatActivity {
         ivServiceImage = findViewById(R.id.ivServiceImage);
         btnUpdate = findViewById(R.id.btnUpdate);
         btnDelete = findViewById(R.id.btnDelete);
-        spCategory = findViewById(R.id.spServiceCategory);
+//        spCategory = findViewById(R.id.spServiceCategory);
 
         serviceId = getIntent().getStringExtra("service_id");
         etName.setText(getIntent().getStringExtra("service_name"));
@@ -55,13 +56,18 @@ public class EditServiceActivity extends AppCompatActivity {
         String imageUrl = getIntent().getStringExtra("service_image");
         Glide.with(this).load(imageUrl).into(ivServiceImage);
 
-        categoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new ArrayList<>());
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spCategory.setAdapter(categoryAdapter);
+        // Khởi tạo adapter trước khi loadCategories()
+//        categoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new ArrayList<>());
+//        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spCategory.setAdapter(categoryAdapter);
 
         btnUpdate.setOnClickListener(view -> updateService());
         btnDelete.setOnClickListener(view -> deleteService());
+
+        // Gọi API lấy danh mục sau khi Adapter đã khởi tạo
+//        loadCategories();
     }
+
     private void encodeImage(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
@@ -78,8 +84,7 @@ public class EditServiceActivity extends AppCompatActivity {
             return;
         }
 
-        Category selectedCategory = categoryList.get(selectedPosition);
-        ServiceItem service = new ServiceItem(encodedImage, name, "", price, selectedCategory);
+        ServiceItem service = new ServiceItem(encodedImage, name, "", price, "9CA4AE5B-C18D-4115-821F-3A28ED7A416F");
 
         ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
         apiService.updateService(serviceId, service).enqueue(new Callback<Void>() {
@@ -87,6 +92,9 @@ public class EditServiceActivity extends AppCompatActivity {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(EditServiceActivity.this, "Service Updated!", Toast.LENGTH_SHORT).show();
+
+                    // Gửi kết quả về MainActivity
+                    setResult(RESULT_OK);
                     finish();
                 } else {
                     Toast.makeText(EditServiceActivity.this, "Failed to update service", Toast.LENGTH_SHORT).show();
@@ -100,9 +108,6 @@ public class EditServiceActivity extends AppCompatActivity {
         });
     }
 
-
-
-
     private void deleteService() {
         ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
         apiService.deleteService(serviceId).enqueue(new Callback<Void>() {
@@ -110,6 +115,9 @@ public class EditServiceActivity extends AppCompatActivity {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(EditServiceActivity.this, "Service Deleted!", Toast.LENGTH_SHORT).show();
+
+                    // Gửi kết quả về MainActivity
+                    setResult(RESULT_OK);
                     finish();
                 } else {
                     Toast.makeText(EditServiceActivity.this, "Failed to delete service", Toast.LENGTH_SHORT).show();
@@ -122,5 +130,49 @@ public class EditServiceActivity extends AppCompatActivity {
             }
         });
     }
+//    private void loadCategories() {
+//        ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
+//        apiService.getCategories().enqueue(new Callback<List<Category>>() {
+//            @Override
+//            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+//                if (response.isSuccessful() && response.body() != null) {
+//                    categoryList.clear();
+//                    categoryList.addAll(response.body());
+//
+//                    List<String> categoryNames = new ArrayList<>();
+//                    for (Category category : categoryList) {
+//                        categoryNames.add(category.getName());
+//                    }
+//
+//                    // Đảm bảo adapter đã được gán giá trị trước khi cập nhật
+//                    if (categoryAdapter != null) {
+//                        categoryAdapter.clear();
+//                        categoryAdapter.addAll(categoryNames);
+//                        categoryAdapter.notifyDataSetChanged();
+//                    }
+//
+//                    // Chọn category phù hợp với service hiện tại
+//                    String currentCategoryId = getIntent().getStringExtra("service_category_id");
+//                    if (currentCategoryId != null) {
+//                        for (int i = 0; i < categoryList.size(); i++) {
+//                            if (categoryList.get(i).getId().equals(currentCategoryId)) {
+//                                spCategory.setSelection(i);
+//                                break;
+//                            }
+//                        }
+//                    }
+//                } else {
+//                    Toast.makeText(EditServiceActivity.this, "Failed to load categories", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Category>> call, Throwable t) {
+//                Toast.makeText(EditServiceActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
+
+
 
 }

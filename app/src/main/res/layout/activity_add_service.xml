@@ -25,10 +25,10 @@
         android:hint="Price"
         android:inputType="numberDecimal" />
 
-    <Spinner
-        android:id="@+id/spServiceCategory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+<!--    <Spinner-->
+<!--        android:id="@+id/spServiceCategory"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content" />-->
 
     <ImageView
         android:id="@+id/ivServiceImage"

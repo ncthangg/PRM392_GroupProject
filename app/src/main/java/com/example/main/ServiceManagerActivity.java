@@ -29,6 +29,7 @@ public class ServiceManagerActivity extends AppCompatActivity {
     private ServiceManagerAdapter serviceAdapter;
     private List<ServiceItem> serviceList = new ArrayList<>();
     private FloatingActionButton fabAddItem;
+    private static final int REQUEST_UPDATE = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -83,5 +84,12 @@ public class ServiceManagerActivity extends AppCompatActivity {
         intent.putExtra("service_price", service.getPrice());
         intent.putExtra("service_image", service.getImage());
         startActivity(intent);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_UPDATE && resultCode == RESULT_OK) {
+            loadServices();
+        }
     }
 }
