@@ -22,6 +22,9 @@
             android:name=".BookingActivity"
             android:exported="false" />
         <activity
+            android:name=".BookingListCustomer"
+            android:exported="false" />
+        <activity
             android:name=".CheckoutActivity"
             android:exported="false" />
         <activity

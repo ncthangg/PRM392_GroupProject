@@ -51,10 +51,11 @@ public interface ApiService {
     Call<Void> deleteService(@Path("id") String id);
 
     @GET("authentications/current-user")
-    Call<UserInfoResponse> getUserInfo(@Header("Authorization") String token);
+    Call<UserInfoResponse> getUserInfo();
+
 
     @POST("bookings")
-    Call<Void> saveBooking(@Header("Authorization") String token, @Body BookingReq request);
+    Call<Void> saveBooking(@Body BookingReq request);
 
     @POST("bookings/get-bookings-by-mechanist/{mechanistId}")
         Call<GetBookingsRes> getBookings(

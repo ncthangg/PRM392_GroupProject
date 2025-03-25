@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -66,10 +67,19 @@ public class BookingDetailMechanist extends AppCompatActivity {
                 int position = Arrays.asList(statusOptions).indexOf(status);
                 spinnerStatus.setSelection(position >= 0 ? position : 0);
             }
+
+            boolean isEditable = getIntent().getBooleanExtra("isEditable", true);
+            Button btnUpdate = findViewById(R.id.btnUpdate);
+            if (!isEditable) {
+                btnUpdate.setVisibility(View.GONE);  // Ẩn nút cập nhật
+                spinnerStatus.setEnabled(false);
+            }
+
         }
 
         // Update button click listener
         btnUpdate.setOnClickListener(view -> updateBookingStatus(intent.getStringExtra("bookingId")));
+
     }
     private void updateBookingStatus(String id) {
         String selectedStatus = spinnerStatus.getSelectedItem().toString();

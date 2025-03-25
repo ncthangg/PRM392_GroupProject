@@ -269,15 +269,15 @@ public class CheckoutActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("MY_APP", MODE_PRIVATE);
         String token = sharedPreferences.getString("ACCESS_TOKEN", "");
 
-        Call<Void> call = apiService.saveBooking("Bearer " + token, request);
+        Call<Void> call = apiService.saveBooking(request);
 
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(CheckoutActivity.this, "Dat lich thanh cong!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CheckoutActivity.this, "OK!", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(CheckoutActivity.this, "Lỗi khi đặt lịch!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CheckoutActivity.this, "Fail!", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -294,7 +294,7 @@ public class CheckoutActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("MY_APP", MODE_PRIVATE);
         String token = sharedPreferences.getString("ACCESS_TOKEN", "");
 
-        Call<UserInfoResponse> call = apiService.getUserInfo("Bearer " + token);
+        Call<UserInfoResponse> call = apiService.getUserInfo();
         call.enqueue(new Callback<UserInfoResponse>() {
             @Override
             public void onResponse(Call<UserInfoResponse> call, Response<UserInfoResponse> response) {

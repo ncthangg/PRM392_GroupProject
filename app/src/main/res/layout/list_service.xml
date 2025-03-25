@@ -33,17 +33,19 @@
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
+    <!-- Thanh điều hướng dưới cùng -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvServiceList"
-        android:layout_width="408dp"
-        android:layout_height="531dp"
+        android:layout_width="397dp"
+        android:layout_height="618dp"
         android:padding="8dp"
         app:layout_constraintBottom_toTopOf="@id/bottom_nav_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <!-- Thanh điều hướng dưới cùng -->
     <include
         android:id="@+id/bottom_nav_bar"
         layout="@layout/bottom_nav_bar"

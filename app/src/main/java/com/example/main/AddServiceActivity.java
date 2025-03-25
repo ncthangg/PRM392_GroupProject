@@ -102,9 +102,8 @@ public class AddServiceActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Toast.makeText(AddServiceActivity.this, "Dịch vụ đã được thêm!", Toast.LENGTH_SHORT).show();
                     finish();
-                } else {
-                    Toast.makeText(AddServiceActivity.this, "Lỗi khi thêm dịch vụ!", Toast.LENGTH_SHORT).show();
                 }
+                finish();
             }
 
             @Override

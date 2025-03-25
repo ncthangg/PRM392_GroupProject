@@ -100,7 +100,7 @@ public class CustomerInfoActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("MY_APP", MODE_PRIVATE);
         String token = sharedPreferences.getString("ACCESS_TOKEN", "");
 
-        Call<UserInfoResponse> call = apiService.getUserInfo("Bearer " + token); // Gọi API lấy thông tin người dùng
+        Call<UserInfoResponse> call = apiService.getUserInfo(); // Gọi API lấy thông tin người dùng
 
         call.enqueue(new Callback<UserInfoResponse>() {
             @Override

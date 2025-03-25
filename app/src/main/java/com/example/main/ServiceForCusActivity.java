@@ -64,7 +64,6 @@ public class ServiceForCusActivity extends AppCompatActivity {
 //        });
 
         findViewById(R.id.nav_booking).setOnClickListener(v -> viewBooking());
-        findViewById(R.id.nav_profile).setOnClickListener(v -> viewProfile());
         findViewById(R.id.nav_logout).setOnClickListener(v -> logoutUser());
 
     }

@@ -37,21 +37,14 @@
         <!-- Tên dịch vụ -->
         <TextView
             android:id="@+id/tvServiceName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="268dp"
+            android:layout_height="39dp"
             android:text="Fridge Repair"
+            android:textColor="@color/black"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"/>
+            android:textStyle="bold" />
 
         <!-- Tên người thợ -->
-        <TextView
-            android:id="@+id/tvWorkerName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Worker Name"
-            android:textSize="14sp"
-            android:textColor="@color/black"/>
 
         <!-- Giá tiền -->
         <TextView

@@ -16,6 +16,9 @@ import com.example.main.models.BookingItem;
 import com.example.main.models.GetBookingsRes;
 import com.example.main.models.UserInfoResponse;
 import com.example.main.retrofits.RetrofitClient;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -27,6 +30,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BookingListCustomer extends AppCompatActivity {
+    private GoogleSignInClient mGoogleSignInClient;
     private RecyclerView recyclerView;
     private BookingAdapter bookingAdapter;
     private List<BookingItem> bookingList = new ArrayList<>();
@@ -36,7 +40,7 @@ public class BookingListCustomer extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.booking_list_mechanist);
+        setContentView(R.layout.booking_list_customer);
 
         recyclerView = findViewById(R.id.rvBookingList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -57,21 +61,23 @@ public class BookingListCustomer extends AppCompatActivity {
             intent.putExtra("address", bookingItem.getAddress() != null ? bookingItem.getAddress() : "N/A");
             intent.putExtra("note", bookingItem.getNote() != null ? bookingItem.getNote() : "N/A");
             intent.putExtra("status", statusString);
+            intent.putExtra("isEditable", false);
+
             startActivityForResult(intent, REQUEST_UPDATE_BOOKING);
 
         });
         recyclerView.setAdapter(bookingAdapter);
         //loadBookingCustomer();
         LoadUserInfo();
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+
+        findViewById(R.id.nav_booking).setOnClickListener(v -> viewBooking());
+        findViewById(R.id.nav_logout).setOnClickListener(v -> logoutUser());
     }
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode == REQUEST_UPDATE_BOOKING && resultCode == RESULT_OK) {
-//            loadBookingCustomer(); // Call API again to refresh the list
-//        }
-//    }
+
     private void loadBookingCustomer(String userId) {
         ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
         Call<GetBookingsRes> call = apiService.getBookingsByCustomerId(userId, "Pending",1, 10);
@@ -109,22 +115,43 @@ public class BookingListCustomer extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("MY_APP", MODE_PRIVATE);
         String token = sharedPreferences.getString("ACCESS_TOKEN", "");
 
-        Call<UserInfoResponse> call = apiService.getUserInfo("Bearer " + token);
-        call.enqueue(new Callback<UserInfoResponse>() {
-            @Override
-            public void onResponse(Call<UserInfoResponse> call, Response<UserInfoResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    String userId = response.body().getData().getId(); // Giả sử UserInfoResponse có phương thức getId()
-                    loadBookingCustomer(userId);
-                } else {
-                    Toast.makeText(BookingListCustomer.this, "Không thể lấy thông tin người dùng!", Toast.LENGTH_SHORT).show();
-                }
-            }
+        Call<UserInfoResponse> call = apiService.getUserInfo();
 
-            @Override
-            public void onFailure(Call<UserInfoResponse> call, Throwable t) {
-                Toast.makeText(BookingListCustomer.this, "Lỗi: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+        new Thread(() -> {
+            try {
+                Response<UserInfoResponse> response = call.execute();
+                Log.d("DEBUG", "Response code: " + response.code());
+                if (response.isSuccessful()) {
+                    loadBookingCustomer(response.body().getData().getId());
+                } else {
+                    Log.e("DEBUG", "API response failed: " + response.code());
+                }
+            } catch (Exception e) {
+                Log.e("DEBUG", "API call failed: " + e.getMessage());
             }
+        }).start();
+
+    }
+
+    private void logoutUser() {
+        // Xóa token trong SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("MY_APP", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("ACCESS_TOKEN"); // Xóa token
+        editor.apply(); // Lưu lại thay đổi
+        mGoogleSignInClient.signOut().addOnCompleteListener(this, task -> {
+            Toast.makeText(BookingListCustomer.this, "Logged out!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(BookingListCustomer.this, SignInActivity.class);
+            startActivity(intent);
+            finish();
         });
+    }
+    private void viewProfile() {
+        Intent intent = new Intent(BookingListCustomer.this, ProfileActivity.class);
+        startActivity(intent);
+    }
+    private void viewBooking() {
+        Intent intent = new Intent(BookingListCustomer.this, BookingListCustomer.class);
+        startActivity(intent);
     }
 }
