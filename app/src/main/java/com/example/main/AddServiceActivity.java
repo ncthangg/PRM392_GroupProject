@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -81,33 +82,63 @@ public class AddServiceActivity extends AppCompatActivity {
 
     private void addService() {
         String name = etServiceName.getText().toString().trim();
-        String description = etServiceDes.getText().toString();
+        String description = etServiceDes.getText().toString().trim();
         String priceStr = etPrice.getText().toString().trim();
 
-        if (name.isEmpty() ||priceStr.isEmpty()) {
+        // Kiểm tra dữ liệu đầu vào
+        if (name.isEmpty() || priceStr.isEmpty()) {
             Toast.makeText(this, "Vui lòng điền đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        int price = Integer.parseInt(priceStr);
+        // Kiểm tra lỗi chuyển đổi số
+        int price;
+        try {
+            price = Integer.parseInt(priceStr);
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Giá tiền không hợp lệ!", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        ServiceReq service = new ServiceReq("https://fixitright.blob.core.windows.net/fixitright/aircondition.jpg", name, description, price, "9ca4ae5b-c18d-4115-821f-3a28ed7a416f");
+        // In log kiểm tra dữ liệu
+        Log.d("AddService", "Name: " + name);
+        Log.d("AddService", "Description: " + description);
+        Log.d("AddService", "Price: " + price);
 
+        // Tạo đối tượng ServiceReq
+        ServiceReq service = new ServiceReq(
+                "https://fixitright.blob.core.windows.net/fixitright/aircondition.jpg",
+                name, description, price,
+                "9ca4ae5b-c18d-4115-821f-3a28ed7a416f"
+        );
+
+        // Gọi API
         ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
         apiService.createService(service).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.d("AddService", "Response Code: " + response.code());
+
                 if (response.isSuccessful()) {
                     Toast.makeText(AddServiceActivity.this, "Dịch vụ đã được thêm!", Toast.LENGTH_SHORT).show();
                     finish();
+                } else {
+                    try {
+                        Log.e("AddService", "Error Body: " + response.errorBody().string());
+                    } catch (Exception e) {
+                        Log.e("AddService", "Lỗi khi đọc lỗi từ response.errorBody()");
+                    }
+                    Toast.makeText(AddServiceActivity.this, "Lỗi khi thêm dịch vụ!", Toast.LENGTH_SHORT).show();
                 }
                 finish();
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("AddService", "Lỗi kết nối: " + t.getMessage());
                 Toast.makeText(AddServiceActivity.this, "Lỗi: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 }

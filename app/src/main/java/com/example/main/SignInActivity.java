@@ -113,8 +113,8 @@ public class SignInActivity extends AppCompatActivity {
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("ACCESS_TOKEN", accessToken);
                             editor.apply(); // Lưu lại
-
-                            Toast.makeText(getApplicationContext(), "Sign In Successful!", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, "onResponse: " + accessToken);
+                            Toast.makeText(getApplicationContext(), "Sign In Successful!" + accessToken, Toast.LENGTH_SHORT).show();
 
                             // Redirect to Main Activity after successful login
                             if(usernameInput.equals("admin")){
