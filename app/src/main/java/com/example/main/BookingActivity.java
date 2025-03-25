@@ -136,52 +136,52 @@ public class BookingActivity extends AppCompatActivity {
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                     (view, year1, month1, dayOfMonth) -> {
-                        // Lưu ngày hiển thị trên nút
                         selectedDay = dayOfMonth + " / " + (month1 + 1) + " / " + year1;
                         btnSelectDate.setText(selectedDay);
 
-                        // Chuyển đổi sang định dạng yyyy-MM-dd
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                         Calendar selectedDate = Calendar.getInstance();
                         selectedDate.set(year1, month1, dayOfMonth);
-                        formattedDate = sdf.format(selectedDate.getTime()); // Lưu đúng format
+                        formattedDate = sdf.format(selectedDate.getTime());
                     }, year, month, day);
+
+            // Chặn ngày quá khứ
+            datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis());
+
             datePickerDialog.show();
         });
 
-
         btnSelectTime.setOnClickListener(v -> {
             Calendar calendar = Calendar.getInstance();
-            int hour = calendar.get(Calendar.HOUR_OF_DAY);
+            int hour = calendar.get(Calendar.HOUR);
             int minute = calendar.get(Calendar.MINUTE);
+            int amPm = calendar.get(Calendar.AM_PM);
+
+            boolean is24HourView = false; // Sử dụng định dạng 12 giờ
 
             TimePickerDialog timePickerDialog = new TimePickerDialog(this,
                     (view, selectedHour, selectedMinute) -> {
-                        // Hiển thị trên button
-                        selectedTime = String.format(Locale.getDefault(), "%02d:%02d", selectedHour, selectedMinute);
-                        btnSelectTime.setText(selectedTime);
+                        int selectedAmPm = (selectedHour >= 12) ? Calendar.PM : Calendar.AM;
+                        String amPmText = (selectedAmPm == Calendar.AM) ? "AM" : "PM";
 
-                        // Chuyển đổi sang định dạng HH:mm:ss
-                        formattedTime = String.format(Locale.getDefault(), "%02d:%02d:%02d", selectedHour, selectedMinute, 0);
-                    }, hour, minute, true);
+                        if ((selectedAmPm == Calendar.AM && selectedHour < 8) || (selectedAmPm == Calendar.PM && selectedHour >= 10 && selectedMinute > 0)) {
+                            Toast.makeText(this, "Vui lòng chọn giờ từ 08:00 AM đến 10:00 PM", Toast.LENGTH_SHORT).show();
+                        } else {
+                            selectedTime = String.format(Locale.getDefault(), "%02d:%02d %s", selectedHour, selectedMinute, amPmText);
+                            btnSelectTime.setText(selectedTime);
+
+                            // Format thành 24h (nếu cần lưu vào database)
+                            int hour24 = (selectedAmPm == Calendar.PM && selectedHour != 12) ? selectedHour + 12 : selectedHour;
+                            if (selectedAmPm == Calendar.AM && selectedHour == 12) hour24 = 0; // Chỉnh 12 AM về 00h
+
+                            formattedTime = String.format(Locale.getDefault(), "%02d:%02d:%02d", hour24, selectedMinute, 0);
+                        }
+                    }, hour, minute, is24HourView);
+
             timePickerDialog.show();
         });
+
+
     }
 
-
-//    private void updateDaySelection(View selectedView) {
-//        dayToday.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
-//        dayMon.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
-//        dayTues.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
-//        dayWed.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
-//
-//        selectedView.setBackgroundTintList(ColorStateList.valueOf(getColor(android.R.color.holo_blue_dark)));
-//    }
-//
-//    private void updateTimeSelection(View selectedView) {
-//        time7am.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
-//        time730am.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
-//        time8am.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B4E4E4")));
-//        selectedView.setBackgroundTintList(ColorStateList.valueOf(getColor(android.R.color.holo_blue_dark)));
-//    }
 }

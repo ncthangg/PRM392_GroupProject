@@ -150,13 +150,29 @@ public class CheckoutActivity extends AppCompatActivity {
                     txtMethodName.setText(selectedPaymentMethod);
 
                     if ("VnPay".equals(selectedPaymentMethod)) {
-                        CheckOut(totalCost);
+                        LoadUserInfo(new UserInfoCallback() {
+                            @Override
+                            public void onSuccess(UserInfoResponse userInfo) {
+                                UserInfoResponse.UserData user = userInfo.getData();
+                                SaveBooking(user);
+                                CheckOut(totalCost);
+                            }
+
+                            @Override
+                            public void onFailure(String errorMessage) {
+                                Toast.makeText(CheckoutActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     } else {
                         LoadUserInfo(new UserInfoCallback() {
                             @Override
                             public void onSuccess(UserInfoResponse userInfo) {
                                 UserInfoResponse.UserData user = userInfo.getData();
                                 SaveBooking(user);
+
+                                Intent intent = new Intent(CheckoutActivity.this, LastCheckoutActivity.class);
+                                startActivity(intent);
+                                finish(); // Đóng activity
                             }
 
                             @Override
@@ -197,9 +213,9 @@ public class CheckoutActivity extends AppCompatActivity {
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == Activity.RESULT_OK) {
-                        Intent data = result.getData();
-                        if (data != null) {
-                            selectedPaymentMethod = data.getStringExtra("selectedPayment");
+                        Intent chooseMethodIntent = result.getData();
+                        if (chooseMethodIntent != null) {
+                            selectedPaymentMethod = chooseMethodIntent.getStringExtra("selectedPayment");
                             txtMethodName.setText(selectedPaymentMethod);
                             imageViewMethod.setImageResource(
                                     "VnPay".equals(selectedPaymentMethod) ?
@@ -210,46 +226,7 @@ public class CheckoutActivity extends AppCompatActivity {
                 }
         );
 
-
-
     }
-
-    private void SaveBooking(UserInfoResponse.UserData user) {
-        String customerId = user.getId(); // ID khách hàng (có thể lấy từ API current-user)
-        String serviceId = getIntent().getStringExtra("serviceId");
-        String workingDate = getIntent().getStringExtra("selected_day");
-        String workingTime = getIntent().getStringExtra("selected_time");
-        String address = getIntent().getStringExtra("location");
-        String note = getIntent().getStringExtra("note");
-
-        BookingReq request = new BookingReq(customerId, serviceId, workingDate, workingTime, address, note);
-
-        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
-
-        SharedPreferences sharedPreferences = getSharedPreferences("MY_APP", MODE_PRIVATE);
-        String token = sharedPreferences.getString("ACCESS_TOKEN", "");
-
-        Call<Void> call = apiService.saveBooking("Bearer " + token, request);
-
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()) {
-                    Intent intent = new Intent(CheckoutActivity.this, LastCheckoutActivity.class);
-                    startActivity(intent);
-                    finish(); // Đóng activity
-                } else {
-                    Toast.makeText(CheckoutActivity.this, "Lỗi khi đặt lịch!", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(CheckoutActivity.this, "Kết nối thất bại!", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
     private void CheckOut(int totalCost){
         new AlertDialog.Builder(this)
                 .setTitle("Confirm Checkout?")
@@ -277,6 +254,40 @@ public class CheckoutActivity extends AppCompatActivity {
                 .show();
     }
 
+    private void SaveBooking(UserInfoResponse.UserData user) {
+        String customerId = user.getId(); // ID khách hàng (có thể lấy từ API current-user)
+        String serviceId = getIntent().getStringExtra("serviceId");
+        String workingDate = getIntent().getStringExtra("selected_day");
+        String workingTime = getIntent().getStringExtra("selected_time");
+        String address = getIntent().getStringExtra("location");
+        String note = getIntent().getStringExtra("note");
+
+        BookingReq request = new BookingReq(customerId, serviceId, workingDate, workingTime, address, note);
+
+        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("MY_APP", MODE_PRIVATE);
+        String token = sharedPreferences.getString("ACCESS_TOKEN", "");
+
+        Call<Void> call = apiService.saveBooking("Bearer " + token, request);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(CheckoutActivity.this, "Dat lich thanh cong!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(CheckoutActivity.this, "Lỗi khi đặt lịch!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(CheckoutActivity.this, "Kết nối thất bại!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void LoadUserInfo(UserInfoCallback callback) {
         ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
 
@@ -301,7 +312,7 @@ public class CheckoutActivity extends AppCompatActivity {
         });
     }
 
-    private interface UserInfoCallback {
+    interface UserInfoCallback {
         void onSuccess(UserInfoResponse userInfo);
         void onFailure(String errorMessage);
     }
