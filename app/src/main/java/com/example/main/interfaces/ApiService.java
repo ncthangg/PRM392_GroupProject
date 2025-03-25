@@ -55,13 +55,22 @@ public interface ApiService {
     @POST("bookings")
     Call<Void> saveBooking(@Header("Authorization") String token, @Body BookingReq request);
 
-        @POST("bookings/get-bookings-by-mechanist/{mechanistId}")
+    @POST("bookings/get-bookings-by-mechanist/{mechanistId}")
         Call<GetBookingsRes> getBookings(
                 @Path("mechanistId") String mechanistId,
                 @Query("Status") String status,
                 @Query("PageNumber") int pageNumber,
                 @Query("PageSize") int pageSize
         );
+
+    @POST("bookings/get-bookings-by-customer/{customerId}")
+    Call<GetBookingsRes> getBookingsByCustomerId(
+            @Path("customerId") String customerId,
+            @Query("Status") String status,
+            @Query("PageNumber") int pageNumber,
+            @Query("PageSize") int pageSize
+    );
+
     @PUT("bookings/{id}")
     Call<Void> updateBookingStatus(
             @Path("id") String id,
