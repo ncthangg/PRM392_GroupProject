@@ -18,8 +18,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.gson.Gson;
 
 import adapter.BookingAdapter;
-import model.BookingItem;
-import model.GetBookingsRes;
+import com.example.main.models.BookingItem;
+import com.example.main.models.GetBookingsRes;
 
 import java.util.ArrayList;
 import java.util.List;

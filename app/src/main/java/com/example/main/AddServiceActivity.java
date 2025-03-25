@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -13,11 +12,12 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.main.interfaces.ApiService;
+import com.example.main.models.ServiceReq;
 import com.example.main.retrofits.RetrofitClient;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Base64;
-import model.ServiceItem;
+import com.example.main.models.ServiceItem;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -90,7 +90,7 @@ public class AddServiceActivity extends AppCompatActivity {
 
         int price = Integer.parseInt(priceStr);
 
-        ServiceItem service = new ServiceItem(encodedImage, name, category, price, workerName);
+        ServiceReq service = new ServiceReq(encodedImage, name, category, price, workerName);
 
         ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
         apiService.createService(service).enqueue(new Callback<Void>() {

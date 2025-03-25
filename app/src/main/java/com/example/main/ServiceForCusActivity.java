@@ -17,8 +17,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 import adapter.ServiceAdapter;
-import model.GetServiceRes;
-import model.ServiceItem;
+import com.example.main.models.GetServiceRes;
+import com.example.main.models.ServiceItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +45,7 @@ public class ServiceForCusActivity extends AppCompatActivity {
             Intent intent = new Intent(ServiceForCusActivity.this, BookingActivity.class);
             int servicePriceInt = serviceItem.getPrice();
             String servicePriceString = Integer.toString(servicePriceInt);
-            intent.putExtra("categoryName", serviceItem.getCategory());
+            intent.putExtra("categoryName", serviceItem.getCategory().getName());
             intent.putExtra("serviceId", serviceItem.getId());
             intent.putExtra("serviceName", serviceItem.getName());
             intent.putExtra("servicePrice", servicePriceString);

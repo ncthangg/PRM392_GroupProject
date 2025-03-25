@@ -15,8 +15,7 @@ import com.example.main.R;
 
 import java.util.List;
 
-import model.BookingItem;
-import model.ServiceItem;
+import com.example.main.models.BookingItem;
 
 public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingViewHolder> {
     private Context context;

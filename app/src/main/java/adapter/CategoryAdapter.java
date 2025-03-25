@@ -9,8 +9,7 @@ import android.widget.ArrayAdapter;
 
 import java.util.List;
 
-import model.Category;
-import com.example.main.R;
+import com.example.main.models.Category;
 
 public class CategoryAdapter extends ArrayAdapter<Category> {
     private LayoutInflater inflater;

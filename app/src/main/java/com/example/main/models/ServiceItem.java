@@ -1,4 +1,4 @@
-package model;
+package com.example.main.models;
 
 public class ServiceItem {
     private String Id;
@@ -7,9 +7,9 @@ public class ServiceItem {
     private String Description;
     private int Price;
     private boolean Active;
-    private String  Category;
+    private Category  Category;
 
-    public ServiceItem(String image, String name, String description, int price, String category) {
+    public ServiceItem(String image, String name, String description, int price, Category category) {
         this.Image = image;
         this.Name = name;
         this.Description = description;
@@ -24,5 +24,5 @@ public class ServiceItem {
     public String getDescription() { return Description; }
     public int getPrice() { return Price; }
     public boolean isActive() { return Active; }
-    public String getCategory() { return Category; }
+    public Category getCategory() { return Category; }
 }

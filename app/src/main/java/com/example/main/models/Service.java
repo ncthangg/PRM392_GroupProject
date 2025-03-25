@@ -1,4 +1,4 @@
-package model;
+package com.example.main.models;
 
 public class Service {
     public String Id;
@@ -9,7 +9,7 @@ public class Service {
     public boolean Active;
     public Category Category;
 
-    public Service(String id, String image, String name, String description, int price, boolean active, model.Category category) {
+    public Service(String id, String image, String name, String description, int price, boolean active, com.example.main.models.Category category) {
         Id = id;
         Image = image;
         Name = name;
@@ -67,11 +67,11 @@ public class Service {
         Active = active;
     }
 
-    public model.Category getCategory() {
+    public com.example.main.models.Category getCategory() {
         return Category;
     }
 
-    public void setCategory(model.Category category) {
+    public void setCategory(com.example.main.models.Category category) {
         Category = category;
     }
 }

@@ -3,7 +3,6 @@ package com.example.main;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,8 +17,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import adapter.ServiceManagerAdapter;
-import model.GetServiceRes;
-import model.ServiceItem;
+import com.example.main.models.GetServiceRes;
+import com.example.main.models.ServiceItem;
 
 import java.util.ArrayList;
 import java.util.List;

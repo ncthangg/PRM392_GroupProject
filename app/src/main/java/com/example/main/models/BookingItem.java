@@ -1,4 +1,4 @@
-package model;
+package com.example.main.models;
 
 import java.util.Date;
 
@@ -16,7 +16,7 @@ public class BookingItem {
     public Date BookingDate;
     public String Note;
 
-    public BookingItem(String id, String customerId, String mechanistId, String serviceId, model.Service service, String workingDate, String address, String workingTime, String status, Date bookingDate, String note) {
+    public BookingItem(String id, String customerId, String mechanistId, String serviceId, com.example.main.models.Service service, String workingDate, String address, String workingTime, String status, Date bookingDate, String note) {
         Id = id;
         CustomerId = customerId;
         MechanistId = mechanistId;
@@ -62,11 +62,11 @@ public class BookingItem {
         ServiceId = serviceId;
     }
 
-    public model.Service getService() {
+    public com.example.main.models.Service getService() {
         return Service;
     }
 
-    public void setService(model.Service service) {
+    public void setService(com.example.main.models.Service service) {
         Service = service;
     }
 
