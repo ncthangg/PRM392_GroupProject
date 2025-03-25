@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -42,6 +40,8 @@ public class CustomerInfoActivity extends AppCompatActivity {
         btnContinue = findViewById(R.id.btnContinue);
         btnBack = findViewById(R.id.btnBack);
 
+        String serviceId = getIntent().getStringExtra("serviceId");
+
         String categoryName = getIntent().getStringExtra("categoryName");
         String serviceName = getIntent().getStringExtra("serviceName");
         String servicePrice = getIntent().getStringExtra("servicePrice");
@@ -72,6 +72,8 @@ public class CustomerInfoActivity extends AppCompatActivity {
                     Toast.makeText(CustomerInfoActivity.this, "Input invalidate", Toast.LENGTH_SHORT).show();
                 }else {
                     Intent intent = new Intent(CustomerInfoActivity.this, ChoosePaymentMethodActivity.class);
+                    intent.putExtra("serviceId", serviceId);
+
                     intent.putExtra("categoryName", categoryName);
                     intent.putExtra("serviceName", serviceName);
                     intent.putExtra("servicePrice", servicePrice);

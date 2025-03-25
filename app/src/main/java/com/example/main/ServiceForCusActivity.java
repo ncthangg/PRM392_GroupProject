@@ -16,8 +16,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 import adapter.ServiceAdapter;
-import model.GetServiceRes;
-import model.ServiceItem;
+import com.example.main.models.GetServiceRes;
+import com.example.main.models.ServiceItem;
 
 import java.util.ArrayList;
 import java.util.List;

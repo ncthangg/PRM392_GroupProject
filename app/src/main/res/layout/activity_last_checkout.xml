@@ -6,35 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".LastCheckoutActivity">
 
-    <!-- Nút Back -->
-    <!-- Icon thành công -->
-
-    <ImageButton
+    <ImageView
         android:id="@+id/btnBack"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/ic_back"
-        android:contentDescription="Back"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_100dp_no_stroke"
+        android:backgroundTint="#4A628A"
+        android:gravity="center"
+        android:padding="9dp"
+        android:src="@drawable/arrow_left"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- Tiêu đề -->
-
-    <!-- Mô tả -->
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#DFF2EB" />
 
     <ImageView
-        android:id="@+id/imgSuccess"
+        android:id="@+id/imgResult"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="100dp"
         android:src="@drawable/ic_success"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnBack" />
+        app:layout_constraintTop_toBottomOf="@+id/btnBack" />
 
     <TextView
         android:id="@+id/txtTitle"
@@ -47,7 +43,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgSuccess" />
+        app:layout_constraintTop_toBottomOf="@id/imgResult" />
 
     <TextView
         android:id="@+id/txtDescription"

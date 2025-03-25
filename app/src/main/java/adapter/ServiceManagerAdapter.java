@@ -10,8 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.main.R;
-import model.ServiceItem;
 import java.util.List;
+
+import com.example.main.models.ServiceItem;
 
 public class ServiceManagerAdapter extends RecyclerView.Adapter<ServiceManagerAdapter.ViewHolder> {
     private Context context;

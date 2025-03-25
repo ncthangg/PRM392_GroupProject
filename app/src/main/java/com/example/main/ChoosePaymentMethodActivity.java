@@ -32,9 +32,14 @@ public class ChoosePaymentMethodActivity extends AppCompatActivity {
         LinearLayout cashLayout = findViewById(R.id.cashLayout);
         LinearLayout vnPayLayout = findViewById(R.id.vnpayLayout);
 
+        cashLayout.setOnClickListener(v -> radioGroup.check(R.id.rbCash));
+        vnPayLayout.setOnClickListener(v -> radioGroup.check(R.id.rbVnPay));
+
         btnConfirmPayment = findViewById(R.id.btnConfirmPayment);
 
         // Nhận dữ liệu từ CusomterInfoActivity
+        String serviceId = getIntent().getStringExtra("serviceId");
+
         String categoryName = getIntent().getStringExtra("categoryName");
         String serviceName = getIntent().getStringExtra("serviceName");
         String servicePrice = getIntent().getStringExtra("servicePrice");
@@ -59,9 +64,6 @@ public class ChoosePaymentMethodActivity extends AppCompatActivity {
             }
         }
 
-        cashLayout.setOnClickListener(v -> radioGroup.check(R.id.rbCash));
-        vnPayLayout.setOnClickListener(v -> radioGroup.check(R.id.rbVnPay));
-
         btnConfirmPayment.setOnClickListener(v -> {
             int selectedId = radioGroup.getCheckedRadioButtonId();
             String paymentMethod = "";
@@ -74,6 +76,7 @@ public class ChoosePaymentMethodActivity extends AppCompatActivity {
 
             Intent intent  = new Intent(ChoosePaymentMethodActivity.this, CheckoutActivity.class);
             intent.putExtra("selectedPaymentMethod", paymentMethod);
+            intent.putExtra("serviceId", serviceId);
 
             intent.putExtra("categoryName", categoryName);
             intent.putExtra("serviceName", serviceName);
