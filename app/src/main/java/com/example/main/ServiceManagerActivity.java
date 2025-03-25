@@ -1,6 +1,7 @@
 package com.example.main;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -11,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.main.interfaces.ApiService;
 import com.example.main.retrofits.RetrofitClient;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import adapter.ServiceManagerAdapter;
@@ -27,6 +31,8 @@ import retrofit2.Response;
 public class ServiceManagerActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ServiceManagerAdapter serviceAdapter;
+    private GoogleSignInClient mGoogleSignInClient;
+
     private List<ServiceItem> serviceList = new ArrayList<>();
     private FloatingActionButton fabAddItem;
     private static final int REQUEST_UPDATE = 1;
@@ -49,6 +55,11 @@ public class ServiceManagerActivity extends AppCompatActivity {
         });
 
         loadServices();
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+
+        findViewById(R.id.nav_profile).setOnClickListener(v -> logoutUser());
     }
 
     private void loadServices() {
@@ -91,5 +102,18 @@ public class ServiceManagerActivity extends AppCompatActivity {
         if (requestCode == REQUEST_UPDATE && resultCode == RESULT_OK) {
             loadServices();
         }
+    }
+    private void logoutUser() {
+        // Xóa token trong SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("MY_APP", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("ACCESS_TOKEN"); // Xóa token
+        editor.apply(); // Lưu lại thay đổi
+        mGoogleSignInClient.signOut().addOnCompleteListener(this, task -> {
+            Toast.makeText(ServiceManagerActivity.this, "Logged out!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(ServiceManagerActivity.this, SignInActivity.class);
+            startActivity(intent);
+            finish();
+        });
     }
 }
