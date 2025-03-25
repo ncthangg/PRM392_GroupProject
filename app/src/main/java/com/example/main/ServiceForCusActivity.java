@@ -63,7 +63,9 @@ public class ServiceForCusActivity extends AppCompatActivity {
 //            startActivity(intent);
 //        });
 
-        findViewById(R.id.nav_profile).setOnClickListener(v -> logoutUser());
+        findViewById(R.id.nav_booking).setOnClickListener(v -> viewBooking());
+        findViewById(R.id.nav_profile).setOnClickListener(v -> viewProfile());
+        findViewById(R.id.nav_logout).setOnClickListener(v -> logoutUser());
 
     }
 
@@ -107,5 +109,12 @@ public class ServiceForCusActivity extends AppCompatActivity {
             finish();
         });
     }
-
+    private void viewProfile() {
+        Intent intent = new Intent(ServiceForCusActivity.this, ProfileActivity.class);
+        startActivity(intent);
+    }
+    private void viewBooking() {
+        Intent intent = new Intent(ServiceForCusActivity.this, BookingListCustomer.class);
+        startActivity(intent);
+    }
 }

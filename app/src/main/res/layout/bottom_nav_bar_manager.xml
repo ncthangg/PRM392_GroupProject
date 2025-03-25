@@ -1,107 +1,72 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="110dp"
+    android:orientation="horizontal"
+    android:background="@drawable/rounded_bottom_bar"
+    android:padding="8dp"
+    android:gravity="bottom">
 
-    <!-- Bottom Bar -->
+    <!-- Home Button -->
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        android:background="@drawable/rounded_bottom_bar"
-        android:padding="8dp"
-        android:gravity="center">
-
-        <!-- Home -->
-        <LinearLayout
-            android:id="@+id/nav_home"
-            android:layout_width="0dp"
+        android:id="@+id/nav_home"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="12dp">
+        <ImageView
+            android:src="@drawable/home_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"/>
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:clickable="true"
-            android:focusable="true">
-            <ImageView
-                android:src="@drawable/home_icon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Home"
-                android:textColor="@color/white"
-                android:textSize="10sp"/>
-        </LinearLayout>
-
-        <!-- Profile -->
-        <LinearLayout
-            android:id="@+id/nav_profile"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:clickable="true"
-            android:focusable="true">
-            <ImageView
-                android:src="@drawable/user_icon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Profile"
-                android:textColor="@color/white"
-                android:textSize="10sp"/>
-        </LinearLayout>
-
+            android:text="Home"
+            android:textColor="@color/white"
+            android:textSize="10sp"/>
     </LinearLayout>
 
+    <!-- Profile Button -->
+    <LinearLayout
+        android:id="@+id/nav_booking"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="12dp">
+        <ImageView
+            android:src="@drawable/nav_booking"
+            android:layout_width="24dp"
+            android:layout_height="24dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Booking"
+            android:textColor="@color/white"
+            android:textSize="10sp"/>
+    </LinearLayout>
 
+    <!-- Logout Button -->
+    <LinearLayout
+        android:id="@+id/nav_logout"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="12dp">
+        <ImageView
+            android:src="@drawable/nav_logout"
+            android:layout_width="24dp"
+            android:layout_height="24dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:textColor="@color/white"
+            android:textSize="10sp"/>
+    </LinearLayout>
 
-</RelativeLayout>
-
-    <!-- List Service -->
-    <!--        <LinearLayout-->
-    <!--            android:id="@+id/nav_list_service"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:gravity="center"-->
-    <!--            android:orientation="vertical"-->
-    <!--            android:clickable="true"-->
-    <!--            android:focusable="true">-->
-    <!--            <ImageView-->
-    <!--                android:src="@drawable/bookmark"-->
-    <!--                android:layout_width="24dp"-->
-    <!--                android:layout_height="24dp"/>-->
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:text="Services"-->
-    <!--                android:textColor="@color/white"-->
-    <!--                android:textSize="10sp"/>-->
-    <!--        </LinearLayout>-->
-
-    <!--        &lt;!&ndash; List Booking &ndash;&gt;-->
-    <!--        <LinearLayout-->
-    <!--            android:id="@+id/nav_list_booking"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:gravity="center"-->
-    <!--            android:orientation="vertical"-->
-    <!--            android:clickable="true"-->
-    <!--            android:focusable="true">-->
-    <!--            <ImageView-->
-    <!--                android:src="@drawable/chat_icon"-->
-    <!--                android:layout_width="24dp"-->
-    <!--                android:layout_height="24dp"/>-->
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:text="Bookings"-->
-    <!--                android:textColor="@color/white"-->
-    <!--                android:textSize="10sp"/>-->
-    <!--        </LinearLayout>-->
+</LinearLayout>

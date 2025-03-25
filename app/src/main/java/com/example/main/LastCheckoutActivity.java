@@ -51,6 +51,14 @@ public class LastCheckoutActivity extends AppCompatActivity {
                  finish(); // Đóng activity
             }
         });
+        btnMyBooking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LastCheckoutActivity.this, BookingListCustomer.class);
+                startActivity(intent);
+                finish(); // Đóng activity
+            }
+        });
     }
 
     @Override

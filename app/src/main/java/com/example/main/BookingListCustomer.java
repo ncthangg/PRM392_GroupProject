@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,25 +14,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.main.interfaces.ApiService;
 import com.example.main.models.BookingItem;
 import com.example.main.models.GetBookingsRes;
+import com.example.main.models.UserInfoResponse;
 import com.example.main.retrofits.RetrofitClient;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.gson.Gson;
-
-import adapter.BookingAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import adapter.BookingAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BookingListMechanist extends AppCompatActivity {
+public class BookingListCustomer extends AppCompatActivity {
     private RecyclerView recyclerView;
     private BookingAdapter bookingAdapter;
-    private GoogleSignInClient mGoogleSignInClient;
     private List<BookingItem> bookingList = new ArrayList<>();
     private static final int REQUEST_UPDATE_BOOKING = 1; // Define a request code
 
@@ -46,7 +43,7 @@ public class BookingListMechanist extends AppCompatActivity {
 
 
         bookingAdapter = new BookingAdapter(this, bookingList, bookingItem -> {
-            Intent intent = new Intent(BookingListMechanist.this, BookingDetailMechanist.class);
+            Intent intent = new Intent(BookingListCustomer.this, BookingDetailMechanist.class);
 
             // Convert numerical values to string
             String statusString = String.valueOf(bookingItem.getStatus());
@@ -64,30 +61,20 @@ public class BookingListMechanist extends AppCompatActivity {
 
         });
         recyclerView.setAdapter(bookingAdapter);
-        loadBookingAdmin();
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build();
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
-        // Bắt sự kiện click
-//        findViewById(R.id.nav_home).setOnClickListener(v -> {
-//            Intent intent = new Intent(ServiceForCusActivity.this, ServiceForCusActivity.class);
-//            startActivity(intent);
-//        });
-
-        findViewById(R.id.nav_logout).setOnClickListener(v -> logoutUser());
+        //loadBookingCustomer();
+        LoadUserInfo();
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == REQUEST_UPDATE_BOOKING && resultCode == RESULT_OK) {
-            loadBookingAdmin(); // Call API again to refresh the list
-        }
-    }
-    private void loadBookingAdmin() {
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (requestCode == REQUEST_UPDATE_BOOKING && resultCode == RESULT_OK) {
+//            loadBookingCustomer(); // Call API again to refresh the list
+//        }
+//    }
+    private void loadBookingCustomer(String userId) {
         ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
-        Call<GetBookingsRes> call = apiService.getBookings("18493305-2010-4196-83ab-d8e28d73899e", "Pending",1, 10);
+        Call<GetBookingsRes> call = apiService.getBookingsByCustomerId(userId, "Pending",1, 10);
 
         call.enqueue(new Callback<GetBookingsRes>() {
             @Override
@@ -104,29 +91,40 @@ public class BookingListMechanist extends AppCompatActivity {
                     }
                 } else {
                     Log.e("API_RESPONSE", "Failed with response: " + response.errorBody());
-                    Toast.makeText(BookingListMechanist.this, "Failed to get data!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BookingListCustomer.this, "Failed to get data!", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<GetBookingsRes> call, Throwable t) {
                 Log.e("API_ERROR", "Request failed", t);
-                Toast.makeText(BookingListMechanist.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(BookingListCustomer.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
-    private void logoutUser() {
-        // Xóa token trong SharedPreferences
+
+    private void LoadUserInfo() {
+        ApiService apiService = RetrofitClient.getClient(this).create(ApiService.class);
+
         SharedPreferences sharedPreferences = getSharedPreferences("MY_APP", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.remove("ACCESS_TOKEN"); // Xóa token
-        editor.apply(); // Lưu lại thay đổi
-        mGoogleSignInClient.signOut().addOnCompleteListener(this, task -> {
-            Toast.makeText(BookingListMechanist.this, "Logged out!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(BookingListMechanist.this, SignInActivity.class);
-            startActivity(intent);
-            finish();
+        String token = sharedPreferences.getString("ACCESS_TOKEN", "");
+
+        Call<UserInfoResponse> call = apiService.getUserInfo("Bearer " + token);
+        call.enqueue(new Callback<UserInfoResponse>() {
+            @Override
+            public void onResponse(Call<UserInfoResponse> call, Response<UserInfoResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    String userId = response.body().getData().getId(); // Giả sử UserInfoResponse có phương thức getId()
+                    loadBookingCustomer(userId);
+                } else {
+                    Toast.makeText(BookingListCustomer.this, "Không thể lấy thông tin người dùng!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserInfoResponse> call, Throwable t) {
+                Toast.makeText(BookingListCustomer.this, "Lỗi: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
         });
     }
-
 }
